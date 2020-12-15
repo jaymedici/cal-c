@@ -58,6 +58,14 @@ class DepartmentController extends Controller
     {
 
         if (Auth::check()){
+
+            $exist = Department::where('name',$request->input('name'))
+            ->count();
+
+            if($exist > 0){
+                return back()->withinput()->with('errors2','Error Occured, This Project exist, Please check your Entry and Try again, or Contact IT team for help');
+            }else{
+
             $departments=Department::create([
                                     'name'=>$request->input('name'),
                                     'description'=>$request->input('description'),
@@ -70,6 +78,7 @@ class DepartmentController extends Controller
         }
         return view('auth.login');
     }
+}
 
     /**
      * Display the specified resource.

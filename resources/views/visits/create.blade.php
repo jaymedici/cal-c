@@ -2,6 +2,7 @@
 @section('content')
 
       @include('partials.errors')
+      @include('partials.errors2')
       @include('partials.success')
 
 <div class="col-md-9 col-lg-9 col-sm-9 pull-left" style="background: white;">
@@ -38,7 +39,7 @@
                                        minlength="1"
                                        class="form-control @error('visit_name') is-invalid @enderror" 
                                        name="visit_name" 
-                                       value="" 
+                                       value="{{ old('visit_name') }}" 
                                        required autocomplete="visit_name" 
                                        autofocus >
                                 @error('visit_name')
@@ -57,7 +58,7 @@
                                        minlength="1"
                                        class="form-control @error('number_of_days') is-invalid @enderror" 
                                        name="number_of_days" 
-                                       value="" 
+                                       value="{{ old('number_of_days') }}" 
                                        required autocomplete="number_of_days" 
                                        autofocus >
                                 @error('number_of_days')
@@ -76,7 +77,7 @@
                                        minlength="1"
                                        class="form-control @error('window_period') is-invalid @enderror" 
                                        name="window_period" 
-                                       value="" 
+                                       value="{{ old('window_period') }}" 
                                        required autocomplete="window_period" 
                                        autofocus >
                                 @error('window_period')

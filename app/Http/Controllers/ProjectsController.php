@@ -78,6 +78,13 @@ class ProjectsController extends Controller
     {
 
         if (Auth::check()){
+            $exist = Project::where('name',$request->input('name'))
+            ->count();
+
+            if($exist > 0){
+                return back()->withinput()->with('errors2','Error Occured, This Project exist, Please check your Entry and Try again, or Contact IT team for help');
+            }else{
+
             $projects=Project::create([
                                     'name'=>$request->input('name'),
                                     'description'=>$request->input('description'),
@@ -90,6 +97,7 @@ class ProjectsController extends Controller
         }
         return view('auth.login');
     }
+}
 
     /**
      * Display the specified resource.
@@ -131,7 +139,6 @@ class ProjectsController extends Controller
     public function update(Request $request, Project $project)
     {
         if (Auth::check()){
-
 
         $projects=Project::where('id', $project->id)
                               ->update([

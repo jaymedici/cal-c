@@ -2,6 +2,7 @@
 @section('content')
 
       @include('partials.errors')
+      @include('partials.errors2')
       @include('partials.success')
 
 <div class="col-md-9 col-lg-9 col-sm-9 pull-left" style="background: white;">
@@ -20,7 +21,7 @@
                                        minlength="1"
                                        class="form-control @error('patient_id') is-invalid @enderror" 
                                        name="patient_id" 
-                                       value="" 
+                                       value="{{ old('patient_id') }}" 
                                        required autocomplete="patient_id" 
                                        autofocus >
                                 @error('patient_id')
@@ -57,7 +58,7 @@
                                        minlength="1"
                                        class="form-control @error('site_name') is-invalid @enderror" 
                                        name="site_name" 
-                                       value="" 
+                                       value="{{ old('site_name') }}" 
                                        required autocomplete="site_name" 
                                        autofocus >
                                 @error('site_name')
@@ -76,7 +77,7 @@
                                        minlength="1"
                                        class="form-control @error('visit_date') is-invalid @enderror" 
                                        name="visit_date" 
-                                       value="" 
+                                       value="{{ old('visit_date') }}" 
                                        required autocomplete="visit_date" 
                                        autofocus >
                                 @error('visit_date')

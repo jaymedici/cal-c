@@ -62,6 +62,15 @@ class VisitSettingsController extends Controller
     {
 
         if (Auth::check()){
+
+            $exist = VisitSetting::where('visit_name',$request->input('visit_name'))
+            ->Where('project_id', $request->input('project_id'))
+            ->count();
+
+            if($exist > 0){
+                return back()->withinput()->with('errors2','Error Occured, This Visit exist in the selected project, Please check your Entry and Try again, or Contact IT team for help');
+            }else{
+
             $visit=VisitSetting::create([
                                     'project_id'=>$request->input('project_id'),
                                     'visit_name'=>$request->input('visit_name'),
@@ -76,6 +85,7 @@ class VisitSettingsController extends Controller
         }
         return view('auth.login');
     }
+}
 
     /**
      * Display the specified resource.

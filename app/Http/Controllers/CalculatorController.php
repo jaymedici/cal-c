@@ -193,6 +193,15 @@ class CalculatorController extends Controller
     public function store(Request $request)
     {
         if (Auth::check()){
+
+            $exist = Calendar::where('patient_id',$request->input('patient_id'))
+            ->Where('project_id', $request->input('project_id'))
+            ->count();
+
+            if($exist > 0){
+                return back()->withinput()->with('errors2','Error Occured, This participant ID exist in the selected project, Please check your Entry and Try again, or Contact IT team for help');
+            }else{
+
             $visit = VisitSetting::where('project_id',$request->input('project_id'))->orderBy('id')->get();
             foreach ($visit as $visits) {
             $visitdate= date('Y-m-d', strtotime($request->input('visit_date') . '+'.$visits->number_of_days.'days'));
@@ -225,6 +234,7 @@ class CalculatorController extends Controller
            return back()->withinput()->with('errors','Error Updating information');
         }
         return view('auth.login');
+    }
     }
 
     /**

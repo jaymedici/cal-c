@@ -8,6 +8,7 @@
 @section('content')
 
       @include('partials.errors')
+      @include('partials.errors2')
       @include('partials.success')
 
 <div class="col-md-9 col-lg-9 col-sm-9 pull-left" style="background: white;">

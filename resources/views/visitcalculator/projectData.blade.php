@@ -36,7 +36,7 @@
 
 
 <div class="col-lg-12 col-md-12">
-<div class="card card-info">
+<div class="card card-success">
     <div class="card-header with-border">
                 <h3 class="box-title">{{$project->name}} Project, Pending and On Window Visits </h3>
                 
