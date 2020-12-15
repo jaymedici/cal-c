@@ -20,13 +20,11 @@ Route::get('/', function () {
 Auth::routes();
 Route::get('logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::group(['middleware' => ['preventBackHistory','auth']],function(){
 Route::get('/projectData/{id}', [App\Http\Controllers\HomeController::class, 'projectData'])->name('projectData');
-Auth::routes();
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
+//Auth::routes();
 Route::get('user',[App\Http\Controllers\UsersController::class, 'index'])->name('user.index');
 Route::get('userDatatable',[App\Http\Controllers\UsersController::class, 'userDatatable'])->name('userDatatable');
 
@@ -61,7 +59,7 @@ Route::get('commingVisitsDatatable',[App\Http\Controllers\CalculatorController::
 Route::resource('roles',App\Http\Controllers\RolesController::class);
 Route::resource('dataCharts',App\Http\Controllers\DataChartController::class);
 
-
+});
 
 
 
