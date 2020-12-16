@@ -79,7 +79,7 @@ class CalculatorController extends Controller
     {
         if (Auth::check()){
             $todaydate=date("Y-m-d");
-            return Datatables::of(Calendar::where('visit_status','Pending')
+            return Datatables::of(Calendar::where('visit_status','Pending and On Window')
             ->where('windows_start_date','<=', $todaydate)
             ->where('windows_end_date','>=', $todaydate)
             ->with('project')
@@ -107,7 +107,7 @@ class CalculatorController extends Controller
     {
         if (Auth::check()){
             $todaydate=date("Y-m-d");
-            return Datatables::of(Calendar::where('visit_status','Pending')
+            return Datatables::of(Calendar::where('visit_status','Missed Visit')
             ->where('windows_end_date','<', $todaydate)
             ->with('project')
             ->orderBy('project_id')->orderBy('visit'))

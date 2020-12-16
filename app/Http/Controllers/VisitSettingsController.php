@@ -124,10 +124,9 @@ class VisitSettingsController extends Controller
     public function update(Request $request, VisitSetting $visit)
     {
         if (Auth::check()){
+
         $visit=VisitSetting::where('id', $visit->id)
                               ->update([
-                                'project_id'=>$request->input('project_id'),
-                                'visit_name'=>$request->input('visit_name'),
                                 'number_of_days'=>$request->input('number_of_days'),
                                 'window_period'=>$request->input('window_period'),
                                 'updated_by'=>auth::user()->email
@@ -142,8 +141,8 @@ if ($visit){
        return back()->withinput()->with('errors','Error Updating');
     }
     return view('auth.login');
-}
-
+      }
+    
     /**
      * Remove the specified resource from storage.
      *

@@ -25,6 +25,7 @@ class Calendars extends Migration
             $table->date('windows_end_date')->nullable();
             $table->integer('window_period')->nullable();
             $table->string('visit_status')->nullable();
+            $table->string('visit_status1')->nullable();
             $table->string('updated_by')->nullable();
             $table->timestamps();
         });

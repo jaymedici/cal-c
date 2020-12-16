@@ -106,10 +106,9 @@
                                     <div class="col-md-9">
                                         <select id="visit_status" class="form-control" required name="visit_status">
                                                 <option value="{{$visit->visit_status}}"> {{$visit->visit_status}}</option>
-                                                <option value="Completed">Completed</option>  
+                                                <option value="Completed">Completed</option> 
+                                                <option value="Lost to Follow up">Lost to Follow up</option>   
                                                 <option value="Pending">Pending</option>
-                                                <option value="Pending and On Window">Pending and On Window</option>   
-                                                <option value="Missed Visit">Missed Visit</option>   
                                                 
                                         </select>  
                                         @error('visit_status')
@@ -128,14 +127,8 @@
                                 </button>
                                 </div>
                                 </div>
-
-                               
-                       
-
-
-                                
-</form>  
-
+                
+              </form>  
 
                             <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">

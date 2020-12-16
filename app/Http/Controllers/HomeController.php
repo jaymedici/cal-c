@@ -32,6 +32,28 @@ class HomeController extends Controller
     public function index(Request $request)
     {
   // Get users grouped by Visit Status
+      $todaydate=date("Y-m-d");
+      $visit=Calendar::where('windows_start_date','<=', $todaydate)
+      ->where('windows_end_date','>=', $todaydate)
+      ->where('visit_status', 'Pending')
+      ->update([
+        'visit_status1'=>'Pending and On Window',
+        'visit_status'=>'Pending and On Window',
+               ]);
+
+      $visit=Calendar::where('windows_start_date','>', $todaydate)
+                ->update([
+                  'visit_status1'=>'Pending',
+        ]);  
+        
+        $todaydate=date("Y-m-d");
+        $visit=Calendar::where('windows_end_date','<', $todaydate)
+        ->where('visit_status', 'Pending and On Window')
+        ->update([
+          'visit_status1'=>'Missed Visit',
+          'visit_status1'=>'Missed Visit',
+                 ]);
+  
   $project = Project::all();
   $groups = DB::table('calendars')->select('visit_status', DB::raw('count(*) as total'))
   ->groupBy('visit_status')->pluck('total', 'visit_status')->all();
