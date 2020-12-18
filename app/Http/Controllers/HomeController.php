@@ -7,6 +7,10 @@ use ConsoleTVs\Charts\Facades\Charts;
 use App\Calendar;
 use App\VisitSetting;
 use App\Project;
+use Mail;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\VisitNotification;
 
 use App\Charts\DataChart;
 use DB;
@@ -31,6 +35,14 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
+
+ //Send Email Notification to substitute
+ $requesterName = auth::user()->name;
+ $substituteEmail="pagrea16@gmail.com";
+ Notification::route('mail', $substituteEmail)
+ ->notify(new VisitNotification($requesterName));
+
+
   // Get users grouped by Visit Status
       $todaydate=date("Y-m-d");
       $visit=Calendar::where('windows_start_date','<=', $todaydate)
