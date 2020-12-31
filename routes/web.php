@@ -28,6 +28,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('user',[App\Http\Controllers\UsersController::class, 'index'])->name('user.index');
 Route::get('userDatatable',[App\Http\Controllers\UsersController::class, 'userDatatable'])->name('userDatatable');
 
+Route::resource('user',App\Http\Controllers\UsersController::class);
 Route::resource('departments',App\Http\Controllers\DepartmentController::class);
 Route::get('departmentDatatable',[App\Http\Controllers\DepartmentController::class, 'departmentDatatable'])->name('departmentDatatable');
 

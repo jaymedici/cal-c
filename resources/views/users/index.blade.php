@@ -1,7 +1,6 @@
 @extends('adminlte::page')
 @section('css')
-@include('partials.errors')
-@include('partials.success')
+
 <style>
     .dt-buttons {
         text-align: center;
@@ -26,6 +25,8 @@
 </style>
 @stop
 @section('content')
+@include('partials.errors')
+@include('partials.success')
 <head>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
@@ -54,6 +55,7 @@
                                 <th>Name</th>
                                 <th>User Name</th>
                                 <th>Email</th>
+                                <th>Department</th>
                                 <th>Created Date</th>
                                 <th>Updated Date</th>
                                 <th>Updated By</th>
@@ -91,6 +93,7 @@
                         { data: 'name', name: 'name' },
                         { data: 'username', name: 'username' },
                         { data: 'email', name: 'email' },
+                        { data: 'department', name: 'department' },
                         { data: 'created_at', name: 'created_at' },
                         { data: 'updated_at', name: 'updated_at'},
                         { data: 'updated_by', name: 'updated_by' },

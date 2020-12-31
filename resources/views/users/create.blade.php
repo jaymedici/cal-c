@@ -18,10 +18,11 @@
 
 
 @include('partials.errors')
+@include('partials.errors2')
 @include('partials.success')
 
 <div>
-    <h4 style="text-align:center">Create New User</h4>
+   
     <div class="row">
         <div class="card border-info col-md-12 col-lg-12">
             <div class="card-body">
@@ -29,7 +30,7 @@
                 <div class="row">     
 
                     <div class="card col-md-6 col-lg-6 mr-5 small-text">
-                        <h5 class="card-header">User Information</h5>
+                    <h4 style="text-align:center">Create User</h4>
                         <div class="card-body">
 
 
@@ -43,7 +44,7 @@
                                        type="text" 
                                        class="form-control @error('name') is-invalid @enderror" 
                                        name="name" 
-                                       value="" 
+                                       value="{{ old('name') }}" 
                                        required autocomplete="name" 
                                        autofocus >
                                 @error('name')
@@ -58,7 +59,7 @@
                             <label for="department" class="col-md-4 col-form-label text-md-right">Department<span class="required"></span></label>
                             <div class="col-md-6">
                             <select id="department" required name="department" class="form-control @error('department') is-invalid @enderror"/>
-                                  <option value=""></option>
+                                  <option value="{{ old('department') }}">{{ old('department') }}</option>
                                   @foreach($departments as $department)
                                        <option value="{{$department->name}}">{{$department->name}}</option>
                                     @endforeach
@@ -79,7 +80,7 @@
                                        type="email" 
                                        class="form-control @error('email') is-invalid @enderror" 
                                        name="email" 
-                                       value="" 
+                                       value="{{ old('email') }}" 
                                        required autocomplete="email" 
                                        autofocus >
                                 @error('email')
@@ -97,7 +98,7 @@
                                        type="text" 
                                        class="form-control @error('username') is-invalid @enderror" 
                                        name="username" 
-                                       value="" 
+                                       value="{{ old('username') }}" 
                                        required autocomplete="username" 
                                        autofocus >
                                 @error('username')
@@ -108,6 +109,17 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                        <label for="user_active" class="col-md-4 col-form-label text-md-right">User Active</label>
+                            <div class="col-md-6">  
+                            
+                            <select id="user_active" data-placeholder="user_active" class="form-control tagsselector" name="user_active">  
+                                        <option value="{{ old('user_active') }}">{{ old('user_active') }} </option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No"> No</option>
+                            </select>
+                            </div>
+                        </div>
                                 <div class="form-group">
                                         <div class="col-md-offset-2 col-md-10">
                                             <input class="btn btn-success" id="submit" type="submit" value="Register">
@@ -118,9 +130,6 @@
                         </div>
                     </div>
 
-
-                        </div> 
-                    </div>
                     </div>
                 </div>
             </div>
