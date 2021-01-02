@@ -21,7 +21,7 @@
         
         <div class="<?php echo e($auth_type ?? 'login'); ?>-logo">
             <a href="<?php echo e($dashboard_url); ?>">
-            <img src="<?php echo e(asset('/img/LOGO.png')); ?>" height="50">
+            <img src="<?php echo e(asset(config('adminlte.logo_img'))); ?>" height="50">
             <?php echo config('adminlte.logo', '<b>Admin</b>LTE'); ?>
 
             </a>
