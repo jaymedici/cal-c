@@ -1,3 +1,5 @@
+
+
 <?php ( $dashboard_url = View::getSection('dashboard_url') ?? config('adminlte.dashboard_url', 'home') ); ?>
 
 <?php if(config('adminlte.use_route_url', false)): ?>
@@ -19,8 +21,8 @@
         
         <div class="<?php echo e($auth_type ?? 'login'); ?>-logo">
             <a href="<?php echo e($dashboard_url); ?>">
-                <img src="<?php echo e(asset('img/LOGO.png')); ?>" height="50">
-                <?php echo config('adminlte.logo', '<b>Admin</b>LTE'); ?>
+            <img src="<?php echo e(asset('/img/LOGO.png')); ?>" height="50">
+            <?php echo config('adminlte.logo', '<b>Admin</b>LTE'); ?>
 
             </a>
         </div>
