@@ -43,7 +43,6 @@ class HomeController extends Controller
       ->where('windows_end_date','>=', $todaydate)
       ->where('visit_status', 'Pending')
       ->update([
-        'visit_status1'=>'Pending and On Window',
         'visit_status'=>'Pending and On Window',
                ]);
 
@@ -55,8 +54,7 @@ class HomeController extends Controller
         $visit=Calendar::where('windows_end_date','<', $todaydate)
         ->where('visit_status', 'Pending and On Window')
         ->update([
-          'visit_status1'=>'Missed Visit',
-          'visit_status1'=>'Missed Visit',
+          'visit_status'=>'Missed Visit',
                  ]);
   
   $project = Project::all();
@@ -140,7 +138,7 @@ class HomeController extends Controller
         ->where('visit_status', 'Pending and On Window')
         ->update([
           'visit_status1'=>'Missed Visit',
-          'visit_status1'=>'Missed Visit',
+          'visit_status'=>'Missed Visit',
                  ]);
 
 
