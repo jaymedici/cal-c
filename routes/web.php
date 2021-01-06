@@ -18,6 +18,17 @@ return view('auth.login');
 });
 
 Auth::routes();
+/*
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'Auth\LoginController@login');
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+Route::get('logout', 'Auth\LoginController@logout');
+*/
+Route::get('login', [App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])->name('login');
+Route::get('login', [App\Http\Controllers\Auth\LoginController::class, 'login']);
+Route::get('logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
+Route::get('logout', [App\Http\Controllers\Auth\LoginController::class, 'logout']);
+
 Route::get('logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 Route::get('/sendEmail', [App\Http\Controllers\SendEmailController::class, 'index'])->name('sendEmail');
 
@@ -37,13 +48,14 @@ Route::get('projectDatatable',[App\Http\Controllers\ProjectsController::class, '
 Route::get('projectListdt',[App\Http\Controllers\ProjectsController::class, 'projectListdt'])->name('projectListdt');
 
 
+
 Route::resource('visits',App\Http\Controllers\VisitSettingsController::class);
 Route::get('visitsDatatable',[App\Http\Controllers\VisitSettingsController::class, 'visitsDatatable'])->name('visitsDatatable');
 
 Route::resource('calculators',App\Http\Controllers\CalculatorController::class);
 Route::get('calculatorsDatatable',[App\Http\Controllers\CalculatorController::class, 'calculatorsDatatable'])->name('calculatorsDatatable');
 Route::get('projectdt/{id}',[App\Http\Controllers\CalculatorController::class, 'projectdt']);
-
+Route::get('PendingOnWindow',[App\Http\Controllers\CalculatorController::class, 'PendingOnWindow'])->name('PendingOnWindow');
 
 Route::get('passedvisits',[App\Http\Controllers\CalculatorController::class, 'passedvisits'])->name('passedvisits');
 Route::get('passedvisitsDatatable',[App\Http\Controllers\CalculatorController::class, 'passedvisitsDatatable'])->name('passedvisitsDatatable');
@@ -61,6 +73,8 @@ Route::resource('roles',App\Http\Controllers\RolesController::class);
 Route::resource('dataCharts',App\Http\Controllers\DataChartController::class);
 
 });
+
+
 
 
 

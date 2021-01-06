@@ -25,8 +25,8 @@
 
         
         <div class="input-group mb-3">
-            <input type="email" name="email" class="form-control <?php echo e($errors->has('email') ? 'is-invalid' : ''); ?>"
-                   value="<?php echo e(old('email')); ?>" placeholder="<?php echo e(__('adminlte::adminlte.email')); ?>" autofocus>
+            <input type="text" name="email" class="form-control <?php echo e($errors->has('email') ? 'is-invalid' : ''); ?>"
+                   value="<?php echo e(old('email')); ?>" placeholder="User Name" autofocus>
             <div class="input-group-append">
                 <div class="input-group-text">
                     <span class="fas fa-envelope <?php echo e(config('adminlte.classes_auth_icon', '')); ?>"></span>
@@ -72,18 +72,6 @@
         </div>
 
     </form>
-<?php $__env->stopSection(); ?>
-
-<?php $__env->startSection('auth_footer'); ?>
-    
-    <?php if($password_reset_url): ?>
-        <p class="my-0">
-            <a href="<?php echo e($password_reset_url); ?>">
-                <?php echo e(__('adminlte::adminlte.i_forgot_my_password')); ?>
-
-            </a>
-        </p>
-    <?php endif; ?>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('adminlte::auth.auth-page', ['auth_type' => 'login'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Visitcallender\resources\views/vendor/adminlte/auth/login.blade.php ENDPATH**/ ?>

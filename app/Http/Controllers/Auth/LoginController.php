@@ -1,6 +1,10 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
+use Adldap\Laravel\Facades\Adldap;
+use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
@@ -21,6 +25,38 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
+
+    protected function login(Request $request)
+    {
+        $username = $request->input('email');
+        $password = $request->input('password');
+        $user = User::where('username', $username)->first();
+          if (!$user) {
+               
+                return back()->withinput()->with('error_message','Invalid Username or Password');
+            }
+        if(Adldap::auth()->attempt($username, $password, $bindAsUser = true)) {
+
+           $this->guard()->login($user, true);
+
+            return redirect()->route('home');
+        }
+
+        else{
+        return back()->withinput()->with('error_message','Invalid Username or Password');
+    }
+    }
+
+    public function showLoginForm()
+    {
+        return view('auth.login');
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return view('auth.login');
+    }
     /**
      * Where to redirect users after login.
      *

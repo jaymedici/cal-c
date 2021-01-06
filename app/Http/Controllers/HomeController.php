@@ -37,6 +37,12 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
+
+      if ((Auth::user()->user_active) != 'Yes') {
+        echo '<script>alert("Your Account Was not Activeted, Please Contact The supper Admin User to activate it")</script>';
+         Auth::logout();
+         return view('auth.login');
+     }
   // Get users grouped by Visit Status
       $todaydate=date("Y-m-d");
       $visit=Calendar::where('windows_start_date','<=', $todaydate)
@@ -64,7 +70,9 @@ class HomeController extends Controller
   $groups1 = DB::table('calendars')->select('visit', DB::raw('count(*) as total'))
   ->where('visit_status', 'Pending and On Window')
   ->groupBy('visit')->pluck('total', 'visit')->all();
- 
+
+  
+
  // Generate random colours for the groups
  for ($i=0; $i<=count($groups); $i++) {
  $colours[] = '#' . substr(str_shuffle('ABCDEF0123456789'), 0, 6);

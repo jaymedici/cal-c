@@ -148,6 +148,27 @@ class CalculatorController extends Controller
     return view('auth.login');
     }
 
+
+    public function PendingOnWindow()
+    {
+        if (Auth::check()){
+            $todaydate=date("Y-m-d");
+            return Datatables::of(Calendar::where('visit_status', 'Pending and On Window')
+            ->with('project')
+            ->orderBy('project_id')->orderBy('visit'))
+            ->addColumn('editLink', function ($row) {
+                return '<a href="/calculators/'.$row->id.'/edit">'."Edit".'</a>';
+            })
+            ->rawColumns(['editLink'])
+            ->make(true);
+        
+    }
+    return view('auth.login');
+    }
+
+
+    
+
     public function projectdt($id)
     {
         if (Auth::check()){
