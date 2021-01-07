@@ -28,7 +28,6 @@ Route::get('login', [App\Http\Controllers\Auth\LoginController::class, 'showLogi
 Route::get('login', [App\Http\Controllers\Auth\LoginController::class, 'login']);
 Route::get('logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 Route::get('logout', [App\Http\Controllers\Auth\LoginController::class, 'logout']);
-
 Route::get('logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 Route::get('/sendEmail', [App\Http\Controllers\SendEmailController::class, 'index'])->name('sendEmail');
 
