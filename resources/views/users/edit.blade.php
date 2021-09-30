@@ -17,8 +17,10 @@
 @section('content')
 
 
-@include('partials.errors')
-@include('partials.success')
+      @include('partials.errors')
+      @include('partials.errors2')
+      @include('partials.success')
+
 
 <div>
    
@@ -121,6 +123,18 @@
                             </select>
                             </div>
                         </div>
+
+                        <div class="form-group row">
+                        <label for="userRole" class="col-md-4 col-form-label text-md-right">User Role</label>
+                            <div class="col-md-6">  
+                            
+                            <select id="userRole" data-placeholder="Select a Roles" class="form-control tagsselector" name="roles[]" multiple="multiple">
+                                    @foreach($roles as $role)
+                                        <option value="{{ $role->id }}"  {{ $User->roles->contains($role->id) ? 'selected' : '' }}>{{ $role->name }}</option>
+                                    @endforeach
+                            </select>
+                            </div>
+                        </div>
                                 <div class="form-group">
                                         <div class="col-md-offset-2 col-md-10">
                                             <input class="btn btn-success" id="submit" type="submit" value="Save">
@@ -130,6 +144,67 @@
                            
                         </div>
                     </div>
+
+
+                    <div class="card col-md-5 col-lg-5">
+                    <h5 class="card-header">Add Projects</h5>
+                   
+                        <div class="card-body">
+
+                        <form action="/addprojecttouser" method="get">
+                        <input  type="hidden" name="user_id" value="{{$User->id}}">
+                        <table class="table">
+                                    <thead>
+                                    <tr>
+                                    <th>  Project Name</th>
+                                    <th>
+                           <select class="form-control" required name="project_id">
+                                <option value="{{ old('project_id') }}">{{ old('staff_id') }}</option>
+                                @foreach($projects as $project)
+                                <option value="{{$project->id}}">{{$project->name}}</option>
+                                @endforeach
+                           </select></th>
+                           <th>
+                           <input class="btn btn-success" id="submit" type="submit" value="Add New Project">
+                           </th>
+                           </tr></thead> </table>
+                                    
+                        </form>
+
+                        <div class="table-responsive">
+                                <table class="table">
+                                    <thead class="thead-dark">
+                                    <tr>
+                                        <th>Project ID</th>
+                                        <th>Project Name</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($userProjects as $userProject)
+                                        <tr>
+                                        <td>{{$userProject->project_id}} </td>
+                                        <td> {{$userProject->project->name}}</td>
+                                        <td>
+                                        <form action="/removeprojecttouser" method="get">
+                                            <input  type="hidden" name="user_id" value="{{$User->id}}">
+                                            <input  type="hidden" name="project_id" value="{{$userProject->project_id}}">
+                                            <input onclick='return confirm("Are you sure You want to remove this record?? Click Ok to continue or Click Cancel to Cancel")' class="btn btn-sm btn-danger" id="submit" type="submit" value="Remove">                     
+                                        </form>
+                                        </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                    </table>
+                            </div>
+
+                        </div> 
+                    </div>
+
+
+
+
+
 
                     </div>
                 </div>

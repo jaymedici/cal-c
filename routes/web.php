@@ -37,6 +37,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 //Auth::routes();
 Route::get('user',[App\Http\Controllers\UsersController::class, 'index'])->name('user.index');
 Route::get('userDatatable',[App\Http\Controllers\UsersController::class, 'userDatatable'])->name('userDatatable');
+Route::get('addprojecttouser',[App\Http\Controllers\UsersController::class, 'addprojecttouser'])->name('addprojecttouser');
+Route::get('removeprojecttouser',[App\Http\Controllers\UsersController::class, 'removeprojecttouser'])->name('removeprojecttouser');
 
 Route::resource('user',App\Http\Controllers\UsersController::class);
 Route::resource('departments',App\Http\Controllers\DepartmentController::class);

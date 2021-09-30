@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use App\Calendar;
 use App\VisitSetting;
 use App\Project;
+
+use App\UserProject;
 use Yajra\Datatables\Datatables;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -153,9 +155,10 @@ class CalculatorController extends Controller
     {
         if (Auth::check()){
             $todaydate=date("Y-m-d");
-            return Datatables::of(Calendar::where('visit_status', 'Pending and On Window')
-            ->with('project')
-            ->orderBy('project_id')->orderBy('visit'))
+            //return Datatables::of(UserProject::with('visit')->where('visit_status', 'Pending and On Window')
+            return Datatables::of(UserProject::with('visit')->where('user_id','!=',0)
+            ->where('user_id', auth::user()->email)
+            ->orderBy('project_id'))
             ->addColumn('editLink', function ($row) {
                 return '<a href="/calculators/'.$row->id.'/edit">'."Edit".'</a>';
             })
@@ -298,6 +301,7 @@ class CalculatorController extends Controller
         $visit=Calendar::where('id', $calculator->id)
                               ->update([
                                 'visit_status'=>$request->input('visit_status'),
+                                'actual_visit_date'=>$request->input('actual_visit_date'),
                                 'updated_by'=>auth::user()->email
                                        ]);
 if ($visit){

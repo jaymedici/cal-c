@@ -17,8 +17,10 @@
 <?php $__env->startSection('content'); ?>
 
 
-<?php echo $__env->make('partials.errors', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-<?php echo $__env->make('partials.success', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+      <?php echo $__env->make('partials.errors', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+      <?php echo $__env->make('partials.errors2', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+      <?php echo $__env->make('partials.success', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+
 
 <div>
    
@@ -178,6 +180,18 @@ unset($__errorArgs, $__bag); ?>
                             </select>
                             </div>
                         </div>
+
+                        <div class="form-group row">
+                        <label for="userRole" class="col-md-4 col-form-label text-md-right">User Role</label>
+                            <div class="col-md-6">  
+                            
+                            <select id="userRole" data-placeholder="Select a Roles" class="form-control tagsselector" name="roles[]" multiple="multiple">
+                                    <?php $__currentLoopData = $roles; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $role): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($role->id); ?>"  <?php echo e($User->roles->contains($role->id) ? 'selected' : ''); ?>><?php echo e($role->name); ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            </select>
+                            </div>
+                        </div>
                                 <div class="form-group">
                                         <div class="col-md-offset-2 col-md-10">
                                             <input class="btn btn-success" id="submit" type="submit" value="Save">
@@ -187,6 +201,67 @@ unset($__errorArgs, $__bag); ?>
                            
                         </div>
                     </div>
+
+
+                    <div class="card col-md-5 col-lg-5">
+                    <h5 class="card-header">Add Projects</h5>
+                   
+                        <div class="card-body">
+
+                        <form action="/addprojecttouser" method="get">
+                        <input  type="hidden" name="user_id" value="<?php echo e($User->id); ?>">
+                        <table class="table">
+                                    <thead>
+                                    <tr>
+                                    <th>  Project Name</th>
+                                    <th>
+                           <select class="form-control" required name="project_id">
+                                <option value="<?php echo e(old('project_id')); ?>"><?php echo e(old('staff_id')); ?></option>
+                                <?php $__currentLoopData = $projects; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $project): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <option value="<?php echo e($project->id); ?>"><?php echo e($project->name); ?></option>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                           </select></th>
+                           <th>
+                           <input class="btn btn-success" id="submit" type="submit" value="Add New Project">
+                           </th>
+                           </tr></thead> </table>
+                                    
+                        </form>
+
+                        <div class="table-responsive">
+                                <table class="table">
+                                    <thead class="thead-dark">
+                                    <tr>
+                                        <th>Project ID</th>
+                                        <th>Project Name</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php $__currentLoopData = $userProjects; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $userProject): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <tr>
+                                        <td><?php echo e($userProject->project_id); ?> </td>
+                                        <td> <?php echo e($userProject->project->name); ?></td>
+                                        <td>
+                                        <form action="/removeprojecttouser" method="get">
+                                            <input  type="hidden" name="user_id" value="<?php echo e($User->id); ?>">
+                                            <input  type="hidden" name="project_id" value="<?php echo e($userProject->project_id); ?>">
+                                            <input onclick='return confirm("Are you sure You want to remove this record?? Click Ok to continue or Click Cancel to Cancel")' class="btn btn-sm btn-danger" id="submit" type="submit" value="Remove">                     
+                                        </form>
+                                        </td>
+                                        </tr>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    </tbody>
+                                    </table>
+                            </div>
+
+                        </div> 
+                    </div>
+
+
+
+
+
 
                     </div>
                 </div>

@@ -118,7 +118,7 @@ unset($__errorArgs, $__bag); ?>
                         </div>
 
                         <div class="form-group row">
-                            <label for="visit_date" class="col-md-3 col-form-label text-md-right">First Visit Date<span class="required"><font color="red">*</font></span></label>
+                            <label for="visit_date" class="col-md-3 col-form-label text-md-right">Scheduled Visit Date<span class="required"><font color="red">*</font></span></label>
                             <div class="col-md-9">
                                <input id="visit_date" 
                                        type="date" 
@@ -151,13 +151,48 @@ unset($__errorArgs, $__bag); ?>
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label for="actual_visit_date" class="col-md-3 col-form-label text-md-right">Actual Visit Date<span class="required"><font color="red">*</font></span></label>
+                            <div class="col-md-9">
+                               <input id="actual_visit_date" 
+                                       type="date" 
+                                       minlength="1"
+                                       class="form-control <?php $__errorArgs = ['actual_visit_date'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" 
+                                       name="actual_visit_date" 
+                                       value="<?php echo e($visit->actual_visit_date); ?>" 
+                                       required autocomplete="actual_visit_date" 
+                                       autofocus >
+                                <?php $__errorArgs = ['actual_visit_date'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong><?php echo e($message); ?></strong>
+                                    </span>
+                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                            </div>
+                        </div>
+
                         <div  class="form-group row"> 
                                     <label for="visit_status" class="col-md-3 col-form-label text-md-right required"> Visit Status</label>
                                     <div class="col-md-9">
                                         <select id="visit_status" class="form-control" required name="visit_status">
                                                 <option value="<?php echo e($visit->visit_status); ?>"> <?php echo e($visit->visit_status); ?></option>
                                                 <option value="Completed">Completed</option> 
-                                                <option value="Lost to Follow up">Lost to Follow up</option>   
+                                                <option value="Lost to Follow up">Lost to Follow up</option>  
+                                                <option value="Died">Died</option>    
+                                                <option value="Withdrawn">Withdrawn</option>  
                                                 <option value="Pending">Pending</option>
                                                 
                                         </select>  
@@ -179,9 +214,12 @@ unset($__errorArgs, $__bag); ?>
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                             <a class="pull-left btn btn-primary" href="<?php echo e(url()->previous()); ?>">Back</a>
-                                <button type="submit" class="btn btn-primary">
+                               <?php if($visit->windows_start_date <= date("Y-m-d")): ?>
+                            <button type="submit" class="btn btn-primary">
                                    Save
                                 </button>
+                                <?php endif; ?>
+
                                 </div>
                                 </div>
                 

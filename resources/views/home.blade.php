@@ -24,7 +24,7 @@
 </style>
 @stop
 @section('content_header')
-    <h1 class="m-0 text-dark">Dashboard</h1>
+  <!--  <h1 class="m-0 text-dark">Dashboard</h1>-->
 @stop
 @section('content')
 
@@ -37,7 +37,7 @@
 
 <div class="container">
   <div class="row">
-@include('charts.homeDataChart')
+
 
 
 <div class="col-lg-4 col-md-4">
@@ -68,41 +68,6 @@
             </div>
         </div>
     </div>
-
-
-    <div class="col-lg-8 col-md-8">
-<div class="card card-success">
-    <div class="card-header with-border">
-                <h3 class="box-title">Pending and On Window Visit  </h3>
-                
-                <div class="box-tools pull-right">
-
-                    <!-- <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button> -->
-                </div>
-            </div>
-            <!-- /.box-header -->
-            
-            <div class="card-body" style="">
-        <div class="table-responsive">
-        <table class="table" id="table1">
-            <thead class="thead-dark">
-                 <tr>
-                               <th>ParticipantID</th>
-                                <th>ProjectName</th>
-                                <th>Visit</th>
-                                <th>VisitDate</th>
-                                <th>VisitStatus</th>
-                                <th>Action</th>
-                </tr>
-                      </thead>
-                    </table>
-                </div>
-                <!-- /.table-responsive -->
-            </div>
-        </div>
-    </div>
-
-</div>
 @endsection
 
 
@@ -127,34 +92,12 @@
                 buttons: ['copy','excel','csv','pdf'],
                ajax: '{{ url('projectListdt') }}',
                columns: [
-                        { data: 'id', name: 'id' },
-                        { data: 'name', name: 'name' },
-                        { data: 'editLink', name: 'editLink' }
-                     ]
-            });
-         })
-
-        
-         $(function() {
-               $('#table1').DataTable({
-               processing: true,
-               serverSide: true,
-               "scrollX": true,
-                dom: 'Blfrtip',
-                buttons: ['copy','excel','csv','pdf'],
-               ajax: '{{ url('PendingOnWindow') }}',
-               columns: [
-                { data: 'patient_id', name: 'patient_id' },
+                        { data: 'project_id', name: 'project_id' },
                         { data: 'project.name', name: 'project.name' },
-                        { data: 'visit', name: 'visit' },
-                        { data: 'visit_date', name: 'visit_date' },
-                        { data: 'visit_status', name: 'visit_status' },
                         { data: 'editLink', name: 'editLink' }
                      ]
             });
-         })
-
+         })     
 </script>
-
 
 @stop

@@ -3,7 +3,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Session;
 use App\User;
 use App\Department;
-use App\Approver;
+use App\UserProject;
 use App\Project;
 use Yajra\Datatables\Datatables;
 use Maatwebsite\Excel\Facades\Excel;
@@ -43,9 +43,14 @@ class UsersController extends Controller
         public function edit(User $user)
         {
             if (Auth::check()){
+
+            $projects = Project::all();
             $User  = User::find($user->id);
+            $roles = Role::get();
+            $userRole = $User->roles->pluck('name','name')->all();
             $departments = Department::where('id','!=',0)->get();
-            return view('users.edit',compact('User', 'departments'));
+            $userProjects = UserProject::where('user_id',$user->id)->with('project')->get();
+            return view('users.edit',compact('User', 'departments', 'userRole','roles','projects','userProjects'));
 
     }
         return view('auth.login');
@@ -73,7 +78,9 @@ class UsersController extends Controller
                         ]);
 
         //Update the User's role
-       
+        $updatedUser = User::find($User->id);
+        DB::table('model_has_roles')->where('model_id',$User->id)->delete();
+        $updateRoles = $updatedUser->assignRole($request->input('roles'));
 if ($user){
     return redirect()->route('user.index')->with('success','Information Updated Successfully');
 }
@@ -133,5 +140,49 @@ public function create()
 }
 
 
+}
+
+
+public function addprojecttouser(Request $request)
+    {
+        //
+        if (Auth::check()){
+           if(Auth::user()->hasRole('super admin') ){
+
+            $exist = UserProject::where('user_id', $request->input('user_id'))
+           ->Where('project_id', $request->input('project_id'))
+            ->count();
+            if($exist > 0){
+                return back()->withinput()->with('errors2','Error Occured, This Information exist, Please check in the database and Edit if necessary');
+            }
+
+             $addproject=UserProject::create([
+            'user_id'=>$request->input('user_id'),
+            'project_id'=>$request->input('project_id')
+            ]);
+            if($addproject){
+                return back()->withinput()->with('success','Information have been saved Successfully.');;
+}else{
+   return back()->withinput()->with('errors','Error Occured, Probably this user exist');
+}
+        }
+        return redirect()->route('home'); 
+    }
+        return view('auth.login');
+    }
+
+
+    public function removeprojecttouser(Request $request)
+    {
+        if (Auth::check()){
+            if(Auth::user()->hasRole('super admin') ){
+        \DB::table('user_projects')->where('user_id', $request->input('user_id'))
+        ->where('project_id', $request->input('project_id'))
+        ->delete();
+        return back()->withinput()->with('success','Information have been Deleted Successfully.');
+    }
+    return redirect()->route('home'); 
+}
+    return view('auth.login');
 }
 }

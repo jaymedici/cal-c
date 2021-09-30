@@ -21,6 +21,7 @@ class Calendars extends Migration
             $table->string('site_name')->nullable();
             $table->string('visit')->nullable();
             $table->date('visit_date')->nullable();
+            $table->date('actual_visit_date')->nullable();
             $table->date('windows_start_date')->nullable();
             $table->date('windows_end_date')->nullable();
             $table->integer('window_period')->nullable();

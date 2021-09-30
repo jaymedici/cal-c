@@ -25,8 +25,10 @@
 </style>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
-<?php echo $__env->make('partials.errors', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-<?php echo $__env->make('partials.success', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+      <?php echo $__env->make('partials.errors', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+      <?php echo $__env->make('partials.errors2', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+      <?php echo $__env->make('partials.success', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+
 <head>
     <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
     <link href="<?php echo e(asset('css/bootstrap.min.css')); ?>" rel="stylesheet">

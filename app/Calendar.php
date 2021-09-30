@@ -14,6 +14,7 @@ class Calendar extends Model
         'site_name',
         'visit',
         'visit_date',
+        'actual_visit_date',
         'visit_status',
         'visit_status1',
         'updated_by',

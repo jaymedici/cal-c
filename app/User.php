@@ -13,7 +13,7 @@ use Session;
 class User extends Authenticatable
 {
     use Notifiable;
-    //use HasRoles;
+    use HasRoles;
     /**
      * The attributes that are mass assignable.
      *

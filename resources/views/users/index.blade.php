@@ -25,8 +25,10 @@
 </style>
 @stop
 @section('content')
-@include('partials.errors')
-@include('partials.success')
+      @include('partials.errors')
+      @include('partials.errors2')
+      @include('partials.success')
+
 <head>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">

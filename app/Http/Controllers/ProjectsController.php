@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Project;
 use App\User;
 use App\Department;
+use App\UserProject;
 use Yajra\Datatables\Datatables;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -40,9 +41,9 @@ class ProjectsController extends Controller
     public function projectListdt()
     {
         if (Auth::check()){
-            return Datatables::of(Project::query())
+            return Datatables::of(UserProject::with('project')->where('user_id',auth::user()->id)->orderBy('project_id'))
             ->addColumn('editLink', function ($row) {
-                return '<a href="/projectData/'.$row->id.'">'."View Data".'</a>';
+                return '<a href="/projectData/'.$row->project_id.'">'."View Data".'</a>';
             })
             ->rawColumns(['editLink'])
             ->make(true);
