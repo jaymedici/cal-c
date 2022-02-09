@@ -109,7 +109,6 @@ public function create()
             $validatedData = $request->validate([
             'name' => 'required|string',
             'email' => 'required|string',
-            'department' => 'required|string',
             'username' => 'required|string',
                 ]);
 
@@ -126,7 +125,6 @@ public function create()
             'name'=>$request->input('name'),
             'username'=>$request->input('username'),
             'user_active'=>$request->input('user_active'),
-            'department'=>$request->input('department'),
             'updated_by'=>auth::user()->email
                      ]);
 

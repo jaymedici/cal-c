@@ -237,44 +237,63 @@ return [
             'topnav' => true,
         ],
         [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
+            'text' => 'Home',
+            'url'  => '/home',
+            'icon'  => 'fa fa-home',
         ],
         [
-            'text'        => 'All Visits',
-            'url'         => '/calculators',
-            'icon_color' => 'blue',
-            'icon'        => 'fa fa-list',
+            'text' => 'Screening',
+            'url'  => '#',
+            'icon'  => 'fa fa-thermometer',
         ],
         [
-            'text'        => 'On Window Visits',
-            'icon_color' => 'yellow',
-            'url'         => '/todayVisits',
-            'icon'        => 'fa fa-list',
-            
+            'text' => 'Enrol Participant',
+            'url'  => '#',
+            'icon'  => 'fa fa-pen-square',
         ],
 
         [
-            'text'        => 'Upcomming Visits',
-            'icon_color' => 'yellow',
-            'url'         => '/commingVisits',
+            'text'        => 'Visits',
+            'icon_color' => 'blue',
             'icon'        => 'fa fa-list',
-            
-        ],
-        [
-            'text'        => 'Passed Visits',
-            'icon_color' => 'green',
-            'url'         => '/passedvisits',
-            'icon'        => 'fa fa-check',
-            
-        ],
-        [
-            'text'        => 'Missed Visits',
-            'icon_color' => 'red',
-            'url'         => '/missedVisits',
-            'icon'        => 'fa fa-file-excel',
-            
+            'submenu' => [
+
+                [
+                    'text'        => 'In Window Visits',
+                    'icon_color' => 'yellow',
+                    'url'         => '/todayVisits',
+                    'icon'        => 'fa fa-list',
+                    
+                ],
+                [
+                    'text'        => 'Upcoming Visits',
+                    'icon_color' => 'yellow',
+                    'url'         => '/commingVisits',
+                    'icon'        => 'fa fa-calendar',
+                    
+                ],
+                [
+                    'text'        => 'All Visits',
+                    'url'         => '/calculators',
+                    'icon_color' => 'blue',
+                    'icon'        => 'fa fa-list',
+                ],
+                [
+                    'text'        => 'Passed Visits',
+                    'icon_color' => 'green',
+                    'url'         => '/passedvisits',
+                    'icon'        => 'fa fa-check',
+                    
+                ],
+                [
+                    'text'        => 'Missed Visits',
+                    'icon_color' => 'red',
+                    'url'         => '/missedVisits',
+                    'icon'        => 'fa fa-file-excel',
+                    
+                ],
+
+            ],
         ],
 
         [
@@ -297,12 +316,12 @@ return [
                     'icon_color' => 'blue',
                 ],
 
-                [
-                    'text' => 'Departments',
-                    'url'  => '/departments',
-                    'icon' => 'fas fa-fw fa-home',
-                    'icon_color' => 'blue',
-                ],
+                // [
+                //     'text' => 'Departments',
+                //     'url'  => '/departments',
+                //     'icon' => 'fas fa-fw fa-home',
+                //     'icon_color' => 'blue',
+                // ],
 
         ],
     ],

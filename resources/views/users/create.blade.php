@@ -55,23 +55,6 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="department" class="col-md-4 col-form-label text-md-right">Department<span class="required"></span></label>
-                            <div class="col-md-6">
-                            <select id="department" required name="department" class="form-control @error('department') is-invalid @enderror"/>
-                                  <option value="{{ old('department') }}">{{ old('department') }}</option>
-                                  @foreach($departments as $department)
-                                       <option value="{{$department->name}}">{{$department->name}}</option>
-                                    @endforeach
-                             </select>
-                                       @error('department')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
 
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">E-mail Address<span class="required"></span></label>

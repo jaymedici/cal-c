@@ -18,24 +18,14 @@ class ProjectsController extends Controller
      */
     public function index(Request $request)
     {
-        if (Auth::check()){
-            return view('projects.index');
-    }
-    return view('auth.login');
-    }
+        if (Auth::check())
+        {
+            $allProjects = Project::paginate(10);
 
-    public function projectDatatable()
-    {
-        if (Auth::check()){
-            return Datatables::of(Project::with('pi')->with('dept'))
-            ->addColumn('editLink', function ($row) {
-                return '<a href="/projects/'.$row->id.'/edit">'."Edit".'</a>';
-            })
-            ->rawColumns(['editLink'])
-            ->make(true);
-        
-    }
-    return view('auth.login');
+            return view('projects.index', compact('allProjects'));
+        }
+
+        return view('auth.login');
     }
 
     public function projectListdt()
@@ -61,11 +51,13 @@ class ProjectsController extends Controller
      */
     public function create()
     {
-        if (Auth::check()){
-            $user = User::all();
-            $department = Department::all();
-        return view('projects.create',compact('user','department'));
+        if (Auth::check())
+        {
+            $users = User::all();
+            
+            return view('projects.create', compact('users'));
         }
+
         return view('auth.login');
     }
 
@@ -77,28 +69,69 @@ class ProjectsController extends Controller
      */
     public function store(Request $request)
     {
+        if (Auth::check())
+        {
+            //Validation Rules
+            $rules = [
+                'name' => 'required',
+                'description' => 'required',
+                'include_screening' => 'required',
+                'managers' => 'required'
+            ];
 
-        if (Auth::check()){
-            $exist = Project::where('name',$request->input('name'))
-            ->count();
+            //Check if Project already exists
+            $project = Project::where('name',$request->input('name'))->count();
 
-            if($exist > 0){
-                return back()->withinput()->with('errors2','Error Occured, This Project exist, Please check your Entry and Try again, or Contact IT team for help');
-            }else{
+            if($project > 0)
+            {
+                return back()->withinput()->with('errors2','Error Occured, This Project already exists, Please check your Entry and Try again, or Contact IT team for help');
+            }
+            else
+            {
+                $data = $request->validate($rules);
+                $newProject = new Project();
+                $newProject->name = $data['name'];
+                $newProject->description = $data['description'];
+                $newProject->include_screening = $data['include_screening'];
+                $newProject->updated_by = auth::user()->email;
 
-            $projects=Project::create([
-                                    'name'=>$request->input('name'),
-                                    'description'=>$request->input('description'),
-                                    'updated_by'=>auth::user()->email
-                                 ]);
-        if ($projects){
-        return redirect()->route('projects.index')->with('success','Information have been saved Successfully.');
-        }
-           return back()->withinput()->with('errors','Error Updating information');
+                try
+                {
+                    $newProject->save();
+                }
+                catch(\Exception $exception)
+                {
+                    return back()->withinput()->with('errors','Error Creating Project. If the Error persists please contact IT');
+                }
+                
+                //Get Id of the newly created Project
+                $newProjectId = $newProject->id;
+                
+                //Associate assigned managers to project:
+                $managers = $request->input('managers');
+
+                foreach($managers as $key => $manager)
+                {
+                    try{
+                        UserProject::create([
+                           'user_id' => $manager,
+                           'project_id' => $newProjectId,
+                           'project_role' => 'manager',
+                           'updated_by' => auth::user()->username,
+                           ]);
+                    }
+                    catch(\Exception $exception)
+                    {
+                        return back()->withinput()->with('errors','There was an error assigning one or more of the managers selected');
+                    }
+                }
+
+                return redirect()->route('projects.index')->with('success','Project Information has been saved Successfully.');
+   
+            }
         }
         return view('auth.login');
     }
-}
 
     /**
      * Display the specified resource.

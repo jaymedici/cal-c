@@ -16,10 +16,14 @@ class VisitSettingsController extends Controller
      */
     public function index(Request $request)
     {
-        if (Auth::check()){
-            return view('visits.index');
-    }
-    return view('auth.login');
+        if (Auth::check())
+        {
+            $projects = Project::with('visits')->paginate(10);
+
+            return view('visits.index', compact('projects'));
+        }
+
+         return view('auth.login');
     }
 
     public function visitsDatatable()
