@@ -52,6 +52,7 @@ Route::get('projectListdt',[App\Http\Controllers\ProjectsController::class, 'pro
 
 Route::resource('visits',App\Http\Controllers\VisitSettingsController::class);
 Route::get('visitsDatatable',[App\Http\Controllers\VisitSettingsController::class, 'visitsDatatable'])->name('visitsDatatable');
+Route::get('visits/createForProject/{project}',[App\Http\Controllers\VisitSettingsController::class, 'createForProject'])->name('visits.createForProject');
 
 Route::resource('calculators',App\Http\Controllers\CalculatorController::class);
 Route::get('calculatorsDatatable',[App\Http\Controllers\CalculatorController::class, 'calculatorsDatatable'])->name('calculatorsDatatable');

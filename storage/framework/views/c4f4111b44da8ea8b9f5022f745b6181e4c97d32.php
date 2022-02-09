@@ -41,7 +41,7 @@
                                 </td>
                                 <td>
                                     <?php if($project->visits->isEmpty()): ?>
-                                        <a class="btn btn-success" href="">Add/Create Visits</a>
+                                        <a class="btn btn-success" href="<?php echo e(route('visits.createForProject', $project->id)); ?>">Add/Create Visits</a>
                                     <?php else: ?>
                                         <a class="btn btn-info" href="">View Created Visits</a>
                                     <?php endif; ?>

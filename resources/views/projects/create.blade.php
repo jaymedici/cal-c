@@ -29,7 +29,7 @@
                     <label for="name" class="col-md-3 col-form-label text-md-left">Project Name<span class="required"><font color="red">*</font></span></label>
                     <div class="col-md-9">
                         <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" 
-                                name="name" value="{{ old('name') }}" max="1900" required autocomplete="name" autofocus >
+                                name="name" value="{{ old('name') }}" required autocomplete="name" autofocus >
                         @error('name')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -42,7 +42,7 @@
                 <div class="form-group row">
                     <label for="description" class="col-md-3 col-form-label text-md-left">Project Description<span class="required"><font color="red">*</font></span></label>
                     <div class="col-md-9">
-                        <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="description" cols="80" rows="5">{{ old('description') }}</textarea>
+                        <textarea name="description" max="1900" class="form-control @error('description') is-invalid @enderror" id="description" cols="80" rows="5">{{ old('description') }}</textarea>
                         @error('description')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

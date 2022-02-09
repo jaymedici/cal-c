@@ -56,6 +56,13 @@ class VisitSettingsController extends Controller
         return view('auth.login');
     }
 
+    public function createForProject($projectId)
+    {
+        $project = Project::findOrFail($projectId);
+
+        return view('visits.createForProject', compact('project'));
+    }
+
     /**
      * Store a newly created resource in storage.
      *

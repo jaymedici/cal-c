@@ -41,7 +41,7 @@
                                 </td>
                                 <td>
                                     @if($project->visits->isEmpty())
-                                        <a class="btn btn-success" href="">Add/Create Visits</a>
+                                        <a class="btn btn-success" href="{{ route('visits.createForProject', $project->id) }}">Add/Create Visits</a>
                                     @else
                                         <a class="btn btn-info" href="">View Created Visits</a>
                                     @endif
