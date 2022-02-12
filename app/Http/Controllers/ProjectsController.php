@@ -76,7 +76,9 @@ class ProjectsController extends Controller
                 'name' => 'required',
                 'description' => 'required',
                 'include_screening' => 'required',
-                'managers' => 'required'
+                'managers' => 'required',
+                'break_screening' => 'required_if:include_screening,==,Yes',
+                'screening_visit_labels.*' => 'required_if:break_screening,==,Yes',
             ];
 
             //Check if Project already exists
@@ -93,7 +95,12 @@ class ProjectsController extends Controller
                 $newProject->name = $data['name'];
                 $newProject->description = $data['description'];
                 $newProject->include_screening = $data['include_screening'];
+                $newProject->break_screening = $data['break_screening'];
                 $newProject->updated_by = auth::user()->email;
+                if($data['break_screening'] == "Yes")
+                {
+                    $newProject->screening_visit_labels = implode(";", $data['screening_visit_labels']);
+                }
 
                 try
                 {
@@ -101,7 +108,7 @@ class ProjectsController extends Controller
                 }
                 catch(\Exception $exception)
                 {
-                    return back()->withinput()->with('errors','Error Creating Project. If the Error persists please contact IT');
+                    return back()->withinput()->with('error_message','Error Creating Project. If the Error persists please contact IT');
                 }
                 
                 //Get Id of the newly created Project
@@ -122,7 +129,7 @@ class ProjectsController extends Controller
                     }
                     catch(\Exception $exception)
                     {
-                        return back()->withinput()->with('errors','There was an error assigning one or more of the managers selected');
+                        return back()->withinput()->with('error_message','There was an error assigning one or more of the managers selected');
                     }
                 }
 

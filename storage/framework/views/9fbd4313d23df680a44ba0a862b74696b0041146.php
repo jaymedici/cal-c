@@ -11,7 +11,14 @@
 
         $('#add_visit').click(function() {
             i++;
-            var visit_div = '<div id="row'+i+'" style="border: 2px grey solid; border-radius: 10px;" class="form-group row"> <div class="col-md-3"> <div class="form-group"> <label for="visit_name">Visit Label</label> <input type="text" class="form-control" id="visit_name" name="visit_names[]"> </div> </div> <div class="col-md-3"> <div class="form-group"> <label for="days_from_first_visit">No. of days from 1st Visit</label> <input type="text" class="form-control" id="days_from_first_visit" name="days_from_first_visit[]"> </div> </div> <div class="col-md-2"> <div class="form-group"> <label for="plus_window_period">Window Period (+)</label> <input type="text" class="form-control" id="plus_window_period" name="plus_window_periods[]"> </div> </div> <div class="col-md-2"> <div class="form-group"> <label for="minus_window_period">Window Period (-)</label> <input type="text" class="form-control" id="minus_window_period" name="minus_window_periods[]"> </div> </div> <div class="col-md-2"> <a id="'+i+'" style="margin-top: 30px;" class="btn btn-danger btn_remove_visit"><i class="fas fa-minus-circle"></i> Remove Visit</a> </div> </div>';
+            var visit_div = '<div id="row'+i+'" style="border: 2px grey solid; border-radius: 10px;" class="form-group row"> <div class="col-md-2"> <div class="form-group"> <label for="visit_type">Visit Type<span class="required"><font color="red">*</font></span></label> <select name="visit_types[]" class="form-control <?php $__errorArgs = ['visit_type'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" id="visit_type" onchange="visit_type_change(this)"> <option selected value="Regular">Regular</option> <option value="Follow Up">Follow Up</option> </select> </div> </div> <div class="col-md-2"> <div class="form-group"> <label for="visit_name">Visit Label<span class="required"><font color="red">*</font></span></label> <input required type="text" class="form-control" id="visit_name" name="visit_names[]"> </div> </div> <div class="col-md-2"> <div class="form-group"> <label for="days_from_first_visit">Days from 1st Visit<span class="required"><font color="red">*</font></span></label> <input required type="text" class="form-control" id="days_from_first_visit" name="days_from_first_visit[]"> </div> </div> <div class="col-md-2"> <div class="form-group"> <label for="plus_window_period">Window Period (+)<span class="required"><font color="red">*</font></span></label> <input required type="text" class="form-control" id="plus_window_period" name="plus_window_periods[]"> </div> </div> <div class="col-md-2"> <div class="form-group"> <label for="minus_window_period">Window Period (-)<span class="required"><font color="red">*</font></span></label> <input required type="text" class="form-control" id="minus_window_period" name="minus_window_periods[]"> </div> </div> <div class="col-md-2"> <a id="'+i+'" style="margin-top: 30px;" class="btn btn-sm btn-danger btn_remove_visit"><i class="fas fa-minus-circle"></i> Remove Visit</a> </div> </div>';
 
             $('#dynamic_visits').append(visit_div);
         });
@@ -26,9 +33,8 @@
 
 <?php $__env->startSection('content'); ?>
 
-      <?php echo $__env->make('partials.errors', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-      <?php echo $__env->make('partials.errors2', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-      <?php echo $__env->make('partials.success', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php echo $__env->make('partials.errors', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php echo $__env->make('partials.success', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
 <div class="row">
     <div class="card col-md-12">
@@ -38,7 +44,7 @@
    
 
         <div class="card-body">
-            <form action="<?php echo e(route('visits.store')); ?>" method="post">
+            <form action="<?php echo e(route('visits.storeVisitsForProject', $project->id)); ?>" method="post">
                 <?php echo csrf_field(); ?>
 
 
@@ -71,7 +77,7 @@ unset($__errorArgs, $__bag); ?>
                 </div>
 
                 <div class="form-group row">
-                    <label for="visit_1_label" class="col-md-3 col-form-label text-md-left">Visit 1 Label<span class="required"><font color="red">*</font></span></label>
+                    <label for="visit_1_label" class="col-md-3 col-form-label text-md-left">Randomization visit Label<span class="required"><font color="red">*</font></span></label>
                     <div class="col-md-7">
                         <input id="visit_1_label" type="text" class="form-control <?php $__errorArgs = ['visit_1_label'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -81,7 +87,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" 
-                                name="visit_1_label" value="<?php echo e($project->visit_1_label); ?>" required placeholder="Please enter a name used by your Project for Visit 1, e.g: Baseline Visit" autofocus >
+                                name="visit_1_label" value="<?php echo e($project->visit_1_label); ?>" required placeholder="Please enter a name used by your Project for Visit 1, e.g: Baseline" autofocus >
                         <?php $__errorArgs = ['visit_1_label'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -109,29 +115,46 @@ unset($__errorArgs, $__bag); ?>
                 <!-- <div style="border: 2px grey solid; border-radius: 10px;" class="form-group row">
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="visit_name">Visit 2 Label</label>
-                            <input type="text" class="form-control" id="visit_name" name="visit_names[]">
+                            <label for="visit_name">Visit 2 Label<span class="required"><font color="red">*</font></span></label>
+                            <input required type="text" class="form-control" id="visit_name" name="visit_names[]">
                         </div>  
                     </div>
 
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="days_from_first_visit">No. of days from 1st Visit</label>
-                            <input type="text" class="form-control" id="days_from_first_visit" name="days_from_first_visit[]">
+                            <label for="days_from_first_visit">No. of days from 1st Visit<span class="required"><font color="red">*</font></span></label>
+                            <input required type="text" class="form-control" id="days_from_first_visit" name="days_from_first_visit[]">
                         </div>  
                     </div>
 
                     <div class="col-md-2">
                         <div class="form-group">
-                            <label for="plus_window_period">Window Period (+)</label>
-                            <input type="text" class="form-control" id="plus_window_period" name="plus_window_periods[]">
+                            <label for="visit_type">Visit Type<span class="required"><font color="red">*</font></span></label>
+                            <select name="visit_types[]" class="form-control <?php $__errorArgs = ['visit_type'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" id="visit_type" onchange="visit_type_change(this)">
+                                <option selected value="Regular">Regular</option>
+                                <option value="Follow Up">Follow Up</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="plus_window_period">Window Period (+)<span class="required"><font color="red">*</font></span></label>
+                            <input required type="text" class="form-control" id="plus_window_period" name="plus_window_periods[]">
                         </div>  
                     </div>
 
                     <div class="col-md-2">
                         <div class="form-group">
-                            <label for="minus_window_period">Window Period (-)</label>
-                            <input type="text" class="form-control" id="minus_window_period" name="minus_window_periods[]">
+                            <label for="minus_window_period">Window Period (-)<span class="required"><font color="red">*</font></span></label>
+                            <input required type="text" class="form-control" id="minus_window_period" name="minus_window_periods[]">
                         </div>  
                     </div>
 
@@ -146,7 +169,7 @@ unset($__errorArgs, $__bag); ?>
                     <div class="col-md-6 offset-md-6">
                     <a class="pull-left btn btn-primary" href="<?php echo e(url()->previous()); ?>">Back</a>
                         <button type="submit" class="btn btn-success">
-                            Save
+                            Save Visits
                         </button>
                         </div>
                 </div>

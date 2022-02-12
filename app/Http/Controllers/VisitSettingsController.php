@@ -14,6 +14,11 @@ class VisitSettingsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index(Request $request)
     {
         if (Auth::check())
@@ -89,14 +94,100 @@ class VisitSettingsController extends Controller
                                     'window_period'=>$request->input('window_period'),
                                     'updated_by'=>auth::user()->email
                                  ]);
-        if ($visit){
-            return redirect()->route('visits.index')->with('success','Information have been saved Successfully.');
+            if ($visit){
+                return redirect()->route('visits.index')->with('success','Information have been saved Successfully.');
+            }
+            return back()->withinput()->with('errors','Error Updating information');
+            }
+            return view('auth.login');
         }
-           return back()->withinput()->with('errors','Error Updating information');
-        }
-        return view('auth.login');
     }
-}
+
+    public function storeVisitsForProject($projectId, Request $request)
+    {
+        $project = Project::findOrFail($projectId);
+
+        if(!$project->visits->isEmpty())
+        {
+            return back()->withinput()->with('error_message','Could not Complete your request as visits already exist for this project');
+        }
+
+        $rules = [
+            'visit_1_label' => 'required',
+            'visit_types' => 'required',
+            'visit_names' => 'required',
+            'days_from_first_visit' => 'required',
+            'plus_window_periods' => 'required',
+            'minus_window_periods' => 'required'
+        ];
+
+        $data = $request->validate($rules);
+
+        //Create a visits array, and add visit details for each array element
+        $visits = array();
+        $i = $j = $k = $l = $m = 1;
+
+        foreach($data['visit_names'] as $key => $visit_name)
+        {
+            $visits[$i++]['visit_name'] = $visit_name;
+        }
+        foreach($data['days_from_first_visit'] as $key => $days_from_first_visit)
+        {
+            $visits[$j++]['days_from_first_visit'] = $days_from_first_visit;
+        }
+        foreach($data['plus_window_periods'] as $key => $plus_window_period)
+        {
+            $visits[$k++]['plus_window_period'] = $plus_window_period;
+        }
+        foreach($data['minus_window_periods'] as $key => $minus_window_period)
+        {
+            $visits[$l++]['minus_window_period'] = $minus_window_period;
+        }
+        foreach($data['visit_types'] as $key => $visit_type)
+        {
+            $visits[$m++]['visit_type'] = $visit_type;
+        }
+
+
+        //Insert visits data
+        $data1['project_id'] = $projectId;
+        $data1['visit_name'] = $data['visit_1_label'];
+        $data1['visit_type'] = "Regular";
+        $data1['days_from_first_visit'] = 0;
+        $data1['plus_window_period'] = 0;
+        $data1['minus_window_period'] = 0;
+        $data1['updated_by'] = Auth::user()->username;
+
+        try{
+            VisitSetting::create($data1);
+        }
+        catch(\Exception $exception)
+        {
+            return back()->withinput()->with('error_message','An Error Occured while adding visits');
+        }
+
+        foreach($visits as $visit)
+        {
+            $data2['project_id'] = $projectId;
+            $data2['visit_type'] = $visit['visit_type'];
+            $data2['visit_name'] = $visit['visit_name'];
+            $data2['days_from_first_visit'] = $visit['days_from_first_visit'];
+            $data2['plus_window_period'] = $visit['plus_window_period'];
+            $data2['minus_window_period'] = $visit['minus_window_period'];
+            $data2['updated_by'] = Auth::user()->username;
+
+            try{
+                VisitSetting::create($data2);
+            }
+            catch(\Exception $exception)
+            {
+                return back()->withinput()->with('error_message','An Error Occured while adding visits');
+            }
+        }
+
+        //dd($visits);
+        return redirect()->route('visits.index')->with('success','The visits have been added Successfully!');
+    }
 
     /**
      * Display the specified resource.

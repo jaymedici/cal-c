@@ -7,4 +7,17 @@
      <li><strong><?php echo $error; ?> </strong></li>
      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
      </div>
-<?php endif; ?><?php /**PATH C:\xampp\htdocs\Visitcallender\resources\views/partials/errors.blade.php ENDPATH**/ ?>
+<?php endif; ?>
+
+<?php if(Session::has('error_message')): ?>
+        <div class="alert alert-danger">
+            <span class="glyphicon glyphicon-ok"></span>
+            <?php echo session('error_message'); ?>
+
+
+            <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+
+        </div>
+ <?php endif; ?><?php /**PATH C:\xampp\htdocs\Visitcallender\resources\views/partials/errors.blade.php ENDPATH**/ ?>

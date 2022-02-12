@@ -243,7 +243,7 @@ return [
         ],
         [
             'text' => 'Screening',
-            'url'  => '#',
+            'url'  => '/screening/create',
             'icon'  => 'fa fa-thermometer',
         ],
         [

@@ -14,6 +14,8 @@ class Project extends Model
         'name',
         'description',
         'include_screening',
+        'break_screening',
+        'screening_visit_labels',
         'updated_by',
         'updated_at',
     ];

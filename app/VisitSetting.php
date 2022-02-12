@@ -10,6 +10,7 @@ class VisitSetting extends Model
     protected $fillable = [
         'id',
         'project_id',
+        'visit_type',
         'visit_name',
         'days_from_first_visit',
         'plus_window_period',
