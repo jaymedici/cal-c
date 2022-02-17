@@ -5,26 +5,26 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Project;
+use App\Models\User;
 
-class Screening extends Model
+class ProjectUser extends Model
 {
     use HasFactory;
 
-    protected $table = 'screening';
-
     protected $fillable = [
-        'screening_date',
-        'participant_id',
+        'id',
         'project_id',
-        'screening_label',
-        'still_screening',
-        'next_screening_date',
-        'screening_outcome',
+        'user_id',
         'updated_by',
     ];
 
     public function project()
     {
         return $this->belongsTo(Project::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

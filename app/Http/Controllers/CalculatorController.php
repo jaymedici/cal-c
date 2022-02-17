@@ -124,15 +124,15 @@ class CalculatorController extends Controller
     }
 
 
-    public function commingVisits(Request $request)
+    public function upcomingVisits(Request $request)
     {
         if (Auth::check()){
-           return view('visitcalculator.commingVisits');
+           return view('visitcalculator.upcomingVisits');
     }
     return view('auth.login');
     }
 
-    public function commingVisitsDatatable()
+    public function upcomingVisitsDatatable()
     {
         if (Auth::check()){
             $todaydate=date("Y-m-d");

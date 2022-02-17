@@ -1,5 +1,5 @@
-@extends('adminlte::page')
-@section('css')
+
+<?php $__env->startSection('css'); ?>
 <style>
     .dt-buttons {
         text-align: center;
@@ -22,15 +22,15 @@
         border-color:#dc3545;
     }
 </style>
-@stop
-@section('content')
-@include('partials.errors')
-@include('partials.success')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
+<?php echo $__env->make('partials.errors', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php echo $__env->make('partials.success', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <head>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
-	 <link href="{{ asset('css/jquery.dataTables.min.css') }}" rel="stylesheet">
-	 <link href="{{ asset('css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
+    <link href="<?php echo e(asset('css/bootstrap.min.css')); ?>" rel="stylesheet">
+	 <link href="<?php echo e(asset('css/jquery.dataTables.min.css')); ?>" rel="stylesheet">
+	 <link href="<?php echo e(asset('css/dataTables.bootstrap4.min.css')); ?>" rel="stylesheet">
 	 
    
    </head>
@@ -38,7 +38,7 @@
 <div class="col-lg-12 col-md-12">
 <div class="card card-success">
     <div class="card-header with-border">
-                <h3 class="box-title">Missed Visits</h3>
+                <h3 class="box-title">Completed Visit</h3>
 
                 <div class="box-tools pull-right">
 
@@ -71,17 +71,17 @@
         </div>
     </div>
 </div>
-@endsection
-@section('js')
-<script type="text/javascript" src="{{ asset('js/jquery-3.3.1.js') }}"></script>
-<script type="text/javascript" src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('js/dataTables.buttons.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('js/buttons.flash.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('js/jszip.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('js/pdfmake.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('js/vfs_fonts.js') }}"></script>
-<script type="text/javascript" src="{{ asset('js/buttons.html5.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('js/buttons.print.min.js') }}"></script>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('js'); ?>
+<script type="text/javascript" src="<?php echo e(asset('js/jquery-3.3.1.js')); ?>"></script>
+<script type="text/javascript" src="<?php echo e(asset('js/jquery.dataTables.min.js')); ?>"></script>
+<script type="text/javascript" src="<?php echo e(asset('js/dataTables.buttons.min.js')); ?>"></script>
+<script type="text/javascript" src="<?php echo e(asset('js/buttons.flash.min.js')); ?>"></script>
+<script type="text/javascript" src="<?php echo e(asset('js/jszip.min.js')); ?>"></script>
+<script type="text/javascript" src="<?php echo e(asset('js/pdfmake.min.js')); ?>"></script>
+<script type="text/javascript" src="<?php echo e(asset('js/vfs_fonts.js')); ?>"></script>
+<script type="text/javascript" src="<?php echo e(asset('js/buttons.html5.min.js')); ?>"></script>
+<script type="text/javascript" src="<?php echo e(asset('js/buttons.print.min.js')); ?>"></script>
 
 <script>
   $(function() {
@@ -91,7 +91,7 @@
                "scrollX": true,
                 dom: 'Blfrtip',
                 buttons: ['copy','excel','csv','pdf'],
-               ajax: '{{ url('commingVisitsDatatable') }}',
+               ajax: '<?php echo e(url('passedvisitsDatatable')); ?>',
                columns: [
                         { data: 'patient_id', name: 'patient_id' },
                         { data: 'project.name', name: 'project.name' },
@@ -108,4 +108,5 @@
          });
 </script>
 
-@stop
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('adminlte::page', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Visitcallender\resources\views/visitcalculator/passedvisits.blade.php ENDPATH**/ ?>

@@ -75,6 +75,28 @@
                 }
                     }
                 });
+
+                $.ajax(
+                {
+                    type:"GET",
+                    url:"{{url('screening/getScreeningReturningParticipants')}}/"+projectId,
+                    success:function(res){
+                        console.log(res);
+                        if(res)
+                        {
+                            $('#participant_id_select').empty();
+                            $('#participant_id_select').append('<option disabled selected value="">Please select the returning Participant</option>');
+                            $.each(res,function(key,value)
+                            {
+                                $('#participant_id_select').append('<option value="'+value+'">'+value+'</option>');
+                            });
+                        }
+                else {
+                    $('#participant_id_select').empty();
+                    $("#participant_id_select").append('<option disabled selected value="">Please select the returning Participant</option>'); 
+                }
+                    }
+                });
         }
     }
 </script>
@@ -155,9 +177,6 @@
                         <div class="col-md-6">
                             <select name="participant_id_select" class="form-control @error('participant_id_select') is-invalid @enderror" id="participant_id_select">
                                 <option disabled selected value="">Please select the returning Participant</option>
-                                @foreach($projectsWithScreening as $project)
-                                    <option value="{{$project->id}}">{{$project->name}}</option>
-                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -208,7 +227,7 @@
 
                 <br>
                 <div class="form-group row mb-0">
-                    <div class="col-md-6 offset-md-6">
+                    <div class="col-md-6 offset-md-5">
                     <a class="pull-left btn btn-primary" href="{{ url()->previous() }}">Back</a>
                         <button type="submit" class="btn btn-success">
                             Save

@@ -50,6 +50,9 @@ Route::resource('projects',App\Http\Controllers\ProjectsController::class);
 Route::get('projectDatatable',[App\Http\Controllers\ProjectsController::class, 'projectDatatable'])->name('projectDatatable');
 Route::get('projectListdt',[App\Http\Controllers\ProjectsController::class, 'projectListdt'])->name('projectListdt');
 
+//Site Routes
+Route::resource('sites',App\Http\Controllers\SitesController::class);
+
 //Visit Settings Routes
 Route::resource('visits',App\Http\Controllers\VisitSettingsController::class);
 Route::get('visitsDatatable',[App\Http\Controllers\VisitSettingsController::class, 'visitsDatatable'])->name('visitsDatatable');
@@ -59,6 +62,15 @@ Route::post('visits/storeVisitsForProject/{project}',[App\Http\Controllers\Visit
 //Screening Routes
 Route::resource('screening',App\Http\Controllers\ScreeningController::class);
 Route::get('screening/getScreeningTypes/{project}',[App\Http\Controllers\ScreeningController::class, 'getScreeningTypes'])->name('screening.getScreeningTypes');
+Route::get('screening/getScreeningReturningParticipants/{project}',[App\Http\Controllers\ScreeningController::class, 'getScreeningReturningParticipants'])->name('screening.getScreeningReturningParticipants');
+
+//Participant Visits Routes
+Route::get('participantVisits/enrolmentIndex',[App\Http\Controllers\ParticipantVisitsController::class, 'enrolmentIndex'])->name('participantVisits.enrolmentIndex');
+Route::get('participantVisits/visitsIndex',[App\Http\Controllers\ParticipantVisitsController::class, 'visitsIndex'])->name('participantVisits.visitsIndex');
+Route::get('participantVisits/projectVisitsIndex/{project}',[App\Http\Controllers\ParticipantVisitsController::class, 'projectVisitsIndex'])->name('participantVisits.projectVisitsIndex');
+Route::get('participantVisits/projectVisitsIndexDT/{project}',[App\Http\Controllers\ParticipantVisitsController::class, 'projectVisitsIndexDT'])->name('participantVisits.projectVisitsIndexDT');
+Route::get('participantVisits/createParticipant/{project}',[App\Http\Controllers\ParticipantVisitsController::class, 'createParticipant'])->name('participantVisits.createParticipant');
+Route::post('participantVisits/storeParticipant/{project}',[App\Http\Controllers\ParticipantVisitsController::class, 'storeParticipant'])->name('participantVisits.storeParticipant');
 
 //Calculation Routes
 Route::resource('calculators',App\Http\Controllers\CalculatorController::class);
@@ -75,8 +87,8 @@ Route::get('todayVisitsDatatable',[App\Http\Controllers\CalculatorController::cl
 Route::get('missedVisits',[App\Http\Controllers\CalculatorController::class, 'missedVisits'])->name('missedVisits');
 Route::get('missedVisitsDatatable',[App\Http\Controllers\CalculatorController::class, 'missedVisitsDatatable'])->name('missedVisitsDatatable');
 
-Route::get('commingVisits',[App\Http\Controllers\CalculatorController::class, 'commingVisits'])->name('commingVisits');
-Route::get('commingVisitsDatatable',[App\Http\Controllers\CalculatorController::class, 'commingVisitsDatatable'])->name('commingVisitsDatatable');
+Route::get('upcomingVisits',[App\Http\Controllers\CalculatorController::class, 'upcomingVisits'])->name('upcomingVisits');
+Route::get('upcomingVisitsDatatable',[App\Http\Controllers\CalculatorController::class, 'upcomingVisitsDatatable'])->name('upcomingVisitsDatatable');
 
 Route::resource('roles',App\Http\Controllers\RolesController::class);
 Route::resource('dataCharts',App\Http\Controllers\DataChartController::class);

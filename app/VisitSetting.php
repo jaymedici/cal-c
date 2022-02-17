@@ -1,8 +1,10 @@
 <?php
 
 namespace App;
+
 use App\Project;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\PatientVisit;
 
 class VisitSetting extends Model
 {
@@ -23,5 +25,10 @@ class VisitSetting extends Model
     public function project()
     {
         return $this->belongsTo(Project::class, 'project_id');
+    }
+
+    public function patientVisits()
+    {
+        return $this->hasMany(PatientVisit::class);
     }
 }

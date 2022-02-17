@@ -129,7 +129,7 @@ class ProjectsController extends Controller
                     }
                     catch(\Exception $exception)
                     {
-                        return back()->withinput()->with('error_message','There was an error assigning one or more of the managers selected');
+                        return back()->withinput()->with('error_message','The site was created but, there was an error assigning one or more of the managers selected');
                     }
                 }
 

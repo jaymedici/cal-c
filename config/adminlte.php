@@ -247,8 +247,8 @@ return [
             'icon'  => 'fa fa-thermometer',
         ],
         [
-            'text' => 'Enrol Participant',
-            'url'  => '#',
+            'text' => 'Partipant Enrolment',
+            'url'  => '/participantVisits/enrolmentIndex',
             'icon'  => 'fa fa-pen-square',
         ],
 
@@ -259,27 +259,26 @@ return [
             'submenu' => [
 
                 [
-                    'text'        => 'In Window Visits',
-                    'icon_color' => 'yellow',
-                    'url'         => '/todayVisits',
-                    'icon'        => 'fa fa-list',
-                    
-                ],
-                [
-                    'text'        => 'Upcoming Visits',
-                    'icon_color' => 'yellow',
-                    'url'         => '/commingVisits',
-                    'icon'        => 'fa fa-calendar',
-                    
-                ],
-                [
                     'text'        => 'All Visits',
-                    'url'         => '/calculators',
+                    'url'         => '/participantVisits/visitsIndex',
                     'icon_color' => 'blue',
                     'icon'        => 'fa fa-list',
                 ],
                 [
-                    'text'        => 'Passed Visits',
+                    'text'        => 'Upcoming Visits',
+                    'icon_color' => 'yellow',
+                    'url'         => '/upcomingVisits',
+                    'icon'        => 'fa fa-calendar',
+                    
+                ],
+                // [
+                //     'text'        => 'All Visits',
+                //     'url'         => '/calculators',
+                //     'icon_color' => 'blue',
+                //     'icon'        => 'fa fa-list',
+                // ],
+                [
+                    'text'        => 'Completed Visits',
                     'icon_color' => 'green',
                     'url'         => '/passedvisits',
                     'icon'        => 'fa fa-check',
@@ -307,6 +306,12 @@ return [
                     'text' => 'Projects',
                     'url'  => '/projects',
                     'icon' => 'fas fa-fw fa-book',
+                    'icon_color' => 'blue',
+                ],
+                [
+                    'text' => 'Sites',
+                    'url'  => '/sites',
+                    'icon' => 'fas fa-fw fa-building',
                     'icon_color' => 'blue',
                 ],
                 [

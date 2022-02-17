@@ -41,6 +41,30 @@ class ScreeningController extends Controller
          
     }
 
+    public function getScreeningReturningParticipants($projectId)
+    {
+        $allScreenedParticipantIDs = Screening::where('project_id', $projectId)
+                                    ->get()->unique('participant_id')
+                                    ->pluck('participant_id')
+                                    ->toArray();
+
+        $allScreeningInfo = Screening::where('project_id', $projectId)->get();
+
+        foreach($allScreeningInfo as $screening)
+        {
+            if($screening->screening_outcome == "Enrol" | $screening->screening_outcome == "Screen Failure")
+            {
+                //remove participant from participant list (to remain only with those whose screening continues)
+                $arrayKey = array_search($screening->participant_id, $allScreenedParticipantIDs);
+                unset($allScreenedParticipantIDs[$arrayKey]);
+            }
+        }
+
+        $returningParticipants = $allScreenedParticipantIDs;
+        
+        return response()->json($returningParticipants);
+    }
+
     public function create()
     {
         //
@@ -70,6 +94,19 @@ class ScreeningController extends Controller
         ];
 
         $data = $request->validate($rules);
+
+        //Check that no two new participants are assigned with the same participant_id
+        if($data['participant_type'] == "New")
+        {
+            $participant = Screening::where('participant_id', $data['participant_id'])
+                                            ->where('project_id', $data['project_id'])
+                                            ->count();
+
+            if($participant > 0)
+            {
+                return back()->with('error_message', 'Sorry! a participant with this participant id already exists, hence participant type cannot be New!');
+            }
+        }
 
         if($data['participant_type'] == "New")
         {
@@ -101,7 +138,7 @@ class ScreeningController extends Controller
             return back()->withinput()->with('error_message','An Error Occured while saving data');
         }
 
-        return redirect()->route('home')->with('success','Screening Information added Successfully!');
+        return redirect()->route('screening.create')->with('success','Screening Information added Successfully!');
     }
 
     /**

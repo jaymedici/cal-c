@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use App\User;
 use App\Department;
 use App\VisitSetting;
+use App\Models\ParticipantVisit;
+use App\UserProject;
 
 class Project extends Model
 {
@@ -24,6 +26,16 @@ class Project extends Model
     public function visits()
     {
         return $this->hasMany(VisitSetting::class);
+    }
+
+    public function participantVisits()
+    {
+        return $this->hasMany(ParticipantVisit::class);
+    }
+
+    public function assignees()
+    {
+        return $this->hasMany(UserProject::class);
     }
     
 }

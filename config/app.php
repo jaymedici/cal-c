@@ -179,6 +179,7 @@ return [
         Spatie\Permission\PermissionServiceProvider::class,
         ConsoleTVs\Charts\ChartsServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        Yajra\DataTables\DataTablesServiceProvider::class,
 
     ],
 

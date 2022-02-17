@@ -75,6 +75,28 @@
                 }
                     }
                 });
+
+                $.ajax(
+                {
+                    type:"GET",
+                    url:"<?php echo e(url('screening/getScreeningReturningParticipants')); ?>/"+projectId,
+                    success:function(res){
+                        console.log(res);
+                        if(res)
+                        {
+                            $('#participant_id_select').empty();
+                            $('#participant_id_select').append('<option disabled selected value="">Please select the returning Participant</option>');
+                            $.each(res,function(key,value)
+                            {
+                                $('#participant_id_select').append('<option value="'+value+'">'+value+'</option>');
+                            });
+                        }
+                else {
+                    $('#participant_id_select').empty();
+                    $("#participant_id_select").append('<option disabled selected value="">Please select the returning Participant</option>'); 
+                }
+                    }
+                });
         }
     }
 </script>
@@ -198,9 +220,6 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" id="participant_id_select">
                                 <option disabled selected value="">Please select the returning Participant</option>
-                                <?php $__currentLoopData = $projectsWithScreening; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $project): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <option value="<?php echo e($project->id); ?>"><?php echo e($project->name); ?></option>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                         </div>
                     </div>
@@ -286,7 +305,7 @@ unset($__errorArgs, $__bag); ?>
 
                 <br>
                 <div class="form-group row mb-0">
-                    <div class="col-md-6 offset-md-6">
+                    <div class="col-md-6 offset-md-5">
                     <a class="pull-left btn btn-primary" href="<?php echo e(url()->previous()); ?>">Back</a>
                         <button type="submit" class="btn btn-success">
                             Save
