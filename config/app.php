@@ -177,7 +177,6 @@ return [
         Yajra\DataTables\DataTablesServiceProvider::class,
         Yajra\DataTables\ButtonsServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
-        ConsoleTVs\Charts\ChartsServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
 
@@ -233,8 +232,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
-        'Charts' => ConsoleTVs\Charts\Facades\Charts::class,
-        //'Charts' => ConsoleTVs\Charts\Charts::class,
+        'Chart' => ArielMejiaDev\LarapexCharts\Facades\LarapexChart::class,
 
     ],
 

@@ -53,11 +53,29 @@ Route::get('projectListdt',[App\Http\Controllers\ProjectsController::class, 'pro
 //Site Routes
 Route::resource('sites',App\Http\Controllers\SitesController::class);
 
+//Appointment Routes
+Route::resource('appointments',App\Http\Controllers\AppointmentsController::class);
+Route::get('appointments/createFromVisit/{visitId}',[App\Http\Controllers\AppointmentsController::class, 'createFromVisit'])->name('appointments.createFromVisit');
+Route::post('appointments/storeByVisit/{visitId}',[App\Http\Controllers\AppointmentsController::class, 'storeByVisit'])->name('appointments.storeByVisit');
+
+//Calendar Routes
+Route::get('calendar/show',[App\Http\Controllers\CalendarController::class, 'show'])->name('calendar.show');
+
+//Reports/Charts Routes
+Route::get('reports/index',[App\Http\Controllers\ReportsController::class, 'index'])->name('reports.index');
+Route::get('reports/reportsByProject/{project}',[App\Http\Controllers\ReportsController::class, 'reportsByProject'])->name('reports.reportsByProject')
+            ->middleware('checkProjectAssignment');
+
 //Visit Settings Routes
 Route::resource('visits',App\Http\Controllers\VisitSettingsController::class);
 Route::get('visitsDatatable',[App\Http\Controllers\VisitSettingsController::class, 'visitsDatatable'])->name('visitsDatatable');
-Route::get('visits/createForProject/{project}',[App\Http\Controllers\VisitSettingsController::class, 'createForProject'])->name('visits.createForProject');
-Route::post('visits/storeVisitsForProject/{project}',[App\Http\Controllers\VisitSettingsController::class, 'storeVisitsForProject'])->name('visits.storeVisitsForProject');
+Route::get('visits/createForProject/{project}',[App\Http\Controllers\VisitSettingsController::class, 'createForProject'])->name('visits.createForProject')
+        ->middleware('checkProjectAssignment');
+Route::post('visits/storeVisitsForProject/{project}',[App\Http\Controllers\VisitSettingsController::class, 'storeVisitsForProject'])->name('visits.storeVisitsForProject')
+        ->middleware('checkProjectAssignment');
+
+//Visit Checklist Routes
+Route::resource('visitChecklists',App\Http\Controllers\VisitChecklistsController::class);
 
 //Screening Routes
 Route::resource('screening',App\Http\Controllers\ScreeningController::class);
@@ -67,7 +85,8 @@ Route::get('screening/getScreeningReturningParticipants/{project}',[App\Http\Con
 //Participant Visits Routes
 Route::get('participantVisits/enrolmentIndex',[App\Http\Controllers\ParticipantVisitsController::class, 'enrolmentIndex'])->name('participantVisits.enrolmentIndex');
 Route::get('participantVisits/visitsIndex',[App\Http\Controllers\ParticipantVisitsController::class, 'visitsIndex'])->name('participantVisits.visitsIndex');
-Route::get('participantVisits/projectVisitsIndex/{project}',[App\Http\Controllers\ParticipantVisitsController::class, 'projectVisitsIndex'])->name('participantVisits.projectVisitsIndex');
+Route::get('participantVisits/projectVisitsIndex/{project}',[App\Http\Controllers\ParticipantVisitsController::class, 'projectVisitsIndex'])->name('participantVisits.projectVisitsIndex')
+        ->middleware('checkProjectAssignment');
 Route::get('participantVisits/projectVisitsIndexDT/{project}',[App\Http\Controllers\ParticipantVisitsController::class, 'projectVisitsIndexDT'])->name('participantVisits.projectVisitsIndexDT');
 Route::get('participantVisits/createParticipant/{project}',[App\Http\Controllers\ParticipantVisitsController::class, 'createParticipant'])->name('participantVisits.createParticipant');
 Route::post('participantVisits/storeParticipant/{project}',[App\Http\Controllers\ParticipantVisitsController::class, 'storeParticipant'])->name('participantVisits.storeParticipant');

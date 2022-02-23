@@ -181,6 +181,22 @@
                 </div>
 
                 <div class="form-group row">
+                    <label for="sites" class="col-md-3 col-form-label text-md-left">Participating Sites<span class="required"><font color="red">*</font></span></label>
+                    <div class="col-md-9">
+                        <select name="sites[]" class="selectpicker form-control @error('sites') is-invalid @enderror" id="sites" multiple>
+                            @foreach($sites as $site)
+                                <option value="{{$site->id}}">{{$site->site_name}}</option>
+                            @endforeach
+                        </select>
+                        @error('sites')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="form-group row">
                     <label for="managers" class="col-md-3 col-form-label text-md-left">Project Manager(s)<span class="required"><font color="red">*</font></span></label>
                     <div class="col-md-9">
                         <select name="managers[]" class="selectpicker form-control @error('managers') is-invalid @enderror" id="managers" multiple>

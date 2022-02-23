@@ -18,6 +18,7 @@ use App\Models\Screening;
 use App\Charts\DataChart;
 use DB;
 use App\Http\Controllers\ParticipantVisitsController;
+use App\Http\Controllers\AppointmentsController;
 
 
 class HomeController extends Controller
@@ -46,21 +47,22 @@ class HomeController extends Controller
          return view('auth.login');
       }
 
+      //Get Scheduled Visits
       $visitsObject = new ParticipantVisitsController();
-      $scheduledParticipantVisits = $visitsObject->getScheduledVisits(Auth::id());
+      $scheduledParticipantVisits = $visitsObject->get2WeeksScheduledVisits(Auth::id());
 
-      //dd($scheduledParticipantVisits);
+      //Get Appointments
+      $appointmentObject = new AppointmentsController();
+      $appointmentsThisWeek = $appointmentObject->getAppointmentsThisWeek(Auth::id());
+      //dd($appointmentsThisWeek);
 
+      //Get info Boxes Values for projects assigned, participants screened and those enrolled
       $numberOfParticipantsScreened = [];
       $numberOfParticipantsEnrolled = [];
 
-      $projectsAssigned = Project::whereHas('assignees', function ($query) {
-                              $query->where('user_id', Auth::id());
-                          })->get();
+      $projectsAssigned = Project::isAssigned(Auth::id())->get();
                           
-      $projectsAssignedCount = Project::whereHas('assignees', function ($query) {
-                            $query->where('user_id', Auth::id());
-                        })->count();
+      $projectsAssignedCount = Project::isAssigned(Auth::id())->count();
 
       foreach($projectsAssigned as $project)
       {
@@ -69,7 +71,7 @@ class HomeController extends Controller
       }
 
       return view('home', compact('projectsAssigned', 'projectsAssignedCount', 'numberOfParticipantsEnrolled', 'numberOfParticipantsScreened',
-                  'scheduledParticipantVisits'));
+                  'scheduledParticipantVisits', 'appointmentsThisWeek'));
     }
 
 

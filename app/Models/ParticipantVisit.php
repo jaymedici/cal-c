@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Project;
 use App\VisitSetting;
+use App\Models\Site;
+use App\Models\Appointment;
 
 class ParticipantVisit extends Model
 {
@@ -15,7 +17,7 @@ class ParticipantVisit extends Model
         'id',
         'participant_id',
         'project_id',
-        'site_name',
+        'site_id',
         'visit_id',
         'visit_date',
         'actual_visit_date',
@@ -25,6 +27,16 @@ class ParticipantVisit extends Model
         'updated_by',
     ];
 
+    //SCOPES
+    public function scopeWhereProjectAssignedTo($query, $userId)
+    {
+        return $query->whereHas('project', function ($query) use ($userId) {
+            $query->isAssigned($userId);
+            });
+    }
+
+
+    //MODEL RELATIONSHIPS
     public function project()
     {
         return $this->belongsTo(Project::class);
@@ -34,4 +46,15 @@ class ParticipantVisit extends Model
     {
         return $this->belongsTo(VisitSetting::class, 'visit_id');
     }
+
+    public function site()
+    {
+        return $this->belongsTo(Site::class, 'site_id');
+    }
+
+    public function appointment()
+    {
+        return $this->hasOne(Appointment::class);
+    }
+
 }

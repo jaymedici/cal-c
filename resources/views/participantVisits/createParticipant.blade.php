@@ -49,15 +49,14 @@
                 @endif
 
                 <div class="form-group row">
-                    <label for="site_name" class="col-md-3 col-form-label text-md-left">Site Name<span class="required"><font color="red">*</font></span></label>
+                    <label for="site_id" class="col-md-3 col-form-label text-md-left">Select Site<span class="required"><font color="red">*</font></span></label>
                     <div class="col-md-9">
-                        <input id="site_name" type="text" class="form-control @error('site_name') is-invalid @enderror" 
-                                name="site_name" required placeholder="Please enter the site name" autocomplete="site_name" autofocus >
-                        @error('site_name')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror      
+                        <select name="site_id" required class="form-control @error('site_id') is-invalid @enderror" id="site_id">
+                            <option disabled selected value="">Please select the Site for which the Participant is to be enrolled</option>
+                            @foreach($project->sites as $site)
+                            <option value="{{$site->id}}">{{$site->site_name}}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
 

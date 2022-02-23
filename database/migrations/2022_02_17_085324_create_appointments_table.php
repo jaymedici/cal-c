@@ -18,7 +18,8 @@ class CreateAppointmentsTable extends Migration
             $table->string('participant_id');
             $table->integer('project_id')->unsigned();
             $table->integer('site_id')->unsigned();
-            $table->string('visit_name');
+            $table->integer('visit_id')->unsigned()->nullable();
+            $table->integer('screening_id')->unsigned()->nullable();
             $table->dateTime('appointment_date_time');
             $table->string('updated_by');
             $table->timestamps();

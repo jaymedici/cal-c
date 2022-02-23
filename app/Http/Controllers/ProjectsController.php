@@ -5,10 +5,13 @@ use App\Project;
 use App\User;
 use App\Department;
 use App\UserProject;
+use App\Models\Site;
+use App\Models\ProjectSite;
 use Yajra\Datatables\Datatables;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Adldap\Laravel\Facades\Adldap;
+
 class ProjectsController extends Controller
 {
     /**
@@ -16,6 +19,11 @@ class ProjectsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index(Request $request)
     {
         if (Auth::check())
@@ -51,14 +59,11 @@ class ProjectsController extends Controller
      */
     public function create()
     {
-        if (Auth::check())
-        {
-            $users = User::all();
-            
-            return view('projects.create', compact('users'));
-        }
-
-        return view('auth.login');
+        $users = User::all();
+        $sites = Site::all();
+        
+        return view('projects.create', compact('users', 'sites'));
+        
     }
 
     /**
@@ -76,6 +81,7 @@ class ProjectsController extends Controller
                 'name' => 'required',
                 'description' => 'required',
                 'include_screening' => 'required',
+                'sites' => 'required',
                 'managers' => 'required',
                 'break_screening' => 'required_if:include_screening,==,Yes',
                 'screening_visit_labels.*' => 'required_if:break_screening,==,Yes',
@@ -95,13 +101,18 @@ class ProjectsController extends Controller
                 $newProject->name = $data['name'];
                 $newProject->description = $data['description'];
                 $newProject->include_screening = $data['include_screening'];
-                $newProject->break_screening = $data['break_screening'];
                 $newProject->updated_by = auth::user()->email;
-                if($data['break_screening'] == "Yes")
-                {
-                    $newProject->screening_visit_labels = implode(";", $data['screening_visit_labels']);
-                }
 
+                if(array_key_exists('break_screening', $data))
+                {
+                    $newProject->break_screening = $data['break_screening'];
+                    if($data['break_screening'] == "Yes")
+                    {
+                        $newProject->screening_visit_labels = implode(";", $data['screening_visit_labels']);
+                    }
+
+                }
+                
                 try
                 {
                     $newProject->save();
@@ -129,7 +140,26 @@ class ProjectsController extends Controller
                     }
                     catch(\Exception $exception)
                     {
-                        return back()->withinput()->with('error_message','The site was created but, there was an error assigning one or more of the managers selected');
+                        return back()->withinput()->with('error_message','The Project was created but, there was an error assigning one or more of the managers selected');
+                    }
+                }
+
+                //Associate sites to created project:
+                $sites = $request->input('sites');
+
+                foreach($sites as $key => $site)
+                {
+                    try{
+                        ProjectSite::create([
+                           'site_id' => $site,
+                           'project_id' => $newProjectId,
+                           'updated_by' => auth::user()->username,
+                           ]);
+                    }
+                    catch(\Exception $exception)
+                    {
+                        dd($exception);
+                        return back()->withinput()->with('error_message','The Project was created but, there was an error assigning one or more of the sites selected');
                     }
                 }
 

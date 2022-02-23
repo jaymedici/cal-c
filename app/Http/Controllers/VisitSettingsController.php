@@ -7,6 +7,7 @@ use Yajra\Datatables\Datatables;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Adldap\Laravel\Facades\Adldap;
+
 class VisitSettingsController extends Controller
 {
     /**
@@ -21,14 +22,9 @@ class VisitSettingsController extends Controller
 
     public function index(Request $request)
     {
-        if (Auth::check())
-        {
-            $projects = Project::with('visits')->paginate(10);
+        $projects = Project::isAssigned(Auth::id())->with('visits')->paginate(10);
 
-            return view('visits.index', compact('projects'));
-        }
-
-         return view('auth.login');
+        return view('visits.index', compact('projects'));
     }
 
     public function visitsDatatable()

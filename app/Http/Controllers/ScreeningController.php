@@ -6,6 +6,7 @@ use App\Models\Screening;
 use App\Project;
 use Illuminate\Http\Request;
 use Auth;
+use App\Http\Controllers\AppointmentsController;
 
 class ScreeningController extends Controller
 {
@@ -94,6 +95,7 @@ class ScreeningController extends Controller
         ];
 
         $data = $request->validate($rules);
+        $data['site_id'] = 1;
 
         //Check that no two new participants are assigned with the same participant_id
         if($data['participant_type'] == "New")
@@ -127,15 +129,44 @@ class ScreeningController extends Controller
             $data['next_screening_date'] = null;
             $data['still_screening'] = "No";
         }
-        $data['updated_by'] = Auth::user()->email;
+        $data['updated_by'] = Auth::user()->username;
 
+        //Save Screening Data
         try{
-            Screening::create($data);
+            $screening = new Screening();
+            foreach($data as $key => $value)
+            {
+                if($key != 'participant_type')
+                {
+                    $screening->$key = $value;
+                }  
+            }
+            $screening->save();
+            //Screening::create($data);
         }
         catch(\Exception $exception)
         {
             dd($exception);
             return back()->withinput()->with('error_message','An Error Occured while saving data');
+        }
+
+        //Set Appointment is next screening data was set
+        if ($data['next_screening_date'] != null)
+        {
+            $screeningId = $screening->id;
+            $appointmentDetails['participant_id'] = $data['participant_id'];
+            $appointmentDetails['project_id'] = $data['project_id'];
+            $appointmentDetails['site_id'] = $data['site_id'];
+            $appointmentDetails['appointment_date_time'] = $data['next_screening_date'];
+            $appointmentDetails['updated_by'] = $data['updated_by'];
+
+            $appointment = new AppointmentsController;
+            $setAppointment = $appointment->setScreeningAppointment($screeningId, $appointmentDetails);
+
+            if($setAppointment == "Error")
+            {
+                return back()->withinput()->with('error_message','Screening data was saved successfully, however an error occurred while setting an appointment.'); 
+            }
         }
 
         return redirect()->route('screening.create')->with('success','Screening Information added Successfully!');

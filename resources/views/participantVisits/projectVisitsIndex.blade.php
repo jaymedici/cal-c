@@ -9,9 +9,9 @@
 @section('content')
 @include('partials.errors')
 @include('partials.success')
-
+<br>
 <div class="row">
-    <div class="card card-primary col-md-12">
+    <div class="card card-success col-md-12">
         <div class="card-header">
             <h4 class="col-md-12" align="center">Participant Visit Schedule for {{$project->name}}</h4>
         </div>

@@ -23,20 +23,24 @@ class ParticipantVisitsController extends Controller
         //
     }
 
-    public function getScheduledVisits($userId)
+    public function get2WeeksScheduledVisits($userId)
     {
         $now = Carbon::now();
         $datetoday = Carbon::createFromFormat('Y-m-d H:s:i', $now);
         $timeInterval = \Carbon\CarbonInterval::weeks(2);
         $dateAfterTwoWeeks = $now->add($timeInterval)->toDateTimeString();
 
-        $participantVisits = ParticipantVisit::with('project')->whereHas('project', function ($query) use ($userId) {
-                                $query->whereHas('assignees', function ($query2) use ($userId) {
-                                    $query2->where('user_id', $userId);
-                                });
-                            })
-                            ->whereBetween('window_start_date', [$datetoday, $dateAfterTwoWeeks])
-                            ->get();
+        $participantVisits = ParticipantVisit::with('project')->with('appointment')
+                                ->whereProjectAssignedTo($userId)
+                                ->whereBetween('window_start_date', [$datetoday, $dateAfterTwoWeeks])
+                                ->simplePaginate(5);
+
+        return $participantVisits;
+    }
+
+    public function getAllScheduledVisits($userId)
+    {
+        $participantVisits = ParticipantVisit::with('project')->whereProjectAssignedTo($userId)->get();
 
         return $participantVisits;
     }
@@ -130,7 +134,7 @@ class ParticipantVisitsController extends Controller
 
     public function createParticipant($projectId)
     {
-        $project = Project::findOrFail($projectId);
+        $project = Project::with('sites')->findOrFail($projectId);
 
         $firstProjectVisitName = VisitSetting::where('project_id', $projectId)
                                         ->where('days_from_first_visit', 0)
@@ -158,11 +162,12 @@ class ParticipantVisitsController extends Controller
         //
         $rules = [
             'participant_id' => 'required',
-            'site_name' => 'required',
+            'site_id' => 'required',
             'first_visit_date' => 'required',
         ];
 
         $data = $request->validate($rules);
+       // dd($data);
 
         //Check if the Participant is already enrolled
         $participant = ParticipantVisit::where('participant_id', $data['participant_id'])

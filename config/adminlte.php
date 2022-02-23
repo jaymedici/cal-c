@@ -251,6 +251,11 @@ return [
             'url'  => '/participantVisits/enrolmentIndex',
             'icon'  => 'fa fa-pen-square',
         ],
+        [
+            'text' => 'Calendar View',
+            'url'  => '/calendar/show',
+            'icon'  => 'fa fa-calendar',
+        ],
 
         [
             'text'        => 'Visits',
@@ -296,6 +301,12 @@ return [
         ],
 
         [
+            'text' => 'Reports',
+            'url'  => '/reports/index',
+            'icon'  => 'fa fa-chart-line',
+        ],
+
+        [
             'text' => 'Settings',
             'icon' => 'fas fa-fw fa-cog', 
             'icon_color' => 'cyan',
@@ -309,17 +320,24 @@ return [
                     'icon_color' => 'blue',
                 ],
                 [
+                    'text' => 'Set Visits',
+                    'url'  => '/visits',
+                    'icon' => 'fas fa-fw fa-cog',
+                    'icon_color' => 'blue',
+                ],
+                [
+                    'text' => 'Set Visit Checklists',
+                    'url'  => '/visits',
+                    'icon' => 'fas fa-fw fa-cogs',
+                    'icon_color' => 'blue',
+                ],
+                [
                     'text' => 'Sites',
                     'url'  => '/sites',
                     'icon' => 'fas fa-fw fa-building',
                     'icon_color' => 'blue',
                 ],
-                [
-                    'text' => 'Visit Settings',
-                    'url'  => '/visits',
-                    'icon' => 'fas fa-fw fa-cog',
-                    'icon_color' => 'blue',
-                ],
+                
 
                 // [
                 //     'text' => 'Departments',
