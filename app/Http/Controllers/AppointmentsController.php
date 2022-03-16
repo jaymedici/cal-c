@@ -42,6 +42,7 @@ class AppointmentsController extends Controller
                     });
                 })
                 ->whereBetween('appointment_date_time', [$datetoday, $weekendDate])
+                ->orderBy('appointment_date_time', 'asc')
                 ->get();
 
         return $appointments;
@@ -57,6 +58,21 @@ class AppointmentsController extends Controller
     public function createFromScreening($screeningId)
     {
 
+    }
+
+    public function viewAppointment($appointmentId)
+    {
+        $appointment = Appointment::with('project')
+                                    ->with('participantVisit')
+                                    ->with('screening')
+                                    ->findOrFail($appointmentId);
+
+        return view('appointments.viewAppointment', compact('appointment'));
+    }
+
+    public function storeVisitAction($appointmentId)
+    {
+        
     }
 
     /**

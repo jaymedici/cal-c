@@ -33,7 +33,7 @@ class ParticipantVisitsController extends Controller
         $participantVisits = ParticipantVisit::with('project')->with('appointment')
                                 ->whereProjectAssignedTo($userId)
                                 ->whereBetween('window_start_date', [$datetoday, $dateAfterTwoWeeks])
-                                ->simplePaginate(5);
+                                ->paginate(6);
 
         return $participantVisits;
     }

@@ -26,9 +26,7 @@ Route::get('logout', 'Auth\LoginController@logout');
 */
 //Authentication Routes
 Route::get('login', [App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])->name('login');
-Route::get('login', [App\Http\Controllers\Auth\LoginController::class, 'login']);
-Route::get('logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
-Route::get('logout', [App\Http\Controllers\Auth\LoginController::class, 'logout']);
+Route::post('post-login', [App\Http\Controllers\Auth\LoginController::class, 'postLogin'])->name('login.post');
 Route::get('logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 Route::get('/sendEmail', [App\Http\Controllers\SendEmailController::class, 'index'])->name('sendEmail');
 
@@ -50,12 +48,15 @@ Route::resource('projects',App\Http\Controllers\ProjectsController::class);
 Route::get('projectDatatable',[App\Http\Controllers\ProjectsController::class, 'projectDatatable'])->name('projectDatatable');
 Route::get('projectListdt',[App\Http\Controllers\ProjectsController::class, 'projectListdt'])->name('projectListdt');
 
+Route::get('livewireTest',[App\Http\Controllers\ProjectsController::class, 'livewireTest'])->name('livewireTest');
+
 //Site Routes
 Route::resource('sites',App\Http\Controllers\SitesController::class);
 
 //Appointment Routes
 Route::resource('appointments',App\Http\Controllers\AppointmentsController::class);
 Route::get('appointments/createFromVisit/{visitId}',[App\Http\Controllers\AppointmentsController::class, 'createFromVisit'])->name('appointments.createFromVisit');
+Route::get('appointments/viewAppointment/{appointmentId}',[App\Http\Controllers\AppointmentsController::class, 'viewAppointment'])->name('appointments.viewAppointment');
 Route::post('appointments/storeByVisit/{visitId}',[App\Http\Controllers\AppointmentsController::class, 'storeByVisit'])->name('appointments.storeByVisit');
 
 //Calendar Routes

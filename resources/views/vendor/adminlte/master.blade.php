@@ -71,6 +71,9 @@
         <meta name="msapplication-TileImage" content="{{ asset('favicon/ms-icon-144x144.png') }}">
     @endif
 
+    {{-- Toastr Stylesheet --}}
+    <link href="{{ asset('toastr/toastr.css') }}" rel="stylesheet"/>
+
 </head>
 
 <body class="@yield('classes_body')" @yield('body_data')>
@@ -103,6 +106,37 @@
 
     {{-- Custom Scripts --}}
     @yield('adminlte_js')
+
+    {{-- Toastr JS --}}
+    <script src="{{ asset('toastr/toastr.min.js') }}"></script>
+
+    {{-- Initialize options for Toastr --}}
+    <script>
+        $(document).ready(function() {
+            toastr.options = {
+                "positionClass": "toast-top-right",
+                "progressBar": true,
+            }
+        });
+    </script>
+
+    {{-- Browser Event Listeners (thrown by Livewire) --}}
+    <script>
+        window.addEventListener('show-edit-form', event => {
+            $('#editForm').modal('show');
+        });
+
+        window.addEventListener('show-create-form', event => {
+            $('#createForm').modal('show');
+        });
+
+        window.addEventListener('hide-form', event => {
+            $('#createForm').modal('hide');
+            $('#editForm').modal('hide');
+
+            toastr.success(event.detail.message, 'Success');
+        });
+    </script>
 
 </body>
 

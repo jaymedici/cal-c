@@ -24,6 +24,20 @@ class ProjectsController extends Controller
         $this->middleware('auth');
     }
 
+    public function alpineTest()
+    {
+        $users = User::all();
+        $sites = Site::all();
+
+        return view('alpineTest2', compact('users', 'sites'));
+    }
+
+    public function livewireTest()
+    {
+
+        return view('livewireTest');
+    }
+
     public function index(Request $request)
     {
         if (Auth::check())

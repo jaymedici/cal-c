@@ -12,6 +12,7 @@ class ProjectUser extends Model
     use HasFactory;
 
     protected $table = 'user_projects';
+    
     protected $fillable = [
         'id',
         'project_id',

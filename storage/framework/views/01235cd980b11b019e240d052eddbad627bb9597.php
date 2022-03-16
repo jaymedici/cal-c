@@ -76,120 +76,39 @@
 
 <div class="row">
     <div class="col-md-8">
-        <div class="card card-success">
-            <div class="card-header border-transparent">
-                <h3 class="card-title">Scheduled Visits in the coming 2 Weeks</h3>
-                <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                <i class="fas fa-minus"></i>
-                </button>
-                <!-- <button type="button" class="btn btn-tool" data-card-widget="remove">
-                <i class="fas fa-times"></i>
-                </button> -->
-                </div>
-            </div>
-
-            <div class="card-body p-0">
-                <div class="table-responsive">
-                    <table class="table m-0">
-                        <thead>
-                            <tr>
-                                <th>Project</th>
-                                <th>Participant ID</th>
-                                <th>Window Period</th>
-                                <th>Appt Set</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php $__currentLoopData = $scheduledParticipantVisits; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $participantVisit): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <tr>
-                                <td><?php echo e($participantVisit->project->name); ?> </td>
-                                <td><?php echo e($participantVisit->participant_id); ?> </td>
-                                <td><?php echo e(\Carbon\Carbon::parse($participantVisit->window_start_date)->format('d M, Y')); ?> - 
-                                <?php echo e(\Carbon\Carbon::parse($participantVisit->window_end_date)->format('d M, Y')); ?> </td>
-                                <td>
-                                <?php if($participantVisit->appointment()->exists()): ?>
-                                <span class="badge badge-success">Yes</span></a>
-                                <?php else: ?>
-                                <span class="badge badge-warning">No</span></a>
-                                <?php endif; ?>
-                                </td>
-                                <td><a href="<?php echo e(route('appointments.createFromVisit', $participantVisit->id)); ?>">Set Appointment</a></td>
-                            </tr>
-                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div class="card-footer text-center">
-                <?php echo e($scheduledParticipantVisits->links()); ?>
-
-            </div>
-
-        </div>
+        <?php
+if (! isset($_instance)) {
+    $html = \Livewire\Livewire::mount('home.scheduled-visits')->html();
+} elseif ($_instance->childHasBeenRendered('W46jBvb')) {
+    $componentId = $_instance->getRenderedChildComponentId('W46jBvb');
+    $componentTag = $_instance->getRenderedChildComponentTagName('W46jBvb');
+    $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
+    $_instance->preserveRenderedChild('W46jBvb');
+} else {
+    $response = \Livewire\Livewire::mount('home.scheduled-visits');
+    $html = $response->html();
+    $_instance->logRenderedChild('W46jBvb', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+}
+echo $html;
+?>  
     </div>
 
     <div class="col-md-4">
-        <div class="card card-warning">
-            <div class="card-header">
-                <h3 class="card-title">Appointments this Week</h3>
-                <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                <i class="fas fa-minus"></i>
-                </button>
-                <!-- <button type="button" class="btn btn-tool" data-card-widget="remove">
-                <i class="fas fa-times"></i>
-                </button> -->
-                </div>
-            </div>
-
-            <div class="card-body p-0">
-                <ul class="products-list product-list-in-card pl-2 pr-2">
-                    <li class="item">
-                        <div class="product-img">
-                        <h4>MON</h4>
-                        </div>
-                        <div class="product-info">
-                        <a href="javascript:void(0)" class="product-title">TZ/008/009
-                        <span class="badge badge-warning float-right">Screening</span></a>
-                        <span class="product-description">
-                        coming for Week 2 visit
-                        </span>
-                        </div>
-                    </li>
-
-                    <?php $__currentLoopData = $appointmentsThisWeek; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $appointment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <li class="item">
-                        <div class="product-img">
-                        <h4>WED</h4>
-                        </div>
-                        <div class="product-info">
-                        <a href="javascript:void(0)" class="product-title"><?php echo e($appointment->participant_id); ?>
-
-                        <?php if(isset($appointment->participant_visit_id)): ?>
-                        <span class="badge badge-info float-right">Regular</span></a>
-                        <span class="product-description">
-                        Coming for <?php echo e($appointment->participantVisit->visit->visit_name); ?> Visit
-                        </span>
-                        <?php elseif(isset($appointment->screening_id)): ?>
-                        <span class="badge badge-warning float-right">Screening</span></a>
-                        <span class="product-description">
-                        coming for Screening
-                        </span>
-                        <?php endif; ?>
-                        </div>
-                    </li>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                </ul>
-            </div>
-            
-            <div class="card-footer text-center">
-                <a href="javascript:void(0)" class="uppercase">View All Appointments</a>
-            </div>
-
-        </div>
+        <?php
+if (! isset($_instance)) {
+    $html = \Livewire\Livewire::mount('home.weekly-appointments')->html();
+} elseif ($_instance->childHasBeenRendered('6PRcp1o')) {
+    $componentId = $_instance->getRenderedChildComponentId('6PRcp1o');
+    $componentTag = $_instance->getRenderedChildComponentTagName('6PRcp1o');
+    $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
+    $_instance->preserveRenderedChild('6PRcp1o');
+} else {
+    $response = \Livewire\Livewire::mount('home.weekly-appointments');
+    $html = $response->html();
+    $_instance->logRenderedChild('6PRcp1o', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+}
+echo $html;
+?>
     </div>
 
     </div>

@@ -39,9 +39,11 @@
     
     <?php if(config('adminlte.livewire')): ?>
         <?php if(app()->version() >= 7): ?>
-            @livewireStyles
+            <?php echo \Livewire\Livewire::styles(); ?>
+
         <?php else: ?>
-            <livewire:styles />
+            <?php echo \Livewire\Livewire::styles(); ?>
+
         <?php endif; ?>
     <?php endif; ?>
 
@@ -71,6 +73,9 @@
         <meta name="msapplication-TileImage" content="<?php echo e(asset('favicon/ms-icon-144x144.png')); ?>">
     <?php endif; ?>
 
+    
+    <link href="<?php echo e(asset('toastr/toastr.css')); ?>" rel="stylesheet"/>
+
 </head>
 
 <body class="<?php echo $__env->yieldContent('classes_body'); ?>" <?php echo $__env->yieldContent('body_data'); ?>>
@@ -95,14 +100,47 @@
     
     <?php if(config('adminlte.livewire')): ?>
         <?php if(app()->version() >= 7): ?>
-            @livewireScripts
+            <?php echo \Livewire\Livewire::scripts(); ?>
+
         <?php else: ?>
-            <livewire:scripts />
+            <?php echo \Livewire\Livewire::scripts(); ?>
+
         <?php endif; ?>
     <?php endif; ?>
 
     
     <?php echo $__env->yieldContent('adminlte_js'); ?>
+
+    
+    <script src="<?php echo e(asset('toastr/toastr.min.js')); ?>"></script>
+
+    
+    <script>
+        $(document).ready(function() {
+            toastr.options = {
+                "positionClass": "toast-top-right",
+                "progressBar": true,
+            }
+        });
+    </script>
+
+    
+    <script>
+        window.addEventListener('show-edit-form', event => {
+            $('#editForm').modal('show');
+        });
+
+        window.addEventListener('show-create-form', event => {
+            $('#createForm').modal('show');
+        });
+
+        window.addEventListener('hide-form', event => {
+            $('#createForm').modal('hide');
+            $('#editForm').modal('hide');
+
+            toastr.success(event.detail.message, 'Success');
+        });
+    </script>
 
 </body>
 

@@ -5,7 +5,6 @@ use Adldap\Laravel\Facades\Adldap;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -25,6 +24,10 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
+    public function __construct()
+    {
+        $this->middleware('guest')->except('logout');
+    }
 
     protected function login(Request $request)
     {
@@ -43,8 +46,27 @@ class LoginController extends Controller
         }
 
         else{
-        return back()->withinput()->with('error_message','Invalid Username or Password');
+        
+        }
     }
+
+    public function postLogin(Request $request)
+    {
+        $request->validate([
+            'email' => 'required',
+            'password' => 'required'
+            ]);
+
+        $loginCredentials = $request->only('email', 'password');
+
+        if (Auth::attempt($loginCredentials))
+        {
+            return redirect()->route('home');
+        }
+
+        else {
+            return back()->with('error_message','Invalid Email or Password');
+        }
     }
 
     public function showLoginForm()
@@ -69,8 +91,5 @@ class LoginController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('guest')->except('logout');
-    }
+    
 }

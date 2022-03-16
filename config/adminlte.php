@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'Visits Calculator',
+    'title' => 'Visit Calculating & Scheduling System',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -45,7 +45,7 @@ return [
     |
     */
 
-    'logo' => '<b>Visits </b>Calculator',
+    'logo' => '<b>Cal </b>C',
     'logo_img' => 'vendor/adminlte/dist/img/LOGO.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
@@ -374,6 +374,13 @@ return [
         ],
     ],
 
+    // [
+    //     'text'        => 'Livewire Tests',
+    //     'icon_color' => 'red',
+    //     'url'         => 'livewireTest',
+        
+    // ],
+
     [
         'text'        => 'Log Out',
         'icon_color' => 'red',
@@ -501,5 +508,5 @@ return [
     | https://github.com/jeroennoten/Laravel-AdminLTE/#93-livewire
     */
 
-    'livewire' => false,
+    'livewire' => true,
 ];

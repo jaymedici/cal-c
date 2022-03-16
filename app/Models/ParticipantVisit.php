@@ -8,6 +8,7 @@ use App\Project;
 use App\VisitSetting;
 use App\Models\Site;
 use App\Models\Appointment;
+Use Carbon\Carbon;
 
 class ParticipantVisit extends Model
 {
@@ -27,12 +28,27 @@ class ParticipantVisit extends Model
         'updated_by',
     ];
 
+    protected $casts = [
+        'window_end_date' => 'date'
+    ];
+
     //SCOPES
     public function scopeWhereProjectAssignedTo($query, $userId)
     {
         return $query->whereHas('project', function ($query) use ($userId) {
             $query->isAssigned($userId);
             });
+    }
+
+    //ACCESSORS
+    public function getWindowStartDateFormattedAttribute()
+    {
+        return Carbon::parse($this->window_start_date)->format('d M, Y');
+    }
+
+    public function getWindowEndDateFormattedAttribute()
+    {
+        return $this->window_end_date->format('d M, Y');
     }
 
 

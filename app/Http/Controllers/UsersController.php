@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Session;
-use App\User;
+use App\Models\User;
 use App\Department;
 use App\UserProject;
 use App\Project;
@@ -24,7 +24,7 @@ class UsersController extends Controller
      */
     public function index(Request $request)
     {
-        //if ($request->ajax()) {
+        $users = User::withCount('projects')->paginate(10);
            
         return view('users.index');
     }
