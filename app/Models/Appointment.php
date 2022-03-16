@@ -8,6 +8,7 @@ use App\Project;
 use App\Models\Site;
 use App\Models\ParticipantVisit;
 use App\Models\Screening;
+use Carbon\Carbon;
 
 class Appointment extends Model
 {
@@ -24,6 +25,13 @@ class Appointment extends Model
         'updated_by',
     ];
 
+    //ACCESSORS
+    public function getAppointmentDateTimeFormattedAttribute()
+    {
+        return Carbon::parse($this->appointment_date_time)->isoFormat('D/M/YY - h:mm a');
+    }
+
+    //MODEL RELATIONSHIPS:
     public function project()
     {
         return $this->belongsTo(Project::class);

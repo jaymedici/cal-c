@@ -20,7 +20,7 @@
                             <th>Project</th>
                             <th>Participant ID</th>
                             <th>Window Period</th>
-                            <th>Appt Set</th>
+                            <th>Set Appt</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -29,13 +29,13 @@
                         <tr>
                             <td>{{ $participantVisit->project->name}} </td>
                             <td>{{ $participantVisit->participant_id}} </td>
-                            <td>{{ $participantVisit->window_start_date_formatted }} - {{ $participantVisit->window_end_date_formatted }} </td>
+                            <td>{{ $participantVisit->window_start_date_formatted }} - <br> {{ $participantVisit->window_end_date_formatted }} </td>
                             @if($participantVisit->appointment()->exists())
-                            <td><span class="badge badge-success">Yes</span></a></td>
-                            <td><a href="#" wire:click.prevent="changeAppointment({{$participantVisit}})"> <i class="fa fa-pen-square"></i> Change Appt.</a></td>
+                            <td>{{ $participantVisit->appointment->appointment_date_time_formatted }}</td>
+                            <td><a class="btn btn-sm btn-warning" href="#" wire:click.prevent="changeAppointment({{$participantVisit}})"> <i class="fa fa-pen-square"></i> Change Appt.</a></td>
                             @else
-                            <td><span class="badge badge-warning">No</span></a></td>
-                            <td><a href="" wire:click.prevent="setAppointment({{$participantVisit}})"> <i class="fa fa-plus-circle"></i> Set Appt.</a></td>
+                            <td><i>No set Appt...</i></td>
+                            <td><a class="btn btn-sm btn-primary" href="" wire:click.prevent="setAppointment({{$participantVisit}})"> <i class="fa fa-plus-circle"></i> Set Appt.</a></td>
                             @endif
                         </tr>
                         @endforeach

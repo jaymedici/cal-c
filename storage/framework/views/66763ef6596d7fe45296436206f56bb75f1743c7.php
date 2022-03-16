@@ -20,7 +20,7 @@
                             <th>Project</th>
                             <th>Participant ID</th>
                             <th>Window Period</th>
-                            <th>Appt Set</th>
+                            <th>Set Appt</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -29,13 +29,13 @@
                         <tr>
                             <td><?php echo e($participantVisit->project->name); ?> </td>
                             <td><?php echo e($participantVisit->participant_id); ?> </td>
-                            <td><?php echo e($participantVisit->window_start_date_formatted); ?> - <?php echo e($participantVisit->window_end_date_formatted); ?> </td>
+                            <td><?php echo e($participantVisit->window_start_date_formatted); ?> - <br> <?php echo e($participantVisit->window_end_date_formatted); ?> </td>
                             <?php if($participantVisit->appointment()->exists()): ?>
-                            <td><span class="badge badge-success">Yes</span></a></td>
-                            <td><a href="#" wire:click.prevent="changeAppointment(<?php echo e($participantVisit); ?>)"> <i class="fa fa-pen-square"></i> Change Appt.</a></td>
+                            <td><?php echo e($participantVisit->appointment->appointment_date_time_formatted); ?></td>
+                            <td><a class="btn btn-sm btn-warning" href="#" wire:click.prevent="changeAppointment(<?php echo e($participantVisit); ?>)"> <i class="fa fa-pen-square"></i> Change Appt.</a></td>
                             <?php else: ?>
-                            <td><span class="badge badge-warning">No</span></a></td>
-                            <td><a href="" wire:click.prevent="setAppointment(<?php echo e($participantVisit); ?>)"> <i class="fa fa-plus-circle"></i> Set Appt.</a></td>
+                            <td><i>No set Appt...</i></td>
+                            <td><a class="btn btn-sm btn-primary" href="" wire:click.prevent="setAppointment(<?php echo e($participantVisit); ?>)"> <i class="fa fa-plus-circle"></i> Set Appt.</a></td>
                             <?php endif; ?>
                         </tr>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
