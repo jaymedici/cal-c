@@ -40,8 +40,7 @@
                     </tr>
                 </tbody>
             </table>
-            <br>
-            <a href="#" class="btn btn-info">Change Appointment Date</a>
+            
         </div>
     </div>
 
@@ -53,16 +52,16 @@
         <div class="card-body">
             <?php
 if (! isset($_instance)) {
-    $html = \Livewire\Livewire::mount('appointments.visit-actions')->html();
-} elseif ($_instance->childHasBeenRendered('e3ugP6P')) {
-    $componentId = $_instance->getRenderedChildComponentId('e3ugP6P');
-    $componentTag = $_instance->getRenderedChildComponentTagName('e3ugP6P');
+    $html = \Livewire\Livewire::mount('appointments.visit-actions', ['appointment' => $appointment])->html();
+} elseif ($_instance->childHasBeenRendered('t1vSFdd')) {
+    $componentId = $_instance->getRenderedChildComponentId('t1vSFdd');
+    $componentTag = $_instance->getRenderedChildComponentTagName('t1vSFdd');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('e3ugP6P');
+    $_instance->preserveRenderedChild('t1vSFdd');
 } else {
-    $response = \Livewire\Livewire::mount('appointments.visit-actions');
+    $response = \Livewire\Livewire::mount('appointments.visit-actions', ['appointment' => $appointment]);
     $html = $response->html();
-    $_instance->logRenderedChild('e3ugP6P', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('t1vSFdd', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>

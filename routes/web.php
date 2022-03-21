@@ -27,7 +27,7 @@ Route::get('logout', 'Auth\LoginController@logout');
 //Authentication Routes
 Route::get('login', [App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])->name('login');
 Route::post('post-login', [App\Http\Controllers\Auth\LoginController::class, 'postLogin'])->name('login.post');
-Route::get('logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
+//Route::get('logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 Route::get('/sendEmail', [App\Http\Controllers\SendEmailController::class, 'index'])->name('sendEmail');
 
 //User Control Routes

@@ -11,11 +11,11 @@
         <div class="card card-info">
             <div class="card-header with-border row">
                 <div class="col-md-8">
-                    <h4 class="box-title">Projects</h4>
+                    <h4 class="box-title">Sites</h4>
                 </div>
 
                 <div class="col-md-4">
-                    <a class="float-right btn btn-success " href="/projects/create"><i class="fas fa-plus-circle"></i> Register New Project</a>
+                    <a class="float-right btn btn-success " href="/sites/create"><i class="fas fa-plus-circle"></i> Register New Site</a>
                 </div>
             </div>
             <!-- /.box-header -->
@@ -26,25 +26,28 @@
                     <table class="table" id="table">
                         <thead>
                             <tr>
-                                <th>Project Name</th>
-                                <th>Project Description</th>
-                                <th>Includes Screening</th>
-                                <th>Action</th>
+                                <th>Site Name</th>
+                                <th>District</th>
+                                <th>Region</th>
+                                <th>Country</th>
+                                <th>Number of Users</th>
                             </tr>
                         </thead>
 
                         <tbody>
-                            <?php $__currentLoopData = $allProjects; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $project): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <?php $__currentLoopData = $allSites; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $site): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <tr>
-                                <td><?php echo e($project->name); ?></td>
-                                <td><?php echo e($project->description); ?></td>
-                                <td><?php echo e($project->include_screening); ?></td>
-                                <td><a href="<?php echo e(route('projectData', $project->id)); ?>">View Project</a></td>
+                                <td><?php echo e($site->site_name); ?></td>
+                                <td><?php echo e($site->district); ?></td>
+                                <td><?php echo e($site->region); ?></td>
+                                <td><?php echo e($site->country); ?></td>
+                                <td><?php echo e($site->users_count); ?></td>
+                                
                             </tr>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </tbody>
                     </table>
-                    <?php echo e($allProjects->links()); ?>
+                    <?php echo e($allSites->links()); ?>
 
                 </div>
                 <!-- /.table-responsive -->
@@ -54,4 +57,4 @@
 </div>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('adminlte::page', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Visitcallender\resources\views/projects/index.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('adminlte::page', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Visitcallender\resources\views/sites/index.blade.php ENDPATH**/ ?>

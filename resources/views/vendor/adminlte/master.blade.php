@@ -136,6 +136,7 @@
 
             toastr.success(event.detail.message, 'Success');
         });
+
     </script>
 
 </body>

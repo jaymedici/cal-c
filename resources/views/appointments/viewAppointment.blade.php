@@ -40,8 +40,7 @@
                     </tr>
                 </tbody>
             </table>
-            <br>
-            <a href="#" class="btn btn-info">Change Appointment Date</a>
+            
         </div>
     </div>
 
@@ -51,7 +50,7 @@
         </div>
 
         <div class="card-body">
-            @livewire('appointments.visit-actions')
+            @livewire('appointments.visit-actions', ['appointment' => $appointment])
         </div>
     </div>
 </div>  

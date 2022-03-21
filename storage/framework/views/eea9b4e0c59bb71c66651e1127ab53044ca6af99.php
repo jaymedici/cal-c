@@ -35,6 +35,7 @@ unset($__errorArgs, $__bag); ?>" id="visit_type" onchange="visit_type_change(thi
 
 <?php echo $__env->make('partials.errors', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php echo $__env->make('partials.success', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<br>
 
 <div class="row">
     <div class="card col-md-12">

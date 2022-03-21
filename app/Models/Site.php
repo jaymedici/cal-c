@@ -22,4 +22,9 @@ class Site extends Model
     {
         return $this->belongsToMany(Project::class, 'project_sites');
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'user_sites');
+    }
 }

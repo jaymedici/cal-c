@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Project;
-use App\VisitSetting;
+use App\Models\VisitSetting;
 use App\Models\Site;
 use App\Models\Appointment;
 Use Carbon\Carbon;
@@ -23,6 +23,8 @@ class ParticipantVisit extends Model
         'visit_date',
         'actual_visit_date',
         'visit_status',
+        'marked_by',
+        'marked_date',
         'window_start_date',
         'window_end_date',
         'updated_by',

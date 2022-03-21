@@ -5,6 +5,7 @@
 @section('content')
 @include('partials.errors')
 @include('partials.success')
+<br>
 
 <div class="row">
     <div class="col-lg-12 col-md-12">
@@ -39,7 +40,7 @@
                                 <td>{{$project->name}}</td>
                                 <td>{{$project->description}}</td>
                                 <td>{{$project->include_screening}}</td>
-                                <td><a href="{{ route('projectData', $project->id) }}">View Project</a></td>
+                                <td><a href="#">View Project</a></td>
                             </tr>
                             @endforeach
                         </tbody>

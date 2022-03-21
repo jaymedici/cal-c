@@ -28,6 +28,7 @@
 
 @include('partials.errors')
 @include('partials.success')
+<br>
 
 <div class="row">
     <div class="card col-md-12">

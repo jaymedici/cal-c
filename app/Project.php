@@ -3,9 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\User;
+use App\Models\User;
 use App\Department;
-use App\VisitSetting;
+use App\Models\VisitSetting;
 use App\Models\ParticipantVisit;
 use App\UserProject;
 use App\Models\Site;

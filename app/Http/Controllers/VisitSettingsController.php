@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\VisitSetting;
+use App\Models\VisitSetting;
 use App\Project;
 use Yajra\Datatables\Datatables;
 use Illuminate\Http\Request;

@@ -9,6 +9,7 @@
 <?php $__env->startSection('content'); ?>
 <?php echo $__env->make('partials.errors', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php echo $__env->make('partials.success', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<br>
 
 <div class="row">
     <div class="card card-secondary col-md-12">

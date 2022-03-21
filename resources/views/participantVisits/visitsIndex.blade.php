@@ -9,6 +9,7 @@
 @section('content')
 @include('partials.errors')
 @include('partials.success')
+<br>
 
 <div class="row">
     <div class="card card-secondary col-md-12">

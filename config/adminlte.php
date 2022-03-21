@@ -258,7 +258,7 @@ return [
         ],
 
         [
-            'text'        => 'Visits',
+            'text'        => 'Participant Visits',
             'icon_color' => 'blue',
             'icon'        => 'fa fa-list',
             'submenu' => [
@@ -276,12 +276,6 @@ return [
                     'icon'        => 'fa fa-calendar',
                     
                 ],
-                // [
-                //     'text'        => 'All Visits',
-                //     'url'         => '/calculators',
-                //     'icon_color' => 'blue',
-                //     'icon'        => 'fa fa-list',
-                // ],
                 [
                     'text'        => 'Completed Visits',
                     'icon_color' => 'green',
@@ -325,12 +319,12 @@ return [
                     'icon' => 'fas fa-fw fa-cog',
                     'icon_color' => 'blue',
                 ],
-                [
-                    'text' => 'Set Visit Checklists',
-                    'url'  => '/visits',
-                    'icon' => 'fas fa-fw fa-cogs',
-                    'icon_color' => 'blue',
-                ],
+                // [
+                //     'text' => 'Set Visit Checklists',
+                //     'url'  => '/visits',
+                //     'icon' => 'fas fa-fw fa-cogs',
+                //     'icon_color' => 'blue',
+                // ],
                 [
                     'text' => 'Sites',
                     'url'  => '/sites',

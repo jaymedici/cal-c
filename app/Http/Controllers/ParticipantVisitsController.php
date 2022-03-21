@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Appointment;
 use App\Models\ParticipantVisit;
 use Illuminate\Http\Request;
 use App\Project;
-use App\VisitSetting;
+use App\Models\VisitSetting;
 use App\Models\Screening;
 use Auth;
 use Yajra\Datatables\Datatables;
@@ -13,16 +14,7 @@ use Carbon\Carbon;
 
 class ParticipantVisitsController extends Controller
 {
-    /**
-     * Display a listing of the resource. 
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
+    
     public function get2WeeksScheduledVisits($userId)
     {
         $now = Carbon::now();
@@ -123,15 +115,6 @@ class ParticipantVisitsController extends Controller
     
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     public function createParticipant($projectId)
     {
@@ -145,17 +128,6 @@ class ParticipantVisitsController extends Controller
         $screenedParticipants = Screening::where('project_id', $projectId)->where('screening_outcome', 'LIKE', 'Enrol')->get()->unique('participant_id')->pluck('participant_id');
 
         return view('participantVisits.createParticipant', compact('project', 'firstProjectVisitName', 'screenedParticipants'));
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
     }
 
     public function storeParticipant($projectId, Request $request)
@@ -215,48 +187,4 @@ class ParticipantVisitsController extends Controller
         return redirect()->route('participantVisits.enrolmentIndex')->with('success','Participant Visit schedule information saved successfully!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\ParticipantVisit  $participantVisit
-     * @return \Illuminate\Http\Response
-     */
-    public function show(ParticipantVisit $participantVisit)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\ParticipantVisit  $participantVisit
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(ParticipantVisit $participantVisit)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ParticipantVisit  $participantVisit
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, ParticipantVisit $participantVisit)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\ParticipantVisit  $participantVisit
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(ParticipantVisit $participantVisit)
-    {
-        //
-    }
 }

@@ -41,7 +41,7 @@
                                 <td>{{$site->district}}</td>
                                 <td>{{$site->region}}</td>
                                 <td>{{$site->country}}</td>
-                                <td>N/A</td>
+                                <td>{{$site->users_count}}</td>
                                 
                             </tr>
                             @endforeach

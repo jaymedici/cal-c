@@ -23,7 +23,7 @@ class SitesController extends Controller
     public function index()
     {
         //
-        $allSites = Site::paginate(10);
+        $allSites = Site::withCount('users')->paginate(10);
 
         return view('sites.index', compact('allSites'));
         

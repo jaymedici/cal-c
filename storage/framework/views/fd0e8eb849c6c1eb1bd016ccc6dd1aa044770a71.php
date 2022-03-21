@@ -1,1 +1,0 @@
-<div id="<?php echo $id; ?>"></div><?php /**PATH C:\xampp\htdocs\Visitcallender\vendor\arielmejiadev\larapex-charts\src/../resources/views/chart/container.blade.php ENDPATH**/ ?>
