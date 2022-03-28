@@ -10,6 +10,7 @@ use App\Models\ParticipantVisit;
 use App\UserProject;
 use App\Models\Site;
 use App\Models\ProjectSite;
+use App\Models\Screening;
 
 class Project extends Model
 {
@@ -29,6 +30,13 @@ class Project extends Model
         return ParticipantVisit::where('project_id', $this->id)
                                 ->get()
                                 ->unique('participant_id');
+    }
+
+    public function screenedParticipants()
+    {
+        return Screening::where('project_id', $this->id)
+                            ->get()
+                            ->unique('participant_id');
     }
 
     //SCOPES

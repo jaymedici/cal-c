@@ -92,24 +92,6 @@ Route::get('participantVisits/projectVisitsIndexDT/{project}',[App\Http\Controll
 Route::get('participantVisits/createParticipant/{project}',[App\Http\Controllers\ParticipantVisitsController::class, 'createParticipant'])->name('participantVisits.createParticipant');
 Route::post('participantVisits/storeParticipant/{project}',[App\Http\Controllers\ParticipantVisitsController::class, 'storeParticipant'])->name('participantVisits.storeParticipant');
 
-//Calculation Routes
-Route::resource('calculators',App\Http\Controllers\CalculatorController::class);
-Route::get('calculatorsDatatable',[App\Http\Controllers\CalculatorController::class, 'calculatorsDatatable'])->name('calculatorsDatatable');
-Route::get('projectdt/{id}',[App\Http\Controllers\CalculatorController::class, 'projectdt']);
-Route::get('PendingOnWindow',[App\Http\Controllers\CalculatorController::class, 'PendingOnWindow'])->name('PendingOnWindow');
-
-Route::get('passedvisits',[App\Http\Controllers\CalculatorController::class, 'passedvisits'])->name('passedvisits');
-Route::get('passedvisitsDatatable',[App\Http\Controllers\CalculatorController::class, 'passedvisitsDatatable'])->name('passedvisitsDatatable');
-
-Route::get('todayVisits',[App\Http\Controllers\CalculatorController::class, 'todayVisits'])->name('todayVisits');
-Route::get('todayVisitsDatatable',[App\Http\Controllers\CalculatorController::class, 'todayVisitsDatatable'])->name('todayVisitsDatatable');
-
-Route::get('missedVisits',[App\Http\Controllers\CalculatorController::class, 'missedVisits'])->name('missedVisits');
-Route::get('missedVisitsDatatable',[App\Http\Controllers\CalculatorController::class, 'missedVisitsDatatable'])->name('missedVisitsDatatable');
-
-Route::get('upcomingVisits',[App\Http\Controllers\CalculatorController::class, 'upcomingVisits'])->name('upcomingVisits');
-Route::get('upcomingVisitsDatatable',[App\Http\Controllers\CalculatorController::class, 'upcomingVisitsDatatable'])->name('upcomingVisitsDatatable');
-
 Route::resource('roles',App\Http\Controllers\RolesController::class);
 Route::resource('dataCharts',App\Http\Controllers\DataChartController::class);
 

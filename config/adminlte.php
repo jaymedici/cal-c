@@ -270,20 +270,6 @@ return [
                     'icon'        => 'fa fa-list',
                 ],
                 [
-                    'text'        => 'Upcoming Visits',
-                    'icon_color' => 'yellow',
-                    'url'         => '/upcomingVisits',
-                    'icon'        => 'fa fa-calendar',
-                    
-                ],
-                [
-                    'text'        => 'Completed Visits',
-                    'icon_color' => 'green',
-                    'url'         => '/passedvisits',
-                    'icon'        => 'fa fa-check',
-                    
-                ],
-                [
                     'text'        => 'Missed Visits',
                     'icon_color' => 'red',
                     'url'         => '/missedVisits',
