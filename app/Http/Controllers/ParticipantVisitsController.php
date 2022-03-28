@@ -47,7 +47,9 @@ class ParticipantVisitsController extends Controller
 
     public function visitsIndex()
     {
-        $projectsWithVisits = Project::whereHas('participantVisits')->paginate(10);
+        $projectsWithVisits = Project::whereHas('participantVisits')
+                                        ->withCount('visits')
+                                        ->paginate(10);
 
         return view('participantVisits.visitsIndex', compact('projectsWithVisits'));
     }
@@ -67,8 +69,6 @@ class ParticipantVisitsController extends Controller
                                 ->where('participant_id', 'LIKE', $participant)->first();
             }    
         }
-
-        //dd($visitSchedule['M0065/0299/90'][3]->visit_status);
 
         return view('participantVisits.projectVisitsIndex', compact('project', 'participants', 'visitSchedule'));
     }

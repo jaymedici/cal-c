@@ -33,8 +33,8 @@
                         @foreach($projectsWithVisits as $project)
                         <tr>
                             <td>{{$project->name}}</td>
-                            <td>{{$project->include_screening}}</td>
-                            <td>0</td>
+                            <td>{{$project->visits_count}}</td>
+                            <td>{{count($project->enrolledParticipants())}}</td>
                             <td><a href="{{ route('participantVisits.projectVisitsIndex',$project->id) }}">View Participant Visits</a></td>
                         </tr>
                         @endforeach

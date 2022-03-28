@@ -24,6 +24,13 @@ class Project extends Model
         'updated_at',
     ];
 
+    public function enrolledParticipants()
+    {
+        return ParticipantVisit::where('project_id', $this->id)
+                                ->get()
+                                ->unique('participant_id');
+    }
+
     //SCOPES
     public function scopeIsAssigned($query, $userId)
     {
