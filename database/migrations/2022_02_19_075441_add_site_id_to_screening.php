@@ -15,7 +15,7 @@ class AddSiteIdToScreening extends Migration
     {
         Schema::table('screening', function (Blueprint $table) {
             //
-            $table->integer('site_id')->unsigned()->after('project_id');
+            $table->integer('site_id')->unsigned()->after('project_id')->default(0);
         });
     }
 

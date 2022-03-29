@@ -15,7 +15,7 @@ class AddUpdatedByOnScreening extends Migration
     {
         Schema::table('screening', function (Blueprint $table) {
             //
-            $table->string('updated_by')->after('screening_outcome');
+            $table->string('updated_by')->after('screening_outcome')->default('');
         });
     }
 

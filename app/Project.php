@@ -4,17 +4,17 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
-use App\Department;
 use App\Models\VisitSetting;
 use App\Models\ParticipantVisit;
 use App\UserProject;
 use App\Models\Site;
-use App\Models\ProjectSite;
 use App\Models\Screening;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Project extends Model
 {
-    //
+    use HasFactory;
+    
     protected $fillable = [
         'name',
         'description',

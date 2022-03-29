@@ -15,13 +15,13 @@ class CreateAppointmentsTable extends Migration
     {
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
-            $table->string('participant_id');
-            $table->integer('project_id')->unsigned();
-            $table->integer('site_id')->unsigned();
+            $table->string('participant_id')->default('');
+            $table->integer('project_id')->unsigned()->default(0);
+            $table->integer('site_id')->unsigned()->default(0);
             $table->integer('visit_id')->unsigned()->nullable();
             $table->integer('screening_id')->unsigned()->nullable();
-            $table->dateTime('appointment_date_time');
-            $table->string('updated_by');
+            $table->dateTime('appointment_date_time')->default('');
+            $table->string('updated_by')->default('');
             $table->timestamps();
         });
     }

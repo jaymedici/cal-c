@@ -15,7 +15,7 @@ class AddVisitTypeToVisitSettingsTable extends Migration
     {
         Schema::table('visit_settings', function (Blueprint $table) {
             //
-            $table->string('visit_type')->after('project_id');
+            $table->string('visit_type')->after('project_id')->default('');
         });
     }
 

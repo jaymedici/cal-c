@@ -15,7 +15,7 @@ class AddMoreScreeningFieldsToProjects extends Migration
     {
         Schema::table('projects', function (Blueprint $table) {
             //
-            $table->string('break_screening', 5)->after('include_screening');
+            $table->string('break_screening', 5)->after('include_screening')->default('No');
             $table->string('screening_visit_labels', 250)->after('break_screening')->nullable();
         });
     }

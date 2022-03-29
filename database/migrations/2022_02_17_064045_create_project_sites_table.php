@@ -15,9 +15,9 @@ class CreateProjectSitesTable extends Migration
     {
         Schema::create('project_sites', function (Blueprint $table) {
             $table->id();
-            $table->integer('project_id')->unsigned();
-            $table->integer('site_id')->unsigned();
-            $table->string('updated_by');
+            $table->integer('project_id')->unsigned()->default(0);
+            $table->integer('site_id')->unsigned()->default(0);
+            $table->string('updated_by')->default('');
             $table->timestamps();
         });
     }

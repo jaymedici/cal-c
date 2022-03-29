@@ -15,7 +15,7 @@ class ChangeSiteNameToSiteIdOnParticipantVisits extends Migration
     {
         Schema::table('participant_visits', function (Blueprint $table) {
             //
-            $table->integer('site_id')->unsigned()->after('project_id');
+            $table->integer('site_id')->unsigned()->after('project_id')->default(0);
             $table->dropColumn('site_name');
         });
     }

@@ -15,7 +15,7 @@ class AddProjectIdToScreeningTable extends Migration
     {
         Schema::table('screening', function (Blueprint $table) {
             //
-            $table->integer('project_id')->unsigned()->after('participant_id');
+            $table->integer('project_id')->unsigned()->after('participant_id')->default(0);
         });
     }
 

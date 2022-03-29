@@ -16,7 +16,7 @@ class ModifyProjectsTable extends Migration
         Schema::table('projects', function (Blueprint $table) {
             //
             $table->string('description', 2000)->change();
-            $table->string('include_screening', 5)->after('description');
+            $table->string('include_screening', 5)->after('description')->default("No");
         });
     }
 

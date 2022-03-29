@@ -16,8 +16,8 @@ class ModificationsOnVisitSettingsTable extends Migration
         Schema::table('visit_settings', function (Blueprint $table) {
             //
             $table->renameColumn('number_of_days', 'days_from_first_visit');
-            $table->integer('plus_window_period')->unsigned()->after('window_period');
-            $table->integer('minus_window_period')->unsigned()->after('plus_window_period');
+            $table->integer('plus_window_period')->unsigned()->after('window_period')->default(0);
+            $table->integer('minus_window_period')->unsigned()->after('plus_window_period')->default(0);
         });
     }
 

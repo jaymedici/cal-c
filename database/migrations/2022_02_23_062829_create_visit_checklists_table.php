@@ -15,13 +15,13 @@ class CreateVisitChecklistsTable extends Migration
     {
         Schema::create('visit_checklists', function (Blueprint $table) {
             $table->id();
-            $table->integer('visit_id')->unsigned();
-            $table->integer('project_id')->unsigned();
-            $table->string('checklist_item', 1500);
+            $table->integer('visit_id')->unsigned()->default(0);
+            $table->integer('project_id')->unsigned()->default(0);
+            $table->string('checklist_item', 1500)->default('');
             $table->string('is_done')->nullable();
             $table->string('attending_doctor')->nullable();
             $table->date('item_done_date')->nullable();
-            $table->string('updated_by');
+            $table->string('updated_by')->default('');
             $table->timestamps();
         });
     }

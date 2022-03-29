@@ -15,7 +15,7 @@ class ModifyUserProjectsTable extends Migration
     {
         Schema::table('user_projects', function (Blueprint $table) {
             //
-            $table->string('project_role')->after('project_id');
+            $table->string('project_role')->after('project_id')->default('');
         });
     }
 

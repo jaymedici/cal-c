@@ -54,6 +54,11 @@ class ParticipantVisitsController extends Controller
         return view('participantVisits.visitsIndex', compact('projectsWithVisits'));
     }
 
+    public function missedVisitsIndex()
+    {
+        
+    }
+
     public function projectVisitsIndex($projectId)
     {
         $project = Project::with('visits')->with('participantVisits')->findOrFail($projectId);

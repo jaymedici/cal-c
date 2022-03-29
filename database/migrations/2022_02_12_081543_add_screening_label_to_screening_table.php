@@ -15,7 +15,7 @@ class AddScreeningLabelToScreeningTable extends Migration
     {
         Schema::table('screening', function (Blueprint $table) {
             //
-            $table->string('screening_label')->after('id');
+            $table->string('screening_label')->after('id')->default('');
         });
     }
 

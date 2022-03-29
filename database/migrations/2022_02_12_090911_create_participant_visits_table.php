@@ -15,16 +15,16 @@ class CreateParticipantVisitsTable extends Migration
     {
         Schema::create('participant_visits', function (Blueprint $table) {
             $table->id();
-            $table->string('participant_id');
+            $table->string('participant_id')->default('');
             $table->integer('project_id')->unsigned();
-            $table->string('site_name');
+            $table->string('site_name')->default('');
             $table->integer('visit_id')->unsigned();
-            $table->date('visit_date');
+            $table->date('visit_date')->default('');
             $table->date('actual_visit_date')->nullable();
-            $table->date('window_start_date');
-            $table->date('window_end_date');
-            $table->string('visit_status');
-            $table->string('updated_by');
+            $table->date('window_start_date')->default('');
+            $table->date('window_end_date')->default('');
+            $table->string('visit_status')->default('');
+            $table->string('updated_by')->default('');
             $table->timestamps();
         });
     }

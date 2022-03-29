@@ -15,11 +15,11 @@ class CreateSitesTable extends Migration
     {
         Schema::create('sites', function (Blueprint $table) {
             $table->id();
-            $table->string('site_name', 350);
+            $table->string('site_name', 350)->default('');
             $table->string('district')->nullable();
             $table->string('region')->nullable();
             $table->string('country')->nullable();
-            $table->string('updated_by');
+            $table->string('updated_by')->default('');
             $table->timestamps();
         });
     }
