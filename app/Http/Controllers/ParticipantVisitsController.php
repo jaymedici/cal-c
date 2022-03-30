@@ -56,7 +56,9 @@ class ParticipantVisitsController extends Controller
 
     public function missedVisitsIndex()
     {
-        
+        $projects = Project::isAssigned(auth()->id())->paginate(10);
+
+        return view('participantVisits.missedVisitsIndex', compact('projects'));
     }
 
     public function projectVisitsIndex($projectId)
@@ -76,6 +78,15 @@ class ParticipantVisitsController extends Controller
         }
 
         return view('participantVisits.projectVisitsIndex', compact('project', 'participants', 'visitSchedule'));
+    }
+
+    public function projectMissedVisitsIndex($projectId)
+    {
+        $missedVisits = ParticipantVisit::where('project_id', $projectId)
+                                        ->where('visit_status', 'LIKE', 'Missed')
+                                        ->paginate(15);
+
+        return view('participantVisits.projectMissedVisitsIndex', compact('missedVisits'));
     }
 
     public function projectVisitsIndexDT($projectId, Request $request)

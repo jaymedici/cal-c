@@ -272,7 +272,7 @@ return [
                 [
                     'text'        => 'Missed Visits',
                     'icon_color' => 'red',
-                    'url'         => '/missedVisits',
+                    'url'         => '/participantVisits/missedVisitsIndex',
                     'icon'        => 'fa fa-file-excel',
                     
                 ],

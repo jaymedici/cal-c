@@ -48,7 +48,21 @@ class ProjectManagementTests extends TestCase
 
     }
 
+    public function test_authenticated_user_can_create_a_project()
+    {
+        $this->withoutExceptionHandling();
+        $this->actingAs(User::factory()->create());
+
+        $attributes = Project::factory()->raw();
+        dd($attributes);
+
+        $this->post('/projects', $attributes)->assertRedirect('/projects');
+
+    }
+
     //name, description and screening visit are mandatory
+
+    //Check if it permits to create duplicate projects
 
     //participating sites and project managers are mandatory
 
