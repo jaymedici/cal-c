@@ -9,6 +9,8 @@ use App\Models\ParticipantVisit;
 use App\UserProject;
 use App\Models\Site;
 use App\Models\Screening;
+use App\Models\ProjectSite;
+use App\Observers\ProjectObserver;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Project extends Model
@@ -21,7 +23,6 @@ class Project extends Model
         'include_screening',
         'break_screening',
         'screening_visit_labels',
-        'updated_by',
         'updated_at',
     ];
 
@@ -37,6 +38,43 @@ class Project extends Model
         return Screening::where('project_id', $this->id)
                             ->get()
                             ->unique('participant_id');
+    }
+
+    public function assignManagers(array $managers)
+    {
+        foreach($managers as $key => $managerId)
+        {
+            try{
+                UserProject::create([
+                    'user_id' => $managerId,
+                    'project_id' => $this->id,
+                    'project_role' => 'manager',
+                    'updated_by' => auth()->user()->username,
+                    ]);
+            }
+            catch(\Exception $exception)
+            {
+                return back()->with('error_message','Sorry! An Error occured when assigning managers!');
+            }
+        }
+    }
+
+    public function assignSites(array $sites)
+    {
+        foreach($sites as $key => $siteId)
+        {
+            try{
+                ProjectSite::create([
+                    'site_id' => $siteId,
+                    'project_id' => $this->id,
+                    'updated_by' => auth()->user()->username,
+                    ]);
+            }
+            catch(\Exception $exception)
+            {
+                return back()->withinput()->with('error_message','Sorry! An Error Occured when assigning Sites');
+            }
+        }
     }
 
     //SCOPES

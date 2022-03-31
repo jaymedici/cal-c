@@ -11,17 +11,21 @@ use Yajra\Datatables\Datatables;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Adldap\Laravel\Facades\Adldap;
+use App\Http\Requests\Projects\StoreProjectRequest;
+use App\Services\ProjectService;
 
 class ProjectsController extends Controller
 {
+    protected $projectService;
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct()
+    public function __construct(ProjectService $projectService)
     {
         $this->middleware('auth');
+        $this->projectService = $projectService;
     }
 
     public function alpineTest()
@@ -80,108 +84,18 @@ class ProjectsController extends Controller
         
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(StoreProjectRequest $request)
     {
-        if (Auth::check())
-        {
-            //Validation Rules
-            $rules = [
-                'name' => 'required',
-                'description' => 'required',
-                'include_screening' => 'required',
-                'sites' => 'required',
-                'managers' => 'required',
-                'break_screening' => 'required_if:include_screening,==,Yes',
-                'screening_visit_labels.*' => 'required_if:break_screening,==,Yes',
-            ];
+        $this->projectService->checkIfDuplicateProjectNameExists($request->name);
 
-            //Check if Project already exists
-            $project = Project::where('name',$request->input('name'))->count();
+        $request->screening_visit_labels = $this->projectService->formatScreeningVisitLabels($request->screening_visit_labels);
 
-            if($project > 0)
-            {
-                return back()->withinput()->with('errors2','Error Occured, This Project already exists, Please check your Entry and Try again, or Contact IT team for help');
-            }
-            else
-            {
-                $data = $request->validate($rules);
-                $newProject = new Project();
-                $newProject->name = $data['name'];
-                $newProject->description = $data['description'];
-                $newProject->include_screening = $data['include_screening'];
-                $newProject->updated_by = auth::user()->email;
+        $newProject = Project::create($request->validated());
 
-                if(array_key_exists('break_screening', $data))
-                {
-                    $newProject->break_screening = $data['break_screening'];
-                    if($data['break_screening'] == "Yes")
-                    {
-                        $newProject->screening_visit_labels = implode(";", $data['screening_visit_labels']);
-                    }
+        $newProject->assignManagers($request->managers);
+        $newProject->assignSites($request->sites);
 
-                }
-                
-                try
-                {
-                    $newProject->save();
-                }
-                catch(\Exception $exception)
-                {
-                    return back()->withinput()->with('error_message','Error Creating Project. If the Error persists please contact IT');
-                }
-                
-                //Get Id of the newly created Project
-                $newProjectId = $newProject->id;
-                
-                //Associate assigned managers to project:
-                $managers = $request->input('managers');
-
-                foreach($managers as $key => $manager)
-                {
-                    try{
-                        UserProject::create([
-                           'user_id' => $manager,
-                           'project_id' => $newProjectId,
-                           'project_role' => 'manager',
-                           'updated_by' => auth::user()->username,
-                           ]);
-                    }
-                    catch(\Exception $exception)
-                    {
-                        return back()->withinput()->with('error_message','The Project was created but, there was an error assigning one or more of the managers selected');
-                    }
-                }
-
-                //Associate sites to created project:
-                $sites = $request->input('sites');
-
-                foreach($sites as $key => $site)
-                {
-                    try{
-                        ProjectSite::create([
-                           'site_id' => $site,
-                           'project_id' => $newProjectId,
-                           'updated_by' => auth::user()->username,
-                           ]);
-                    }
-                    catch(\Exception $exception)
-                    {
-                        dd($exception);
-                        return back()->withinput()->with('error_message','The Project was created but, there was an error assigning one or more of the sites selected');
-                    }
-                }
-
-                return redirect()->route('projects.index')->with('success','Project Information has been saved Successfully.');
-   
-            }
-        }
-        return view('auth.login');
+        return redirect()->route('projects.index')->with('success','Project Information has been saved Successfully.');
     }
 
     /**

@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ProjectFactory extends Factory
 {
+    protected $breakScreening, $screeningVisitLabels = null;
+
     protected $model = Project::class;
     /**
      * Define the model's default state.
@@ -15,10 +17,24 @@ class ProjectFactory extends Factory
      */
     public function definition()
     {
+        $includeScreening = $this->faker->randomElement(['Yes', 'No']);
+
+        if($includeScreening == "Yes")
+        {
+            $this->breakScreening = $this->faker->randomElement(['Yes', 'No']);
+        }
+
+        if($this->breakScreening == "Yes")
+        {
+            $this->screeningVisitLabels = 'Screening;Pre-randomization';
+        }
+
         return [
             'name' => $this->faker->word(),
             'description' => $this->faker->paragraph(),
-            'include_screening' => $this->faker->randomElement(['Yes', 'No']),
+            'include_screening' => $includeScreening,
+            'break_screening' => $this->breakScreening,
+            'screening_visit_labels' => $this->screeningVisitLabels,
             'updated_by' => $this->faker->safeEmail()   
         ];
     }

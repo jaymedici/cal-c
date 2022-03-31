@@ -54,21 +54,105 @@ class ProjectManagementTests extends TestCase
         $this->actingAs(User::factory()->create());
 
         $attributes = Project::factory()->raw();
-        dd($attributes);
+        $attributes['sites'] = [1,2,3];
+        $attributes['managers'] = [1,2,3];
+
 
         $this->post('/projects', $attributes)->assertRedirect('/projects');
-
     }
 
-    //name, description and screening visit are mandatory
+    public function test_project_requires_a_name_a_description_and_include_screening_fields()
+    {
+        $this->actingAs(User::factory()->create());
 
-    //Check if it permits to create duplicate projects
+        $attributes['sites'] = [1,2,3];
+        $attributes['managers'] = [1,2,3];
 
-    //participating sites and project managers are mandatory
+        $this->post('/projects', $attributes)->assertSessionHasErrors('name');
+        $this->post('/projects', $attributes)->assertSessionHasErrors('description');
+        $this->post('/projects', $attributes)->assertSessionHasErrors('include_screening');
+    }
 
-    //if screening visit is yes, visit labels qn is mandatory
+    public function test_project_requires_assigned_sites_and_managers()
+    {
+        $this->actingAs(User::factory()->create());
 
-    //if visit labels qn is yes, screening visit  labels should be filled
+        $attributes = Project::factory()->raw();
 
-    //Duplicate projects can not be stored
+        $this->post('/projects', $attributes)->assertSessionHasErrors('sites');
+        $this->post('/projects', $attributes)->assertSessionHasErrors('managers');
+    }
+
+    public function test_if_include_screening_is_yes_break_screening_is_required()
+    {
+        $this->actingAs(User::factory()->create());
+
+        $attributes = Project::factory()->raw([
+            'include_screening' => 'Yes',
+            'break_screening' => null
+        ]);
+        $attributes['sites'] = [1,2,3];
+        $attributes['managers'] = [1,2,3];
+
+        $this->post('/projects', $attributes)->assertSessionHasErrors('break_screening');
+    }
+
+    public function test_if_break_screening_is_yes_visit_labels_are_required()
+    {
+        $this->actingAs(User::factory()->create());
+
+        $attributes = Project::factory()->raw([
+            'include_screening' => 'Yes',
+            'break_screening' => 'Yes',
+            'screening_visit_labels' => [0 => null],
+        ]);
+        $attributes['sites'] = [1,2,3];
+        $attributes['managers'] = [1,2,3];
+
+        $this->post('/projects', $attributes)->assertSessionHasErrors('screening_visit_labels.0');
+    }
+
+    public function test_duplicate_project_names_are_not_allowed()
+    {
+        $this->actingAs(User::factory()->create());
+
+        $projectOne = Project::factory()->create();
+
+        $projectTwo = Project::factory()->raw(['name' => $projectOne->name]);
+        $projectTwo['sites'] = [1,2,3];
+        $projectTwo['managers'] = [1,2,3];
+
+        $this->post('/projects', $projectTwo)->assertSessionHas('error_message');
+    }
+
+    public function test_updated_by_is_added_on_project_creation()
+    {
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        $attributes = Project::factory()->raw();
+        $attributes['sites'] = [1,2];
+        $attributes['managers'] = [1,2];
+
+        $this->post('/projects', $attributes);
+        $this->assertDatabaseHas('projects', ['updated_by' => $user->username]);
+    }
+
+    
+    public function test_database_stores_managers_and_sites_when_project_is_created()
+    {
+        $this->withoutExceptionHandling();
+        $this->actingAs(User::factory()->create());
+
+        $attributes = Project::factory()->raw();
+        $attributes['sites'] = [1,2];
+        $attributes['managers'] = [1,2];
+
+        $this->post('/projects', $attributes);
+
+        $this->assertDatabaseHas('project_sites', ['site_id' => 2]);
+        $this->assertDatabaseHas('user_projects', ['user_id' => 1]);
+    }
+
+    //Check that selected sites actually exist
 }

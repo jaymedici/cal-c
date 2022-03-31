@@ -80,7 +80,6 @@ unset($__errorArgs, $__bag); ?> </div> <div class="col-md-3"> <a id="'+i+'" clas
 <?php $__env->startSection('content'); ?>
 
 <?php echo $__env->make('partials.errors', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-<?php echo $__env->make('partials.errors2', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php echo $__env->make('partials.success', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <br>
 

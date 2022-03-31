@@ -66,7 +66,6 @@
 @section('content')
 
 @include('partials.errors')
-@include('partials.errors2')
 @include('partials.success')
 <br>
 
