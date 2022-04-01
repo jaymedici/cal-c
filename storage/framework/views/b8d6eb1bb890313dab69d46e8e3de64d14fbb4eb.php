@@ -1,3 +1,4 @@
+<br>
 <?php if(isset($errors) && count($errors) > 0): ?>
      <div class="alert alert-dismissable alert-danger col-md-12 col-lg-12">
           <button type="button" class="close" data-dismiss="alert" aria-label="Close">

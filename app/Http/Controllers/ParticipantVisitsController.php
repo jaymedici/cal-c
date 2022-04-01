@@ -63,21 +63,8 @@ class ParticipantVisitsController extends Controller
 
     public function projectVisitsIndex($projectId)
     {
-        $project = Project::with('visits')->with('participantVisits')->findOrFail($projectId);
 
-        //Get all unique participants
-        $participants = ParticipantVisit::where('project_id', $projectId)->get()->unique('participant_id')->pluck('participant_id');
-
-        foreach($participants as $participant)
-        { 
-            foreach($project->visits as $visit)
-            {
-                $visitSchedule[$participant][$visit->id] = ParticipantVisit::with('visit')->where('project_id', $projectId)->where('visit_id', $visit->id)
-                                ->where('participant_id', 'LIKE', $participant)->first();
-            }    
-        }
-
-        return view('participantVisits.projectVisitsIndex', compact('project', 'participants', 'visitSchedule'));
+        return view('participantVisits.projectVisitsIndex', compact('projectId'));
     }
 
     public function projectMissedVisitsIndex($projectId)

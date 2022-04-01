@@ -41,9 +41,9 @@ class ProjectsController extends Controller
     {
         $this->projectService->checkIfDuplicateProjectNameExists($request->name);
 
-        $request->screening_visit_labels = $this->projectService->formatScreeningVisitLabels($request->screening_visit_labels);
+        $request['screening_visit_labels'] = $this->projectService->formatScreeningVisitLabels($request->screening_visit_labels);
 
-        $newProject = Project::create($request->validated());
+        $newProject = Project::create($request->all());
 
         $newProject->assignManagers($request->managers);
         $newProject->assignSites($request->sites);
