@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Site;
 use App\Observers\ProjectObserver;
+use App\Observers\SiteObserver;
 use App\Project;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -31,5 +33,6 @@ class EventServiceProvider extends ServiceProvider
     {
         //
         Project::observe(ProjectObserver::class);
+        Site::observe(SiteObserver::class);
     }
 }

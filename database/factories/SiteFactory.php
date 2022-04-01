@@ -21,7 +21,6 @@ class SiteFactory extends Factory
             'district' => 'Mbeya',
             'region' => 'Mbeya',
             'country' => 'Tanzania',
-            'updated_by' => $this->faker->userName(),
         ];
     }
 }
