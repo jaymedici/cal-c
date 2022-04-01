@@ -49,7 +49,7 @@
 
                     <tbody>
                         @forelse($participants as $participant)
-                        <tr>
+                        <tr wire:loading.remove>
                             <td class="table-primary"><strong>{{$participant}}</strong></td>
                             <!-- @foreach($visitSchedule[$participant] as $schedule)
                             
@@ -73,12 +73,17 @@
                             @endforeach
                         </tr>
                         @empty
-                            <tr>
-                                <td colspan="100%">No Participants Found...</td>
-                            </tr>   
+                        <tr>
+                            <td colspan="100%">No Participants Found...</td>
+                        </tr>   
                         @endforelse
+         
                     </tbody>
                 </table>
+
+                <div wire:loading>
+                    Processing your query...
+                </div>
                 
             </div>
         </div>

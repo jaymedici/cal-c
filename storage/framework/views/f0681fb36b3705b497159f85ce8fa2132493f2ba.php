@@ -49,7 +49,7 @@
 
                     <tbody>
                         <?php $__empty_1 = true; $__currentLoopData = $participants; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $participant): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
-                        <tr>
+                        <tr wire:loading.remove>
                             <td class="table-primary"><strong><?php echo e($participant); ?></strong></td>
                             <!-- <?php $__currentLoopData = $visitSchedule[$participant]; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $schedule): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             
@@ -73,12 +73,17 @@
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </tr>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
-                            <tr>
-                                <td colspan="100%">No Participants Found...</td>
-                            </tr>   
+                        <tr>
+                            <td colspan="100%">No Participants Found...</td>
+                        </tr>   
                         <?php endif; ?>
+         
                     </tbody>
                 </table>
+
+                <div wire:loading>
+                    Processing your query...
+                </div>
                 
             </div>
         </div>
