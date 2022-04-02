@@ -83,7 +83,7 @@ return [
     |
     */
 
-    'layout_topnav' => null,
+    'layout_topnav' => true,
     'layout_boxed' => null,
     'layout_fixed_sidebar' => null,
     'layout_fixed_navbar' => null,
@@ -247,14 +247,9 @@ return [
             'icon'  => 'fa fa-thermometer',
         ],
         [
-            'text' => 'Partipant Enrolment',
+            'text' => 'Enrol Partipant',
             'url'  => '/participantVisits/enrolmentIndex',
             'icon'  => 'fa fa-pen-square',
-        ],
-        [
-            'text' => 'Calendar View',
-            'url'  => '/calendar/show',
-            'icon'  => 'fa fa-calendar',
         ],
 
         [
@@ -276,6 +271,11 @@ return [
                     'icon'        => 'fa fa-file-excel',
                     
                 ],
+                [
+                    'text' => 'Calendar View',
+                    'url'  => '/calendar/show',
+                    'icon'  => 'fa fa-calendar',
+                ],
 
             ],
         ],
@@ -287,9 +287,8 @@ return [
         ],
 
         [
-            'text' => 'Settings',
+            'text' => 'Admin Corner',
             'icon' => 'fas fa-fw fa-cog', 
-            'icon_color' => 'cyan',
             'can' => '',
             'submenu' => [
 
@@ -305,37 +304,13 @@ return [
                     'icon' => 'fas fa-fw fa-cog',
                     'icon_color' => 'blue',
                 ],
-                // [
-                //     'text' => 'Set Visit Checklists',
-                //     'url'  => '/visits',
-                //     'icon' => 'fas fa-fw fa-cogs',
-                //     'icon_color' => 'blue',
-                // ],
+            
                 [
                     'text' => 'Sites',
                     'url'  => '/sites',
                     'icon' => 'fas fa-fw fa-building',
                     'icon_color' => 'blue',
                 ],
-                
-
-                // [
-                //     'text' => 'Departments',
-                //     'url'  => '/departments',
-                //     'icon' => 'fas fa-fw fa-home',
-                //     'icon_color' => 'blue',
-                // ],
-
-        ],
-    ],
-
-
-
-        [
-            'text' => 'Admin Corner',
-            'icon' => 'fas fa-fw fa-cog', 
-            'can' => '',
-            'submenu' => [
                 [
                     'text' => 'Users Management',
                     'url'  => '/user',
@@ -354,20 +329,6 @@ return [
         ],
     ],
 
-    // [
-    //     'text'        => 'Livewire Tests',
-    //     'icon_color' => 'red',
-    //     'url'         => 'livewireTest',
-        
-    // ],
-
-    [
-        'text'        => 'Log Out',
-        'icon_color' => 'red',
-        'url'         => 'logout',
-        'icon'        => 'fa fa-sign-out-alt',
-        
-    ],
     ],
 
     /*
