@@ -56,7 +56,7 @@ class ParticipantVisitsController extends Controller
 
     public function missedVisitsIndex()
     {
-        $projects = Project::isAssigned(auth()->id())->paginate(10);
+        $projects = Project::whereAssignedTo(auth()->id())->paginate(10);
 
         return view('participantVisits.missedVisitsIndex', compact('projects'));
     }

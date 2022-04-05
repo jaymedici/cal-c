@@ -12,9 +12,9 @@
 <br>
 <div class="row">
     <div class="col-md-12">
-        <div class="card card-info">
+        <div class="card card-outline card-info">
             <div class="card-header">
-                <h4 class="box-title">Project Reports</h4>
+                <h4 class="box-title text-center">Project Reports</h4>
             </div>
 
             <div class="card-body">

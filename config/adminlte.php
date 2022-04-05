@@ -231,11 +231,7 @@ return [
     */
 
     'menu' => [
-        [
-            'text' => 'search',
-            'search' => true,
-            'topnav' => true,
-        ],
+        
         [
             'text' => 'Home',
             'url'  => '/home',
@@ -278,12 +274,6 @@ return [
                 ],
 
             ],
-        ],
-
-        [
-            'text' => 'Reports',
-            'url'  => '/reports/index',
-            'icon'  => 'fa fa-chart-line',
         ],
 
         [

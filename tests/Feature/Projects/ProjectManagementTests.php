@@ -155,4 +155,9 @@ class ProjectManagementTests extends TestCase
     }
 
     //Check that selected sites actually exist
+
+    //Check that project show can not be viewed by unauthenticated user
+
+    //Check that project can not be viewed by unassigned authenticated user
+    
 }

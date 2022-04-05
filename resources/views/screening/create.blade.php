@@ -107,7 +107,7 @@
 @include('partials.success')
 
 <div class="row">
-    <div class="card card-secondary col-md-12">
+    <div class="card card-outline card-secondary col-md-12">
         <div class="card-header">
             <h4 class="col-md-12" align="center">Screen Patient </h4>
         </div>

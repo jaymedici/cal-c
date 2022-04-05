@@ -11,6 +11,7 @@ use App\Services\ProjectService;
 class ProjectsController extends Controller
 {
     protected $projectService;
+
     /**
      * Display a listing of the resource.
      *
@@ -27,6 +28,13 @@ class ProjectsController extends Controller
         $allProjects = Project::paginate(10);
 
         return view('projects.index', compact('allProjects'));
+    }
+
+    public function show(Project $project)
+    {
+        $pageVariables = $this->projectService->getShowPageVariables($project);
+
+        return view('projects.show', compact('project', 'pageVariables'));
     }
    
     public function create()

@@ -38,7 +38,7 @@ class ParticipantVisit extends Model
     public function scopeWhereProjectAssignedTo($query, $userId)
     {
         return $query->whereHas('project', function ($query) use ($userId) {
-            $query->isAssigned($userId);
+            $query->whereAssignedTo($userId);
             });
     }
 

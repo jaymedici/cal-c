@@ -10,79 +10,39 @@
 @include('partials.success')
 
 <div class="row">
-    <div id="carouselExampleControls" class="carousel slide col-12" data-ride="carousel">
-    <div class="carousel-inner">
-        <div class="carousel-item active" data-interval="8000">
-        <div class="row" style="background-color:white;">
-                <div class="col-sm-4 col-6">
-                    <div class="description-block border-right">
-                        <span class="description-percentage text-success"><i class="fa fa-briefcase" aria-hidden="true"></i>&nbsp;</span>
-                        <h4>{{$projectsAssignedCount}}</h4>
-                        <span class="description-text">PROJECTS ASSIGNED</span>
-                    </div>
-                </div>
-
-                <div class="col-sm-4 col-6">
-                    <div class="description-block border-right">
-                        <span class="description-percentage text-success"><i class="fas fa-users" aria-hidden="true"></i>&nbsp;</span>
-                        <h4>20</h4>
-                        <span class="description-text">SCREENED</span>
-                    </div>
-                </div>
-
-                <div class="col-sm-4 col-6">
-                    <div class="description-block">
-                        <span class="description-percentage text-success"><i class="fas fa-users" aria-hidden="true"></i>&nbsp;</span>
-                        <h4>15</h4>
-                        <span class="description-text">ENROLLED</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        @foreach($projectsAssigned as $project)
-        <div class="carousel-item" data-interval="8000">
-            <div class="row" style="background-color:white;">
-                <div class="col-sm-4 col-6">
-                    <div class="description-block border-right">
-                        <span class="description-percentage text-success"><i class="fa fa-folder" aria-hidden="true"></i>&nbsp;</span>
-                        <h4>{{$project->name}}</h4>
-                        <span class="description-text">PROJECT</span>
-                    </div>
-                </div>
-
-                <div class="col-sm-4 col-6">
-                    <div class="description-block border-right">
-                        <span class="description-percentage text-success"><i class="fas fa-users" aria-hidden="true"></i>&nbsp;</span>
-                        <h4>{{$numberOfParticipantsScreened[$project->id]}}</h4>
-                        <span class="description-text">SCREENED</span>
-                    </div>
-                </div>
-
-                <div class="col-sm-4 col-6">
-                    <div class="description-block">
-                        <span class="description-percentage text-success"><i class="fas fa-users" aria-hidden="true"></i>&nbsp;</span>
-                        <h4>{{$numberOfParticipantsEnrolled[$project->id]}}</h4>
-                        <span class="description-text">ENROLLED</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        @endforeach    
-    </div>
-    
-    </div>
-</div>
-<br>
-
-<div class="row">
     <div class="col-md-8">
-        @livewire('home.scheduled-visits')  
+        <div class="card bg-gradient-dark">
+            <img class="card-img-top rounded" src="{{asset('img/walkway.jpg')}}" alt="" height="200" style="object-fit: cover">
+            <div class="card-img-overlay d-flex flex-column justify-content-end">
+                <h5 class="card-title text-primary text-white">Hello, <strong>John!</strong></h5>
+                <p class="card-text text-white pb-2 pt-1">Hope you're doing fine today. 
+                    <br>You have 14 Appointment visits set for today
+                </p>
+                <a href="#" class="text-white">View today's appointments</a> 
+            </div>               
+        </div>
+
+        @livewire('home.scheduled-visits')
     </div>
 
     <div class="col-md-4">
-        @livewire('home.weekly-appointments')
-    </div>
+        <div class="card card-outline card-primary">
+            <div class="card-header">
+                <h4 class="card-title">You are currently assigned to these Projects</h4>
+            </div>
+            
+            <div class="card-body">
+                <ul class="list-group list-group-unbordered mb-3">
+                    @foreach ($userAssignedProjects as $project)
+                    <li class="list-group-item">
+                       <b> {{$project->name}} </b>  <a href="{{ route('projects.show', $project->id) }}" class="float-right">View Project</a>
+                    </li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
 
+        @livewire('home.weekly-appointments')
     </div>
 </div>
 

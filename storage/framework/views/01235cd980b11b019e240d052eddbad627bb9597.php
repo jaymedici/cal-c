@@ -10,107 +10,67 @@
 <?php echo $__env->make('partials.success', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
 <div class="row">
-    <div id="carouselExampleControls" class="carousel slide col-12" data-ride="carousel">
-    <div class="carousel-inner">
-        <div class="carousel-item active" data-interval="8000">
-        <div class="row" style="background-color:white;">
-                <div class="col-sm-4 col-6">
-                    <div class="description-block border-right">
-                        <span class="description-percentage text-success"><i class="fa fa-briefcase" aria-hidden="true"></i>&nbsp;</span>
-                        <h4><?php echo e($projectsAssignedCount); ?></h4>
-                        <span class="description-text">PROJECTS ASSIGNED</span>
-                    </div>
-                </div>
-
-                <div class="col-sm-4 col-6">
-                    <div class="description-block border-right">
-                        <span class="description-percentage text-success"><i class="fas fa-users" aria-hidden="true"></i>&nbsp;</span>
-                        <h4>20</h4>
-                        <span class="description-text">SCREENED</span>
-                    </div>
-                </div>
-
-                <div class="col-sm-4 col-6">
-                    <div class="description-block">
-                        <span class="description-percentage text-success"><i class="fas fa-users" aria-hidden="true"></i>&nbsp;</span>
-                        <h4>15</h4>
-                        <span class="description-text">ENROLLED</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <?php $__currentLoopData = $projectsAssigned; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $project): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-        <div class="carousel-item" data-interval="8000">
-            <div class="row" style="background-color:white;">
-                <div class="col-sm-4 col-6">
-                    <div class="description-block border-right">
-                        <span class="description-percentage text-success"><i class="fa fa-folder" aria-hidden="true"></i>&nbsp;</span>
-                        <h4><?php echo e($project->name); ?></h4>
-                        <span class="description-text">PROJECT</span>
-                    </div>
-                </div>
-
-                <div class="col-sm-4 col-6">
-                    <div class="description-block border-right">
-                        <span class="description-percentage text-success"><i class="fas fa-users" aria-hidden="true"></i>&nbsp;</span>
-                        <h4><?php echo e($numberOfParticipantsScreened[$project->id]); ?></h4>
-                        <span class="description-text">SCREENED</span>
-                    </div>
-                </div>
-
-                <div class="col-sm-4 col-6">
-                    <div class="description-block">
-                        <span class="description-percentage text-success"><i class="fas fa-users" aria-hidden="true"></i>&nbsp;</span>
-                        <h4><?php echo e($numberOfParticipantsEnrolled[$project->id]); ?></h4>
-                        <span class="description-text">ENROLLED</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>    
-    </div>
-    
-    </div>
-</div>
-<br>
-
-<div class="row">
     <div class="col-md-8">
+        <div class="card bg-gradient-dark">
+            <img class="card-img-top rounded" src="<?php echo e(asset('img/walkway.jpg')); ?>" alt="" height="200" style="object-fit: cover">
+            <div class="card-img-overlay d-flex flex-column justify-content-end">
+                <h5 class="card-title text-primary text-white">Hello, <strong>John!</strong></h5>
+                <p class="card-text text-white pb-2 pt-1">Hope you're doing fine today. 
+                    <br>You have 14 Appointment visits set for today
+                </p>
+                <a href="#" class="text-white">View today's appointments</a> 
+            </div>               
+        </div>
+
         <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('home.scheduled-visits')->html();
-} elseif ($_instance->childHasBeenRendered('tML8gGM')) {
-    $componentId = $_instance->getRenderedChildComponentId('tML8gGM');
-    $componentTag = $_instance->getRenderedChildComponentTagName('tML8gGM');
+} elseif ($_instance->childHasBeenRendered('gzB1r28')) {
+    $componentId = $_instance->getRenderedChildComponentId('gzB1r28');
+    $componentTag = $_instance->getRenderedChildComponentTagName('gzB1r28');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('tML8gGM');
+    $_instance->preserveRenderedChild('gzB1r28');
 } else {
     $response = \Livewire\Livewire::mount('home.scheduled-visits');
     $html = $response->html();
-    $_instance->logRenderedChild('tML8gGM', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
-}
-echo $html;
-?>  
-    </div>
-
-    <div class="col-md-4">
-        <?php
-if (! isset($_instance)) {
-    $html = \Livewire\Livewire::mount('home.weekly-appointments')->html();
-} elseif ($_instance->childHasBeenRendered('hPFA0Cm')) {
-    $componentId = $_instance->getRenderedChildComponentId('hPFA0Cm');
-    $componentTag = $_instance->getRenderedChildComponentTagName('hPFA0Cm');
-    $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('hPFA0Cm');
-} else {
-    $response = \Livewire\Livewire::mount('home.weekly-appointments');
-    $html = $response->html();
-    $_instance->logRenderedChild('hPFA0Cm', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('gzB1r28', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
     </div>
 
+    <div class="col-md-4">
+        <div class="card card-outline card-primary">
+            <div class="card-header">
+                <h4 class="card-title">You are currently assigned to these Projects</h4>
+            </div>
+            
+            <div class="card-body">
+                <ul class="list-group list-group-unbordered mb-3">
+                    <?php $__currentLoopData = $userAssignedProjects; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $project): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <li class="list-group-item">
+                       <b> <?php echo e($project->name); ?> </b>  <a href="<?php echo e(route('projects.show', $project->id)); ?>" class="float-right">View Project</a>
+                    </li>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                </ul>
+            </div>
+        </div>
+
+        <?php
+if (! isset($_instance)) {
+    $html = \Livewire\Livewire::mount('home.weekly-appointments')->html();
+} elseif ($_instance->childHasBeenRendered('vczx9z5')) {
+    $componentId = $_instance->getRenderedChildComponentId('vczx9z5');
+    $componentTag = $_instance->getRenderedChildComponentTagName('vczx9z5');
+    $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
+    $_instance->preserveRenderedChild('vczx9z5');
+} else {
+    $response = \Livewire\Livewire::mount('home.weekly-appointments');
+    $html = $response->html();
+    $_instance->logRenderedChild('vczx9z5', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+}
+echo $html;
+?>
     </div>
 </div>
 

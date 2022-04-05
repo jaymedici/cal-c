@@ -40,6 +40,30 @@ class Project extends Model
                             ->unique('participant_id');
     }
 
+    public function pendingParticipantVisits()
+    {
+        return ParticipantVisit::where('project_id', $this->id)
+                                ->where('visit_status', 'LIKE', 'Pending');
+    }
+
+    public function completedParticipantVisits()
+    {
+        return ParticipantVisit::where('project_id', $this->id)
+                                ->where('visit_status', 'LIKE', 'Completed');
+    }
+
+    public function missedParticipantVisits()
+    {
+        return ParticipantVisit::where('project_id', $this->id)
+                                ->where('visit_status', 'LIKE', 'Missed');
+    }
+
+    public function lostParticipantVisits()
+    {
+        return ParticipantVisit::where('project_id', $this->id)
+                                ->where('visit_status', 'LIKE', 'Lost to follow up');
+    }
+
     public function assignManagers(array $managers)
     {
         foreach($managers as $key => $managerId)
@@ -78,7 +102,7 @@ class Project extends Model
     }
 
     //SCOPES
-    public function scopeIsAssigned($query, $userId)
+    public function scopeWhereAssignedTo($query, $userId)
     {
         return $query->whereHas('assignees', function ($query) use ($userId) {
             $query->where('user_id', $userId);

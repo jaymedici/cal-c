@@ -26,15 +26,18 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
+				<div class="col-md-12 mb-2">
+					<span class="login100-form-title">CalC - A Visit Calculating & Scheduling System</span>
+				</div>
 				<div class="login100-pic js-tilt" data-tilt>
 					<img src="<?php echo e(asset('images/img-2.png')); ?>" alt="IMG">
 				</div>
 
 				<form class="login100-form validate-form" action="<?php echo e(route('login.post')); ?>" method="post">
 					<?php echo csrf_field(); ?>
-					<span class="login100-form-title">
-						CalC Login
-					</span>
+					<h5 class="mb-2 text-center">
+						Please login
+					</h5>
 
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: lucy@example.com">
 						<input class="input100" type="text" name="email" placeholder="Email">
