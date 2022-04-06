@@ -16,7 +16,7 @@
             <div class="card-img-overlay d-flex flex-column justify-content-end">
                 <h5 class="card-title text-primary text-white">Hello, <strong>John!</strong></h5>
                 <p class="card-text text-white pb-2 pt-1">Hope you're doing fine today. 
-                    <br>You have 14 Appointment visits set for today
+                    <br>You have 0 Appointment visits set for today
                 </p>
                 <a href="#" class="text-white">View today's appointments</a> 
             </div>               
