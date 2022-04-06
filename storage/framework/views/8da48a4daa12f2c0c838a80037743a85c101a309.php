@@ -74,13 +74,13 @@
                         <div class="card-body">
                             <ul class="list-group list-group-unbordered mb-3">
                                 <li class="list-group-item">
-                                <b> Total no. of Completed Visits </b>  <span class="float-right"><?php echo e($pageVariables['completedVisits']); ?></span>
+                                 <a href="">Completed Visits</a>      <span class="float-right"><?php echo e($pageVariables['completedVisits']); ?></span>
                                 </li>
                                 <li class="list-group-item">
-                                <b>Total no. of Missed Visits </b>  <span class="float-right"><?php echo e($pageVariables['missedVisits']); ?></span>
+                                 <a href="<?php echo e(route('participantVisits.projectMissedVisitsIndex', $project->id)); ?>">Missed Visits</a>     <span class="float-right"><?php echo e($pageVariables['missedVisits']); ?></span>
                                 </li>
                                 <li class="list-group-item">
-                                <b>Total no. of Pending Visits </b>  <span class="float-right"><?php echo e($pageVariables['pendingVisits']); ?></span>
+                                 <a href="">Pending Visits</a>    <span class="float-right"><?php echo e($pageVariables['pendingVisits']); ?></span>
                                 </li>
                             </ul>
                             
@@ -90,16 +90,19 @@
 
                     <div class="card card-outline">
                         <div class="card-header">
-                            <h4 class="card-title">Manager Links</h4>
+                            <h4 class="card-title">Quick Links</h4>
                         </div>
                         
                         <div class="card-body">
                             <ul class="list-group list-group-unbordered mb-3">
                                 <li class="list-group-item">
-                                <b><a href="">Add User to Project</a></b>
+                                <a href="<?php echo e(route('participantVisits.projectVisitsIndex', $project->id)); ?>">Participants Visit Schedule</a>
                                 </li>
                                 <li class="list-group-item">
-                                <b><a href="">Add Site to Project</a></b>
+                                <a href="">Add User to Project</a>
+                                </li>
+                                <li class="list-group-item">
+                                <a href="">Add Site to Project</a>
                                 </li>
                             </ul>
                         </div>
