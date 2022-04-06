@@ -20,7 +20,7 @@ class CreateAppointmentsTable extends Migration
             $table->integer('site_id')->unsigned()->default(0);
             $table->integer('visit_id')->unsigned()->nullable();
             $table->integer('screening_id')->unsigned()->nullable();
-            $table->dateTime('appointment_date_time')->default('');
+            $table->dateTime('appointment_date_time')->default('1000-01-01');
             $table->string('updated_by')->default('');
             $table->timestamps();
         });
