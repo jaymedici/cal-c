@@ -10,7 +10,6 @@
     "require": {
         "php": "^7.3|^8.0",
         "acaronlex/laravel-calendar": "^1.6",
-        "adldap2/adldap2-laravel": "^6.1",
         "almasaeed2010/adminlte": "~3.0",
         "arielmejiadev/larapex-charts": "^2.1",
         "barryvdh/laravel-snappy": "^0.4.8",
