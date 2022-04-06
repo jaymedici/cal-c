@@ -22,7 +22,7 @@ class VisitSettingsController extends Controller
 
     public function index(Request $request)
     {
-        $projects = Project::isAssigned(Auth::id())->with('visits')->paginate(10);
+        $projects = Project::whereAssignedTo(Auth::id())->with('visits')->paginate(10);
 
         return view('visits.index', compact('projects'));
     }
