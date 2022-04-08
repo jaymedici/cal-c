@@ -5,10 +5,12 @@ namespace App\Models;
 use App\Project;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\PatientVisit;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class VisitSetting extends Model
 {
-    //
+    use HasFactory;
+    
     protected $fillable = [
         'id',
         'project_id',
