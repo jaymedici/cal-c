@@ -14,7 +14,7 @@
         <div class="card bg-gradient-dark">
             <img class="card-img-top rounded" src="{{asset('img/walkway.jpg')}}" alt="" height="200" style="object-fit: cover">
             <div class="card-img-overlay d-flex flex-column justify-content-end">
-                <h5 class="card-title text-primary text-white">Hello, <strong>John!</strong></h5>
+                <h5 class="card-title text-primary text-white">Hello, <strong>{{ strtok(auth()->user()->name, " ") }}!</strong></h5>
                 <p class="card-text text-white pb-2 pt-1">Hope you're doing fine today. 
                     <br>You have 0 Appointment visits set for today
                 </p>
