@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Home;
 
 use App\Http\Controllers\AppointmentsController;
+use App\Services\AppointmentsService;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -12,11 +13,16 @@ class WeeklyAppointments extends Component
         'appointmentCreated' => 'render'
     ];
 
+    protected $service;
+
+    public function mount(AppointmentsService $service)
+    {
+        $this->service = $service;
+    }
+
     public function render()
     {
-        //Get Appointments
-        $appointmentsObject = new AppointmentsController();
-        $appointmentsThisWeek = $appointmentsObject->getAppointmentsThisWeek(Auth::id());
+        $appointmentsThisWeek = $this->service->getAppointmentsThisWeek(Auth::id());
 
         return view('livewire.home.weekly-appointments', [
             'appointmentsThisWeek' => $appointmentsThisWeek,

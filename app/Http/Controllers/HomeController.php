@@ -1,19 +1,18 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Services\AppointmentsService;
 use Illuminate\Http\Request;
 
 
 class HomeController extends Controller
 {
-  /**
-   * Create a new controller instance.
-   *
-   * @return void
-   */
-  public function __construct()
+  protected $apptService;
+
+  public function __construct(AppointmentsService $apptService)
   {
       $this->middleware('auth');
+      $this->apptService = $apptService;
   }
 
   /**
@@ -24,8 +23,9 @@ class HomeController extends Controller
   public function index(Request $request)
   {
     $userAssignedProjects = auth()->user()->projects()->get();
+    $appointmentsNoToday = $this->apptService->countAppointmentsToday(auth()->user()->id);
    
-    return view('home', compact('userAssignedProjects'));
+    return view('home', compact('userAssignedProjects', 'appointmentsNoToday'));
   }
 
 }

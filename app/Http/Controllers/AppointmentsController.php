@@ -6,28 +6,10 @@ use App\Models\Appointment;
 use Illuminate\Http\Request;
 use App\Models\ParticipantVisit;
 use Auth;
-use Carbon\Carbon;
 
 class AppointmentsController extends Controller
 {
     
-    public function getAppointmentsThisWeek($userId)
-    {
-        $datetoday = Carbon::createFromFormat('Y-m-d H:s:i', Carbon::now());
-        $weekendDate = Carbon::createFromFormat('Y-m-d H:s:i', Carbon::now()->endOfWeek());
-
-        $appointments = Appointment::whereHas('project', function ($query) use ($userId) {
-                    $query->whereHas('assignees', function ($query2) use ($userId) {
-                        $query2->where('user_id', $userId);
-                    });
-                })
-                ->whereBetween('appointment_date_time', [$datetoday, $weekendDate])
-                ->orderBy('appointment_date_time', 'asc')
-                ->get();
-
-        return $appointments;
-    }
-
     public function createFromVisit($visitId)
     {
         $visit = ParticipantVisit::findOrFail($visitId);

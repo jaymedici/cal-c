@@ -277,9 +277,9 @@ return [
         ],
 
         [
-            'text' => 'Admin Corner',
+            'text' => 'Settings',
             'icon' => 'fas fa-fw fa-cog', 
-            'can' => '',
+            'can' => 'view settings',
             'submenu' => [
 
                 [
@@ -287,12 +287,14 @@ return [
                     'url'  => '/projects',
                     'icon' => 'fas fa-fw fa-book',
                     'icon_color' => 'blue',
+                    'can' => 'view all projects',
                 ],
                 [
-                    'text' => 'Set Visits',
+                    'text' => 'Visits',
                     'url'  => '/visits',
                     'icon' => 'fas fa-fw fa-cog',
                     'icon_color' => 'blue',
+                    'can' => 'view all projects',
                 ],
             
                 [
@@ -300,20 +302,21 @@ return [
                     'url'  => '/sites',
                     'icon' => 'fas fa-fw fa-building',
                     'icon_color' => 'blue',
+                    'can' => 'manage users',
                 ],
                 [
-                    'text' => 'Users Management',
+                    'text' => 'Users',
                     'url'  => '/user',
                     'icon' => 'fas fa-fw fa-users', 
-                   //'can' => 'view users',
+                    'can' => 'manage users',
                 ],
     
 
                 [
-                    'text' => 'Manage Roles',
+                    'text' => 'Roles',
                     'url'  => '/roles',
                     'icon' => 'fas fa-fw fa-pencil-alt',
-                   // 'can' => 'view users',
+                    'can' => 'manage users',
                 ],
 
         ],

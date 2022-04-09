@@ -31,6 +31,14 @@ class Appointment extends Model
         return Carbon::parse($this->appointment_date_time)->isoFormat('D/M/YY - h:mm a');
     }
 
+    //SCOPES
+    public function scopeWhereProjectAssignedTo($query, $userId)
+    {
+        return $query->whereHas('project', function ($query) use ($userId) {
+            $query->whereAssignedTo($userId);
+        });
+    }
+
     //MODEL RELATIONSHIPS:
     public function project()
     {
