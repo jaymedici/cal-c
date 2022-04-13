@@ -4,10 +4,17 @@ namespace App\Http\Livewire\ParticipantVisits;
 
 use App\Models\ParticipantVisit;
 use App\Project;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Collection;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class ViewAllParticipantVisits extends Component
 {
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
+
     public $projectId;
 
     public $search = '';
@@ -15,6 +22,13 @@ class ViewAllParticipantVisits extends Component
     public function mount($projectId)
     {
         $this->projectId = $projectId;
+    }
+
+    public function paginate($items, $perPage = 10, $page = null, $options = [])
+    {
+        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1); 
+        $items = $items instanceof Collection ? $items : Collection::make($items);
+        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
     }
 
     public function render()
@@ -42,6 +56,8 @@ class ViewAllParticipantVisits extends Component
         else {
             $visitSchedule = null;
         }
+
+        $participants = $this->paginate($participants);
 
         return view('livewire.participant-visits.view-all-participant-visits', [
             'project' => $project,

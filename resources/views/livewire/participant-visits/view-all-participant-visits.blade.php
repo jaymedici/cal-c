@@ -79,10 +79,15 @@
                         @endforelse
          
                     </tbody>
+
                 </table>
 
                 <div wire:loading>
                     Processing your query...
+                </div>
+
+                <div class="float-right">
+                    {{ $participants->links() }}
                 </div>
                 
             </div>

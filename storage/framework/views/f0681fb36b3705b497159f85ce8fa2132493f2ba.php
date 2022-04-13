@@ -79,10 +79,16 @@
                         <?php endif; ?>
          
                     </tbody>
+
                 </table>
 
                 <div wire:loading>
                     Processing your query...
+                </div>
+
+                <div class="float-right">
+                    <?php echo e($participants->links()); ?>
+
                 </div>
                 
             </div>
