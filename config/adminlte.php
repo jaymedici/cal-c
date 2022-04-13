@@ -249,31 +249,10 @@ return [
         ],
 
         [
-            'text'        => 'Participant Visits',
+            'text'        => 'Calendar View',
             'icon_color' => 'blue',
-            'icon'        => 'fa fa-list',
-            'submenu' => [
-
-                [
-                    'text'        => 'All Visits',
-                    'url'         => '/participantVisits/visitsIndex',
-                    'icon_color' => 'blue',
-                    'icon'        => 'fa fa-list',
-                ],
-                [
-                    'text'        => 'Missed Visits',
-                    'icon_color' => 'red',
-                    'url'         => '/participantVisits/missedVisitsIndex',
-                    'icon'        => 'fa fa-file-excel',
-                    
-                ],
-                [
-                    'text' => 'Calendar View',
-                    'url'  => '/calendar/show',
-                    'icon'  => 'fa fa-calendar',
-                ],
-
-            ],
+            'url'  => '/calendar/show',
+            'icon'        => 'fa fa-calendar',
         ],
 
         [

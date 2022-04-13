@@ -2,40 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Appointment;
 use App\Models\ParticipantVisit;
 use Illuminate\Http\Request;
 use App\Project;
 use App\Models\VisitSetting;
 use App\Models\Screening;
+use App\Services\ParticipantVisitsService;
 use Auth;
-use Yajra\Datatables\Datatables;
-use Carbon\Carbon;
 
 class ParticipantVisitsController extends Controller
 {
-    
-    public function get2WeeksScheduledVisits($userId)
+    protected $service;
+
+    public function __construct(ParticipantVisitsService $service)
     {
-        $now = Carbon::now();
-        $datetoday = Carbon::createFromFormat('Y-m-d H:s:i', $now);
-        $timeInterval = \Carbon\CarbonInterval::weeks(2);
-        $dateAfterTwoWeeks = $now->add($timeInterval)->toDateTimeString();
-
-        $participantVisits = ParticipantVisit::with('project')->with('appointment')
-                                ->whereProjectAssignedTo($userId)
-                                ->whereBetween('window_start_date', [$datetoday, $dateAfterTwoWeeks])
-                                ->orderBy('window_start_date', 'asc')
-                                ->paginate(5);
-
-        return $participantVisits;
-    }
-
-    public function getAllScheduledVisits($userId)
-    {
-        $participantVisits = ParticipantVisit::with('project')->whereProjectAssignedTo($userId)->get();
-
-        return $participantVisits;
+        $this->service = $service;
     }
 
     public function enrolmentIndex()
@@ -43,22 +24,6 @@ class ParticipantVisitsController extends Controller
         $projectsWithVisits = Project::whereHas('visits')->paginate(10);
 
         return view('participantVisits.enrolmentIndex', compact('projectsWithVisits'));
-    }
-
-    public function visitsIndex()
-    {
-        $projectsWithVisits = Project::whereHas('participantVisits')
-                                        ->withCount('visits')
-                                        ->paginate(10);
-
-        return view('participantVisits.visitsIndex', compact('projectsWithVisits'));
-    }
-
-    public function missedVisitsIndex()
-    {
-        $projects = Project::whereAssignedTo(auth()->id())->paginate(10);
-
-        return view('participantVisits.missedVisitsIndex', compact('projects'));
     }
 
     public function projectVisitsIndex($projectId)
@@ -75,49 +40,6 @@ class ParticipantVisitsController extends Controller
 
         return view('participantVisits.projectMissedVisitsIndex', compact('missedVisits'));
     }
-
-    public function projectVisitsIndexDT($projectId, Request $request)
-    {
-        $project = Project::with('visits')->with('participants')->findOrFail($projectId);
-
-        //Get all unique participants
-        $participants = ParticipantVisit::where('project_id', $projectId)->get()->unique('participant_id');
-        $columns = [ [ 'data' => 'participant_id', 'name' => 'participant_id'] ];
-
-        if($request->ajax())
-        {
-            $dt = Datatables::of($participants);
-            
-            foreach($project->visits as $visit)
-            {
-                $query = ParticipantVisit::where('project_id', $projectId)->where('visit_id', $visit->id)
-                ->first();
-
-                $dt->addColumn('window_start_date_' . $visit->id, $query->window_start_date);
-                $dt->addColumn('visit_date_' . $visit->id, $query->visit_date);
-                $dt->addColumn('actual_visit_date_' . $visit->id, $query->actual_visit_date);
-                $dt->addColumn('window_end_date_' . $visit->id, $query->window_end_date);
-            }
-
-            return $dt->make(true);
-        }
-
-        else
-        {
-            
-            foreach($project->visits as $visit)
-            {
-                $columns[] = [ 'data' => 'window_start_date_' . $visit->id, 'name' => 'window_start_date_' . $visit->id];
-                $columns[] = [ 'data' => 'visit_date_' . $visit->id, 'name' => 'visit_date_' . $visit->id];
-                $columns[] = [ 'data' => 'actual_visit_date_' . $visit->id, 'name' => 'actual_visit_date_' . $visit->id];
-                $columns[] = [ 'data' => 'window_end_date_' . $visit->id, 'name' => 'window_end_date_' . $visit->id];
-            }
-
-            return view('participantVisits.projectVisitsIndexDT', compact('project', 'columns'));
-        }
-    
-    }
-
 
     public function createParticipant($projectId)
     {

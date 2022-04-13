@@ -27,10 +27,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-return view('auth.login');
-});
-
 Auth::routes();
 Route::get('login', [App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])->name('login');
 Route::post('post-login', [App\Http\Controllers\Auth\LoginController::class, 'postLogin'])->name('login.post');
@@ -39,6 +35,7 @@ Route::group(['middleware' => ['preventBackHistory','auth']],function()
         {
                 Route::get('/projectData/{id}', [HomeController::class, 'projectData'])->name('projectData');
                 Route::get('/home', [HomeController::class, 'index'])->name('home');
+                Route::get('/', [HomeController::class, 'index'])->name('home');
                 Route::get('user',[UsersController::class, 'index'])->name('user.index');
                 Route::get('userDatatable',[UsersController::class, 'userDatatable'])->name('userDatatable');
                 Route::get('addprojecttouser',[UsersController::class, 'addprojecttouser'])->name('addprojecttouser');
@@ -89,13 +86,10 @@ Route::group(['middleware' => ['preventBackHistory','auth']],function()
 
                 //Participant Visits Routes
                 Route::get('participantVisits/enrolmentIndex',[ParticipantVisitsController::class, 'enrolmentIndex'])->name('participantVisits.enrolmentIndex');
-                Route::get('participantVisits/visitsIndex',[ParticipantVisitsController::class, 'visitsIndex'])->name('participantVisits.visitsIndex');
-                Route::get('participantVisits/missedVisitsIndex', [ParticipantVisitsController::class, 'missedVisitsIndex'])->name('participantVisits.missedVisitsIndex');
                 Route::get('participantVisits/projectVisitsIndex/{project}',[ParticipantVisitsController::class, 'projectVisitsIndex'])->name('participantVisits.projectVisitsIndex')
                         ->middleware('checkProjectAssignment');
                 Route::get('participantVisits/projectMissedVisitsIndex/{project}',[ParticipantVisitsController::class, 'projectMissedVisitsIndex'])->name('participantVisits.projectMissedVisitsIndex')
                         ->middleware('checkProjectAssignment');
-                Route::get('participantVisits/projectVisitsIndexDT/{project}',[ParticipantVisitsController::class, 'projectVisitsIndexDT'])->name('participantVisits.projectVisitsIndexDT');
 
                 Route::get('participantVisits/createParticipant/{project}',[ParticipantVisitsController::class, 'createParticipant'])->name('participantVisits.createParticipant');
                 Route::post('participantVisits/storeParticipant/{project}',[ParticipantVisitsController::class, 'storeParticipant'])->name('participantVisits.storeParticipant');

@@ -16,16 +16,22 @@
 <?php echo $__env->make('partials.success', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
 <div class="row">
-    <div class="card card-secondary col-md-12">
+    <div class="card card-outline card-secondary col-md-12">
     <div class="card-header">
             <h4 class="col-md-12" align="center">Visit Schedule & Appointments Calendar </h4>
         </div> 
    
         <div class="card-body">
-            <?php echo $calendar->calendar(); ?>
+            <div class="row">
+                  <p> <b>Key:</b> <span class="text-primary">Blue</span> = Opening Windows; <span class="text-danger">Red</span> = Closing Windows; <span class="text-success">Green Points</span> = Appointments </p>
+            </div>
 
-            <?php echo $calendar->script(); ?>
+            <div class="row">
+                <?php echo $calendar->calendar(); ?>
 
+                <?php echo $calendar->script(); ?>
+
+            </div> 
         </div>
     </div>
 </div>  

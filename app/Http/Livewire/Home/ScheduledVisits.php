@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire\Home;
 
-use App\Http\Controllers\ParticipantVisitsController;
 use App\Models\Appointment;
 use App\Models\ParticipantVisit;
+use App\Services\ParticipantVisitsService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Livewire\Component;
@@ -90,8 +90,7 @@ class ScheduledVisits extends Component
 
     public function render()
     {
-        $visitsObject = new ParticipantVisitsController();
-        $scheduledParticipantVisits = $visitsObject->get2WeeksScheduledVisits(Auth::id());
+        $scheduledParticipantVisits = ParticipantVisitsService::get2WeeksScheduledVisits(Auth::id());
 
         return view('livewire.home.scheduled-visits', [
             'scheduledParticipantVisits' => $scheduledParticipantVisits,

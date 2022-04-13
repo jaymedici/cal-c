@@ -40,5 +40,14 @@ class AppointmentsService
     {
         return $this->appointmentsToday($userId)->count();
     }
+
+    public static function getAllAppointments($userId)
+    {
+        $appointments = Appointment::whereProjectAssignedTo($userId)
+                ->orderBy('appointment_date_time', 'asc')
+                ->get();
+
+        return $appointments;
+    }
  
 }

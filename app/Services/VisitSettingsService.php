@@ -62,6 +62,7 @@ class VisitSettingsService
             $data['days_from_first_visit'] = $visit['days_from_first_visit'];
             $data['plus_window_period'] = $visit['plus_window_period'];
             $data['minus_window_period'] = $visit['minus_window_period'];
+            $data['visit_type'] = "Regular";
             $data['updated_by'] = Auth::user()->username;
 
             VisitSetting::create($data);

@@ -46,7 +46,7 @@
                     <div class="shadow p-3 mb-5 bg-white rounded form-group row">
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="visit_name">Visit 2 Label<span class="required"><font color="red">*</font></span></label>
+                                <label for="visit_name">Visit Label<span class="required"><font color="red">*</font></span></label>
                                 <input required type="text" class="form-control" name="visit_names[]">
                             </div>  
                         </div>
