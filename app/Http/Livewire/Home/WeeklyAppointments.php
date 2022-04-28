@@ -22,7 +22,8 @@ class WeeklyAppointments extends Component
 
     public function render()
     {
-        $appointmentsThisWeek = $this->service->getAppointmentsThisWeek(Auth::id());
+        $service = new AppointmentsService();
+        $appointmentsThisWeek = $service->getAppointmentsThisWeek(Auth::id());
 
         return view('livewire.home.weekly-appointments', [
             'appointmentsThisWeek' => $appointmentsThisWeek,

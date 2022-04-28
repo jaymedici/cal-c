@@ -49,5 +49,19 @@ class AppointmentsService
 
         return $appointments;
     }
+
+    public function allAppointmentsLaterThanToday($userId)
+    {
+        $dateToday = Carbon::now()->toDateString();
+
+        $appointments = Appointment::whereProjectAssignedTo($userId)
+                                    ->whereDate('appointment_date_time', '>=', $dateToday)
+                                    ->with('project')->with('site')
+                                    ->with('participantVisit')
+                                    ->with('screening')
+                                    ->orderBy('appointment_date_time', 'asc');
+
+        return $appointments;
+    }
  
 }

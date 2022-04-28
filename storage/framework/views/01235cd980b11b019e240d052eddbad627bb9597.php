@@ -18,22 +18,22 @@
                 <p class="card-text text-white pb-2 pt-1">Hope you're doing fine today. 
                     <br>You have <?php echo e($appointmentsNoToday); ?> Appointment visits set for today
                 </p>
-                <a href="#" class="text-white">View today's appointments</a> 
+                <a href="/appointments" class="text-white">View appointments</a> 
             </div>               
         </div>
 
         <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('home.scheduled-visits')->html();
-} elseif ($_instance->childHasBeenRendered('LVivG5p')) {
-    $componentId = $_instance->getRenderedChildComponentId('LVivG5p');
-    $componentTag = $_instance->getRenderedChildComponentTagName('LVivG5p');
+} elseif ($_instance->childHasBeenRendered('KbULjTo')) {
+    $componentId = $_instance->getRenderedChildComponentId('KbULjTo');
+    $componentTag = $_instance->getRenderedChildComponentTagName('KbULjTo');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('LVivG5p');
+    $_instance->preserveRenderedChild('KbULjTo');
 } else {
     $response = \Livewire\Livewire::mount('home.scheduled-visits');
     $html = $response->html();
-    $_instance->logRenderedChild('LVivG5p', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('KbULjTo', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -59,15 +59,15 @@ echo $html;
         <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('home.weekly-appointments')->html();
-} elseif ($_instance->childHasBeenRendered('mfB86HF')) {
-    $componentId = $_instance->getRenderedChildComponentId('mfB86HF');
-    $componentTag = $_instance->getRenderedChildComponentTagName('mfB86HF');
+} elseif ($_instance->childHasBeenRendered('pir5hvX')) {
+    $componentId = $_instance->getRenderedChildComponentId('pir5hvX');
+    $componentTag = $_instance->getRenderedChildComponentTagName('pir5hvX');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('mfB86HF');
+    $_instance->preserveRenderedChild('pir5hvX');
 } else {
     $response = \Livewire\Livewire::mount('home.weekly-appointments');
     $html = $response->html();
-    $_instance->logRenderedChild('mfB86HF', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('pir5hvX', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>

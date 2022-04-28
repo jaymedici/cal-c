@@ -33,7 +33,7 @@
                         <tr>
                             <td><?php echo e($project->name); ?></td>
                             <td><?php echo e($project->include_screening); ?></td>
-                            <td>0</td>
+                            <td><?php echo e($project->enrolledParticipants()->count()); ?></td>
                             <td><a href="<?php echo e(route('participantVisits.createParticipant',$project->id)); ?>">Enrol Participant</a></td>
                         </tr>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

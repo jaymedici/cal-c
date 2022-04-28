@@ -33,7 +33,7 @@
                         <tr>
                             <td>{{$project->name}}</td>
                             <td>{{$project->include_screening}}</td>
-                            <td>0</td>
+                            <td>{{$project->enrolledParticipants()->count()}}</td>
                             <td><a href="{{ route('participantVisits.createParticipant',$project->id) }}">Enrol Participant</a></td>
                         </tr>
                         @endforeach

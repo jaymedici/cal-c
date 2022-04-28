@@ -18,7 +18,7 @@
                 <p class="card-text text-white pb-2 pt-1">Hope you're doing fine today. 
                     <br>You have {{$appointmentsNoToday}} Appointment visits set for today
                 </p>
-                <a href="#" class="text-white">View today's appointments</a> 
+                <a href="/appointments" class="text-white">View appointments</a> 
             </div>               
         </div>
 

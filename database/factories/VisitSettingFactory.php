@@ -19,7 +19,7 @@ class VisitSettingFactory extends Factory
             'project_id' => Project::factory()->create()->id,
             'visit_type' => $this->faker->word(),
             'visit_name' => $this->faker->word(),
-            'days_from_first_visit' => $this->faker->numberBetween(1, 300),
+            'days_from_first_visit' => $this->faker->numberBetween(1, 90),
             'plus_window_period' => $this->faker->randomDigit(),
             'minus_window_period' => $this->faker->randomDigit(),
             'updated_by' => $this->faker->userName()

@@ -9,6 +9,10 @@ use Auth;
 
 class AppointmentsController extends Controller
 {
+    public function index()
+    {
+        return view('appointments.index');
+    }
     
     public function createFromVisit($visitId)
     {

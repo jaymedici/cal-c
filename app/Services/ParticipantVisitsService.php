@@ -16,7 +16,7 @@ class ParticipantVisitsService
 
         $participantVisits = ParticipantVisit::with('project')->with('appointment')
                                 ->whereProjectAssignedTo($userId)
-                                ->whereBetween('window_start_date', [$datetoday, $dateAfterTwoWeeks])
+                                ->whereBetween('window_end_date', [$datetoday, $dateAfterTwoWeeks])
                                 ->orderBy('window_start_date', 'asc')
                                 ->paginate(5);
 
