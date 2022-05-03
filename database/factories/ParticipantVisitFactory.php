@@ -21,9 +21,10 @@ class ParticipantVisitFactory extends Factory
 
         $participantIDs = ['TESTf/100','TESTf/101','TESTf/102','TESTf/103','TESTf/104',];
 
+        
         $visit = VisitSetting::factory()->create();
 
-        $enrolmentDate = $this->faker->dateTimeBetween('-20 weeks', '+2 weeks');
+        $enrolmentDate = $this->faker->dateTimeBetween('-10 weeks', '+2 weeks');
         $enrolmentDate = $enrolmentDate->format('Y-m-d');
         $visitDate = date('Y-m-d', strtotime($enrolmentDate . ' + ' . $visit->days_from_first_visit . 'days'));
         $windowStartDate = date('Y-m-d', strtotime($visitDate . ' - ' . $visit->minus_window_period . 'days'));
@@ -54,8 +55,8 @@ class ParticipantVisitFactory extends Factory
         return [
             //
             'participant_id' => $this->faker->randomElement($participantIDs),
-            'project_id' => Project::factory()->create()->id,
-            'site_id' => Site::factory()->create()->id,
+            'project_id' => 1,
+            'site_id' => 1,
             'visit_id' => $visit->id,
             'visit_date' => $visitDate,
             'actual_visit_date' => $actualVisitDate,

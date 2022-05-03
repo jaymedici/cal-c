@@ -49,8 +49,6 @@ class SitesController extends Controller
      */
     public function store(StoreSiteRequest $request)
     {
-        $this->siteService->checkIfDuplicateSiteNameExists($request->site_name);
-
         $newSite = Site::create($request->validated());
 
         $newSite->assignUsers($request->site_users);

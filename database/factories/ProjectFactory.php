@@ -30,7 +30,7 @@ class ProjectFactory extends Factory
         }
 
         return [
-            'name' => $this->faker->word(),
+            'name' => $this->faker->sentence(2),
             'description' => $this->faker->paragraph(),
             'include_screening' => $includeScreening,
             'break_screening' => $this->breakScreening,

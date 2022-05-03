@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreParticipantRequest;
 use App\Models\ParticipantVisit;
 use Illuminate\Http\Request;
 use App\Project;
@@ -16,12 +17,14 @@ class ParticipantVisitsController extends Controller
 
     public function __construct(ParticipantVisitsService $service)
     {
+        $this->middleware('auth');
         $this->service = $service;
     }
 
     public function enrolmentIndex()
     {
-        $projectsWithVisits = Project::whereHas('visits')->paginate(10);
+        $projectsWithVisits = Project::whereHas('visits')->whereAssignedTo(auth()->id())
+                                        ->paginate(10);
 
         return view('participantVisits.enrolmentIndex', compact('projectsWithVisits'));
     }
@@ -55,60 +58,20 @@ class ParticipantVisitsController extends Controller
         return view('participantVisits.createParticipant', compact('project', 'firstProjectVisitName', 'screenedParticipants'));
     }
 
-    public function storeParticipant($projectId, Request $request)
+    public function storeParticipant($projectId, StoreParticipantRequest $request)
     {
-        //
-        $rules = [
-            'participant_id' => 'required',
-            'site_id' => 'required',
-            'first_visit_date' => 'required',
-        ];
+        $data = $request->validated();
 
-        $data = $request->validate($rules);
-       // dd($data);
-
-        //Check if the Participant is already enrolled
-        $participant = ParticipantVisit::where('participant_id', $data['participant_id'])
-                                        ->where('project_id', $projectId)
-                                        ->count();
-
-        if($participant > 0)
+        $participantAlreadyEnrolled = $this->service->participantIsEnrolledInProject($request->participant_id, $projectId);
+        if($participantAlreadyEnrolled)
         {
-            return back()->with('error_message', 'Sorry this participant has already been enrolled in this study');
+            return back()->withInput()->with('error_message', 'Sorry this participant has already been enrolled in this study');
         }
 
-        //Get Project Study Visits
-        $projectStudyVisits = VisitSetting::where('project_id', $projectId)->get();
+        $participantVisitSchedule = $this->service->generateParticipantVisitSchedule($data, $projectId);
 
-        //Generate a visit schedule for the Participant
-        foreach($projectStudyVisits as $visit)
-        {
-            $data['project_id'] = $projectId;
-            $data['visit_id'] = $visit->id;
-            $data['visit_date'] = date('Y-m-d', strtotime($data['first_visit_date'] . ' + ' . $visit->days_from_first_visit . ' days'));
-            $data['window_start_date'] = date('Y-m-d', strtotime($data['visit_date'] . ' - ' . $visit->minus_window_period . ' days'));
-            $data['window_end_date'] = date('Y-m-d', strtotime($data['visit_date'] . ' + ' . $visit->plus_window_period . ' days'));
-            $data['updated_by'] = Auth::user()->username;
-            //Handle First Visit record
-            if($visit->days_from_first_visit == 0){
-                $data['visit_status'] = "Completed";
-                $data['actual_visit_date'] = $data['visit_date'];
-            }
-            else {
-                $data['visit_status'] = "Pending";
-                $data['actual_visit_date'] = null;
-            }   
-
-            try {
-                ParticipantVisit::create($data);
-            }
-            catch(\Exception $exception)
-            {
-                return back()->with('error_message', 'Error! One or More Participant visit schedule records could not be created');
-            }
-        }
-
-        //Return with Success Message
+        ParticipantVisit::insert($participantVisitSchedule);
+        
         return redirect()->route('participantVisits.enrolmentIndex')->with('success','Participant Visit schedule information saved successfully!');
     }
 

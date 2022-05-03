@@ -45,7 +45,7 @@
 
             <tbody>
                 <?php $__empty_1 = true; $__currentLoopData = $appointments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $appointment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
-                    <tr>
+                    <tr wire:loading.remove>
                         <td><?php echo e($appointment->participant_id); ?></td>
                         <td><?php echo e($appointment->appointment_date_time); ?></td>
                         <?php if(!empty($appointment->participant_visit_id)): ?>
@@ -58,9 +58,20 @@
                         <td><?php echo e($appointment->updated_by); ?></td>
                     </tr>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
-                    No Result Found
+                <tr>
+                    <td colspan="6">No Result Found... </td>
+                </tr>
                 <?php endif; ?>
             </tbody>
         </table>
+
+        <div wire:loading>
+            Processing your query...
+        </div>
+
+        <div class="d-flex justify-content-end">
+        <?php echo $appointments->links(); ?>
+
+        </div>
     </div>
 </div><?php /**PATH C:\xampp\htdocs\Visitcallender\resources\views/livewire/appointments/view-appointments.blade.php ENDPATH**/ ?>

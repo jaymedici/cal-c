@@ -45,7 +45,7 @@
 
             <tbody>
                 @forelse ($appointments as $appointment)
-                    <tr>
+                    <tr wire:loading.remove>
                         <td>{{ $appointment->participant_id }}</td>
                         <td>{{ $appointment->appointment_date_time }}</td>
                         @if (!empty($appointment->participant_visit_id))
@@ -58,9 +58,19 @@
                         <td>{{ $appointment->updated_by }}</td>
                     </tr>
                 @empty
-                    No Result Found
+                <tr>
+                    <td colspan="6">No Result Found... </td>
+                </tr>
                 @endforelse
             </tbody>
         </table>
+
+        <div wire:loading>
+            Processing your query...
+        </div>
+
+        <div class="d-flex justify-content-end">
+        {!! $appointments->links() !!}
+        </div>
     </div>
 </div>

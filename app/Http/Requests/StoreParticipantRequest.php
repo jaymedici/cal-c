@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Sites;
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreSiteRequest extends FormRequest
+class StoreParticipantRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,11 +24,9 @@ class StoreSiteRequest extends FormRequest
     public function rules()
     {
         return [
-            'site_name' => 'required|unique:sites',
-            'district' => 'string|nullable',
-            'region' => 'string|nullable',
-            'country' => 'string|nullable',
-            'site_users' => 'required',
+            'participant_id' => 'required',
+            'site_id' => 'required',
+            'first_visit_date' => 'required',
         ];
     }
 }

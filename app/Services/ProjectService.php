@@ -14,16 +14,6 @@ class ProjectService
      * @param string $name
      * 
      */
-    public function checkIfDuplicateProjectNameExists($name)
-    {
-        $project = Project::where('name', $name)->count();
-
-        if($project > 0)
-        {
-            return back()->withinput()->with('error_message','Error Occured, This Project already exists, Please check your Entry and Try again, or Contact IT team for help');
-        }
-    }
-
     public function formatScreeningVisitLabels($screeningVisitLabels)
     {
         if(is_array($screeningVisitLabels))

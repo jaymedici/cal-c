@@ -57,6 +57,8 @@ class ViewAllParticipantVisits extends Component
             $visitSchedule = null;
         }
 
+        //dd($visitSchedule);
+
         $participants = $this->paginate($participants);
 
         return view('livewire.participant-visits.view-all-participant-visits', [

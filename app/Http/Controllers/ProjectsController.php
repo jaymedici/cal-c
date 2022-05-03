@@ -47,8 +47,6 @@ class ProjectsController extends Controller
 
     public function store(StoreProjectRequest $request)
     {
-        $this->projectService->checkIfDuplicateProjectNameExists($request->name);
-
         $request['screening_visit_labels'] = $this->projectService->formatScreeningVisitLabels($request->screening_visit_labels);
 
         $newProject = Project::create($request->all());

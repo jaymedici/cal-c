@@ -122,7 +122,7 @@ class ProjectManagementTests extends TestCase
         $projectTwo['sites'] = [1,2,3];
         $projectTwo['managers'] = [1,2,3];
 
-        $this->post('/projects', $projectTwo)->assertSessionHas('error_message');
+        $this->post('/projects', $projectTwo)->assertSessionHasErrors('name');
     }
 
     public function test_updated_by_is_added_on_project_creation()

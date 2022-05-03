@@ -81,7 +81,7 @@ class SiteManagementTests extends TestCase
         $siteTwo = Site::factory()->raw(['site_name' => $siteOne->site_name]);
         $siteTwo['site_users'] = [1,2,3];
 
-        $this->post('/sites', $siteTwo)->assertSessionHas('error_message');
+        $this->post('/sites', $siteTwo)->assertSessionHasErrors('site_name');
     }
 
     public function test_updated_by_is_added_on_site_creation()

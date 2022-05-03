@@ -3,7 +3,9 @@
 namespace App\Services;
 
 use App\Models\ParticipantVisit;
+use App\Models\VisitSetting;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class ParticipantVisitsService
 {
@@ -28,5 +30,59 @@ class ParticipantVisitsService
         $participantVisits = ParticipantVisit::with('project')->whereProjectAssignedTo($userId)->get();
 
         return $participantVisits;
+    }
+
+    public function participantIsEnrolledInProject($participantId, $projectId)
+    {
+        $participant = ParticipantVisit::where('participant_id', $participantId)
+                                        ->where('project_id', $projectId)
+                                        ->count();
+
+        if($participant > 0)
+        {
+            return true;
+        }
+    }
+
+    public function generateParticipantVisitSchedule($participantData, $projectId)
+    {
+        $participantVisitSchedule = array();
+
+        $projectStudyVisits = VisitSetting::where('project_id', $projectId)->get();
+
+        foreach($projectStudyVisits as $visit)
+        {
+            $participantData['project_id'] = $projectId;
+            $participantData['visit_id'] = $visit->id;
+            $participantData['visit_date'] = date('Y-m-d', strtotime($participantData['first_visit_date'] . ' + ' . $visit->days_from_first_visit . ' days'));
+            $participantData['window_start_date'] = date('Y-m-d', strtotime($participantData['visit_date'] . ' - ' . $visit->minus_window_period . ' days'));
+            $participantData['window_end_date'] = date('Y-m-d', strtotime($participantData['visit_date'] . ' + ' . $visit->plus_window_period . ' days'));
+            $participantData['created_at'] = Carbon::now()->toDateTimeString();
+
+            if(!array_key_exists('updated_by', $participantData))
+            {
+                $participantData['updated_by'] = Auth::user()->username;
+            }
+
+            //Handle First Visit record
+            if($visit->days_from_first_visit == 0){
+                $participantData['visit_status'] = "Completed";
+                $participantData['actual_visit_date'] = $participantData['visit_date'];
+            }
+            else {
+                $participantData['visit_status'] = "Pending";
+                $participantData['actual_visit_date'] = null;
+            }
+
+            $participantVisitSchedule[] = $participantData;
+        }
+
+        //Unset elements that won't be inserted into the database
+        foreach(array_keys($participantVisitSchedule) as $key)
+        {
+            unset($participantVisitSchedule[$key]['first_visit_date']);
+        }
+        
+        return $participantVisitSchedule;
     }
 }
