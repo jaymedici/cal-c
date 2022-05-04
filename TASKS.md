@@ -36,10 +36,31 @@
 - Continuing Refactoring StoreParticipant method on ParticipantVisitsController - **DONE**
 - Check all places where a checkForDuplicate function has been used. it seems to be bypassed (Check handling of StoreParticipant). Also, Maybe try to use unique instead - **DONE**
 - Creating an artisan command for generating test participant visit schedules - **DONE**
-- Creating an artisan command for generatin dummy appointments
+- Working on the first visit during enrolment issue - **DONE**
+
+
+#### **04/05/2022:**
+- Working on the EnrolParticipantTest to factor in the mark_first_visit_complete added variable - **DONE**
+- Creating an artisan command for generating dummy appointments - **DONE**
+- Adding Project Filter on view appointments page - **DONE**
+- Refactoring Screening controller
+    - Refactoring store method - **DONE**
+- Creating a Test for Screening Patient functionality - **DONE**
+- Adding a view for Screened Patients
+- Working on including site on screen patient form
+
 
 
 #### **TASKS QUEUE:**
-- Properly handle First Visit record when generating participant visit schedule. Automatically marking it as complete is not so smart
-- A test for checking successful assignment of sites and managers is failing.
-- A test that checks if users are assigned to a site after site creation is also failing.
+- ***Bug:*** A test for checking successful assignment of sites and managers is failing.
+- ***Bug:*** A test that checks if users are assigned to a site after site creation is also failing.
+- Start working on Screening Appointments
+- Add Reminder Emails
+- Add Notification alerts
+- Add reminder email preferences page
+- Rewrite adding users and sites to a projects
+- Add project-specific roles
+- Add check to ensure a user is assigned to a project only once
+- Add breadcrumbs on pages
+- Add Site Filter on view appointments page
+

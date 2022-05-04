@@ -73,6 +73,17 @@
                     </div>
                 </div>
 
+                <div class="form-group row">
+                    <label for="mark_first_visit_complete" class="col-md-3 col-form-label text-md-left">Mark the {{$firstProjectVisitName}} visit as Complete<span class="required"><font color="red">*</font></span></label>
+                    <div class="col-md-9">
+                        <select name="mark_first_visit_complete" required class="form-control @error('mark_first_visit_complete') is-invalid @enderror" id="mark_first_visit_complete">
+                            <option disabled selected value="">Please select whether to mark the first visit for this participant as complete or not</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                </div>
+
                 <br>
                 <div class="form-group row mb-0">
                     <div class="col-md-6 offset-md-5">

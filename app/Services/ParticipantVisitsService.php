@@ -65,7 +65,8 @@ class ParticipantVisitsService
             }
 
             //Handle First Visit record
-            if($visit->days_from_first_visit == 0){
+            if($visit->days_from_first_visit == 0 && $participantData['mark_first_visit_complete'] == "Yes")
+            {
                 $participantData['visit_status'] = "Completed";
                 $participantData['actual_visit_date'] = $participantData['visit_date'];
             }
@@ -81,6 +82,7 @@ class ParticipantVisitsService
         foreach(array_keys($participantVisitSchedule) as $key)
         {
             unset($participantVisitSchedule[$key]['first_visit_date']);
+            unset($participantVisitSchedule[$key]['mark_first_visit_complete']);
         }
         
         return $participantVisitSchedule;

@@ -14,7 +14,7 @@ class generateTestParticipantSchedules extends Command
      *
      * @var string
      */
-    protected $signature = 'generate_dummy_participant_schedules {participantsNo=1}';
+    protected $signature = 'generate:schedules {participantsNo=1} {--project=1}';
 
     /**
      * The console command description.
@@ -40,9 +40,9 @@ class generateTestParticipantSchedules extends Command
      */
     public function handle(Faker $faker)
     {
+        $projectId = $this->option('project');
         $participantsNo = $this->argument('participantsNo');
         $participantVisitService = new ParticipantVisitsService;
-        $projectId = 1;
 
         for($i = 1; $i <= $participantsNo; $i++)
         {
@@ -50,6 +50,7 @@ class generateTestParticipantSchedules extends Command
                 'participant_id' => $faker->numerify('PNo/Test/####'),
                 'site_id' => 1,
                 'first_visit_date' => ($faker->dateTimeBetween('-2 weeks', '+10 weeks'))->format('Y-m-d'),
+                'mark_first_visit_complete' => 'No',
                 'updated_by' => 'AutoGenerator'
             ];
 

@@ -92,7 +92,7 @@ class EnrolParticipantTest extends TestCase
         ];
 
         $this->post('participantVisits/storeParticipant/' . $project->id, $attributes)
-                ->assertSessionHasErrors(['participant_id', 'site_id', 'first_visit_date']);
+                ->assertSessionHasErrors(['participant_id', 'site_id', 'first_visit_date', 'mark_first_visit_complete']);
 
     }
 
@@ -114,7 +114,8 @@ class EnrolParticipantTest extends TestCase
         $attributes = [
             'participant_id' => $participantVisitSchedule->participant_id,
             'site_id' => Site::factory()->create()->id,
-            'first_visit_date' => '2022-03-01'
+            'first_visit_date' => '2022-03-01',
+            'mark_first_visit_complete' => 'Yes'
         ];
 
         $this->post('participantVisits/storeParticipant/' . $project->id, $attributes)
@@ -134,7 +135,8 @@ class EnrolParticipantTest extends TestCase
         $attributes = [
             'participant_id' => 'VsTEST',
             'site_id' => $site->id,
-            'first_visit_date' => '2022-03-01'
+            'first_visit_date' => '2022-03-01',
+            'mark_first_visit_complete' => 'No'
         ];
 
         $this->post('participantVisits/storeParticipant/' . $project->id, $attributes);
@@ -145,8 +147,8 @@ class EnrolParticipantTest extends TestCase
         }
     }
 
-    //test_user_can_enrol_participant_to_project()
-
+    
+    //Check if mark_first_visit_complete works
     //test user can not store participant for non-existent project
     //test user can not store participant for a project not assigned
     //test user can not store participant for a project with no visits

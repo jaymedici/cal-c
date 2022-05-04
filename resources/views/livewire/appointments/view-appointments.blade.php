@@ -1,8 +1,12 @@
 <div class="card card-outline card-secondary col-md-12">
     <div class="card-header">
         <div class="card-title form-group mr-2">
-            <select class="form-control-sm" name="">
+            <select wire:model="project" class="form-control-sm" name="">
                 <option selected disabled value="">Project Filter</option>
+                <option value=null>Show All</option>
+                @foreach ($projects as $project)
+                <option value="{{$project->id}}">{{$project->name}}</option>
+                @endforeach
             </select>
         </div>
 

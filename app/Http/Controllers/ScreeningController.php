@@ -6,18 +6,23 @@ use App\Models\Screening;
 use App\Project;
 use Illuminate\Http\Request;
 use Auth;
-use App\Http\Controllers\AppointmentsController;
+use App\Http\Requests\Screening\StoreScreeningRequest;
+use App\Services\AppointmentsService;
+use App\Services\ScreeningService;
 
 class ScreeningController extends Controller
 {
+    public $service;
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct()
+    public function __construct(ScreeningService $service)
     {
         $this->middleware('auth');
+        $this->service = $service;
     }
 
     public function index()
@@ -69,7 +74,9 @@ class ScreeningController extends Controller
     public function create()
     {
         //
-        $projectsWithScreening = Project::where('include_screening', 'LIKE', 'Yes')->get();
+        $projectsWithScreening = Project::where('include_screening', 'LIKE', 'Yes')
+                                        ->whereAssignedTo(auth()->id())
+                                        ->get();
 
         return view('screening.create', compact('projectsWithScreening'));
     }
@@ -80,93 +87,24 @@ class ScreeningController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
-        $rules = [
-            'project_id' => 'required',
-            'screening_label' => 'required',
-            'screening_date' => 'required',
-            'screening_outcome' => 'required',
-            'participant_type' => 'required',
-            'participant_id' => 'required_if:participant_type,==,New',
-            'participant_id_select' => 'required_if:participant_type,==,Returning',
-            'next_screening_date' => 'required_if:screening_outcome,==,Continue Screening',
-        ];
-
-        $data = $request->validate($rules);
+    public function store(StoreScreeningRequest $request)
+    { 
+        $data = $request->validated();
         $data['site_id'] = 1;
 
-        //Check that no two new participants are assigned with the same participant_id
-        if($data['participant_type'] == "New")
+        if($this->service->duplicatePatientExists($data))
         {
-            $participant = Screening::where('participant_id', $data['participant_id'])
-                                            ->where('project_id', $data['project_id'])
-                                            ->count();
-
-            if($participant > 0)
-            {
-                return back()->with('error_message', 'Sorry! a participant with this participant id already exists, hence participant type cannot be New!');
-            }
+            return back()->with('error_message', 'Sorry! a participant with this participant id already exists, hence participant type cannot be New!');
         }
 
-        if($data['participant_type'] == "New")
-        {
-            $data['participant_id'] = $request->input('participant_id');
-        }
-        elseif($data['participant_type'] == "Returning")
-        {
-            $data['participant_id'] = $request->input('participant_id_select');
-        }
+        $data = $this->service->fillRemainingPatientData($data);
 
-        if($data['screening_outcome'] == "Continue Screening")
-        {
-            $data['next_screening_date'] = $request->input('next_screening_date');
-            $data['still_screening'] = "Yes";
-        }
-        else
-        {
-            $data['next_screening_date'] = null;
-            $data['still_screening'] = "No";
-        }
-        $data['updated_by'] = Auth::user()->username;
+        $screening = Screening::create($data);
 
-        //Save Screening Data
-        try{
-            $screening = new Screening();
-            foreach($data as $key => $value)
-            {
-                if($key != 'participant_type')
-                {
-                    $screening->$key = $value;
-                }  
-            }
-            $screening->save();
-            //Screening::create($data);
-        }
-        catch(\Exception $exception)
+        if ($data['screening_outcome'] == "Continue Screening")
         {
-            dd($exception);
-            return back()->withinput()->with('error_message','An Error Occured while saving data');
-        }
-
-        //Set Appointment is next screening data was set
-        if ($data['next_screening_date'] != null)
-        {
-            $screeningId = $screening->id;
-            $appointmentDetails['participant_id'] = $data['participant_id'];
-            $appointmentDetails['project_id'] = $data['project_id'];
-            $appointmentDetails['site_id'] = $data['site_id'];
-            $appointmentDetails['appointment_date_time'] = $data['next_screening_date'];
-            $appointmentDetails['updated_by'] = $data['updated_by'];
-
-            $appointment = new AppointmentsController;
-            $setAppointment = $appointment->setScreeningAppointment($screeningId, $appointmentDetails);
-
-            if($setAppointment == "Error")
-            {
-                return back()->withinput()->with('error_message','Screening data was saved successfully, however an error occurred while setting an appointment.'); 
-            }
+            $appointment = new AppointmentsService;
+            $appointment->createScreeningAppointment($screening, $data);
         }
 
         return redirect()->route('screening.create')->with('success','Screening Information added Successfully!');

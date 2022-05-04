@@ -116,6 +116,24 @@ unset($__errorArgs, $__bag); ?>
                     </div>
                 </div>
 
+                <div class="form-group row">
+                    <label for="mark_first_visit_complete" class="col-md-3 col-form-label text-md-left">Mark the <?php echo e($firstProjectVisitName); ?> visit as Complete<span class="required"><font color="red">*</font></span></label>
+                    <div class="col-md-9">
+                        <select name="mark_first_visit_complete" required class="form-control <?php $__errorArgs = ['mark_first_visit_complete'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" id="mark_first_visit_complete">
+                            <option disabled selected value="">Please select whether to mark the first visit for this participant as complete or not</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                </div>
+
                 <br>
                 <div class="form-group row mb-0">
                     <div class="col-md-6 offset-md-5">

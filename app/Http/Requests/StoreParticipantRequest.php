@@ -27,6 +27,7 @@ class StoreParticipantRequest extends FormRequest
             'participant_id' => 'required',
             'site_id' => 'required',
             'first_visit_date' => 'required',
+            'mark_first_visit_complete' => 'required',
         ];
     }
 }
