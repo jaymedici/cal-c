@@ -36,7 +36,7 @@ class VisitSettingsController extends Controller
     {
         $project = Project::findOrFail($projectId);
 
-        return view('visits.createForProject', compact('project'));
+        return view('visits.create', compact('project'));
     }
 
     public function storeVisitsForProject($projectId, StoreVisitsForProjectsRequest $request)
