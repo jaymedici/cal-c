@@ -27,7 +27,7 @@ class ScreeningController extends Controller
 
     public function index()
     {
-        //
+        return view('screening.index');
     }
 
     /**

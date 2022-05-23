@@ -46,9 +46,11 @@
 - Refactoring Screening controller
     - Refactoring store method - **DONE**
 - Creating a Test for Screening Patient functionality - **DONE**
-- Adding a view for Screened Patients
 - Working on including site on screen patient form
 
+
+#### **05/05/2022:**
+- Adding a view for Screened Patients
 
 
 #### **TASKS QUEUE:**

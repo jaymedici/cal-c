@@ -43,4 +43,9 @@ class ScreeningService {
         
         return $patientData;
     }
+
+    public function getAllScreenings($userId)
+    {
+        return Screening::whereProjectAssignedTo($userId)->get();
+    }
 }

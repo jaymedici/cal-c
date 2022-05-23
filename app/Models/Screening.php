@@ -25,6 +25,14 @@ class Screening extends Model
         'updated_by',
     ];
 
+    //SCOPES
+    public function scopeWhereProjectAssignedTo($query, $userId)
+    {
+        return $query->whereHas('project', function ($query) use ($userId) {
+            $query->whereAssignedTo($userId);
+        });
+    }
+
     public function project()
     {
         return $this->belongsTo(Project::class);

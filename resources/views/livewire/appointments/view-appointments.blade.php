@@ -1,5 +1,9 @@
 <div class="card card-outline card-secondary col-md-12">
     <div class="card-header">
+        <div class="card-title mr-4">
+            <h5>Participant Appointments</h5>
+        </div>
+
         <div class="card-title form-group mr-2">
             <select wire:model="project" class="form-control-sm" name="">
                 <option selected disabled value="">Project Filter</option>
@@ -16,11 +20,13 @@
             </select>
         </div>
 
-        <div class="card-title">
+        <div class="card-title mr-2">
             <button class="btn btn-sm btn-info">
                <i class="fa fa-calendar-alt" aria-hidden="true"></i> Date Filter
             </button>
         </div>
+
+        
 
         <div class="card-tools">
             <div class="input-group input-group-sm">
