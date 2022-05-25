@@ -11,9 +11,9 @@
 @include('partials.success')
 
 <div class="row">
-    <div class="card card-secondary col-md-12">
+    <div class="card card-secondary card-outline col-md-12">
         <div class="card-header">
-            <h4 class="col-md-12" align="center">Heading Here </h4>
+            <h4 class="card-title">Heading Here </h4>
         </div>
    
 

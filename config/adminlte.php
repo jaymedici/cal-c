@@ -285,7 +285,7 @@ return [
                 ],
                 [
                     'text' => 'Users',
-                    'url'  => '/user',
+                    'url'  => '/users',
                     'icon' => 'fas fa-fw fa-users', 
                     'can' => 'manage users',
                 ],

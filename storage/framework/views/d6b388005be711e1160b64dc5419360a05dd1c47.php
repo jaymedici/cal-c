@@ -65,6 +65,12 @@
 
         
         <li class="user-footer">
+            <a class="btn btn-default btn-flat btn-block float-right" href="/user/changePassword">
+                <i class="fa fa-fw fa-history"></i> Change Password
+            </a>
+        </li>
+
+        <li class="user-footer">
             <?php if($profile_url): ?>
                 <a href="<?php echo e($profile_url); ?>" class="btn btn-default btn-flat">
                     <i class="fa fa-fw fa-user text-lightblue"></i>

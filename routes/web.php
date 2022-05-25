@@ -36,13 +36,12 @@ Route::group(['middleware' => ['preventBackHistory','auth']],function()
                 Route::get('/projectData/{id}', [HomeController::class, 'projectData'])->name('projectData');
                 Route::get('/home', [HomeController::class, 'index'])->name('home');
                 Route::get('/', [HomeController::class, 'index'])->name('home');
-                Route::get('user',[UsersController::class, 'index'])->name('user.index');
+
+                //User Routes
+                Route::get('users',[UsersController::class, 'index'])->name('user.index');
                 Route::get('userDatatable',[UsersController::class, 'userDatatable'])->name('userDatatable');
-                Route::get('addprojecttouser',[UsersController::class, 'addprojecttouser'])->name('addprojecttouser');
-                Route::get('removeprojecttouser',[UsersController::class, 'removeprojecttouser'])->name('removeprojecttouser');
-                Route::resource('user',UsersController::class);
-                Route::resource('departments',DepartmentController::class);
-                Route::get('departmentDatatable',[DepartmentController::class, 'departmentDatatable'])->name('departmentDatatable');
+                Route::get('user/changePassword', [UsersController::class, 'profileSettings'])->name('user.profileSettings');
+                Route::post('user/changePassword', [UsersController::class, 'updateProfile'])->name('user.updateProfile');
 
                 //Project Routes
                 Route::resource('projects', ProjectsController::class);

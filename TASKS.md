@@ -53,6 +53,11 @@
 - Adding a view for Screened Patients
 
 
+#### **24/05/2022:**
+- Sorting out a strange issue with the 'add visits' page. - **DONE**
+- Adding a Change Password feature. - **DONE**
+
+
 #### **TASKS QUEUE:**
 - ***Bug:*** A test for checking successful assignment of sites and managers is failing.
 - ***Bug:*** A test that checks if users are assigned to a site after site creation is also failing.
