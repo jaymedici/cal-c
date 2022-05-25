@@ -50,6 +50,8 @@ class CalendarService
 
     public function getClosingWindowEvents(Collection $scheduledParticipantVisits)
     {
+        $events = array();
+
         foreach($scheduledParticipantVisits as $participantVisit)
         {
             $events[] = Calendar::event(
@@ -70,6 +72,8 @@ class CalendarService
 
     public function getAppointmentEvents(Collection $appointments)
     {
+        $events = array();
+        
         foreach($appointments as $appointment)
         {
             $events[] = Calendar::event(
