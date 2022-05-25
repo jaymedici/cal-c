@@ -29,6 +29,8 @@ class CalendarService
 
     public function getOpeningWindowEvents(Collection $scheduledParticipantVisits)
     {
+        $events = array();
+
         foreach($scheduledParticipantVisits as $participantVisit)
         {
             $events[] = Calendar::event(
