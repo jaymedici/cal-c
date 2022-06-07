@@ -99,7 +99,21 @@
                                 <a href="<?php echo e(route('participantVisits.projectVisitsIndex', $project->id)); ?>">Participants Visit Schedule</a>
                                 </li>
                                 <li class="list-group-item">
-                                <a href="">Add User to Project</a>
+                                <?php
+if (! isset($_instance)) {
+    $html = \Livewire\Livewire::mount('projects.add-user-to-project')->html();
+} elseif ($_instance->childHasBeenRendered('k9A1Z7T')) {
+    $componentId = $_instance->getRenderedChildComponentId('k9A1Z7T');
+    $componentTag = $_instance->getRenderedChildComponentTagName('k9A1Z7T');
+    $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
+    $_instance->preserveRenderedChild('k9A1Z7T');
+} else {
+    $response = \Livewire\Livewire::mount('projects.add-user-to-project');
+    $html = $response->html();
+    $_instance->logRenderedChild('k9A1Z7T', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+}
+echo $html;
+?>
                                 </li>
                                 <li class="list-group-item">
                                 <a href="">Add Site to Project</a>
@@ -107,6 +121,8 @@
                             </ul>
                         </div>
                     </div>
+
+                    
 
                     <div class="card card-outline">
                         <div class="card-header">
@@ -133,13 +149,23 @@
                         
                         <div class="card-body">
                             <ul class="list-inline">
-                                <?php $__currentLoopData = $pageVariables['users']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <li class="list-inline-item text-center">
-                                    <img src="<?php echo e(asset('img/user-avatar.png')); ?>" alt="Avatar" height="50">
-                                    <br> <?php echo e(strtok($user->name, " ")); ?>
-
-                                </li>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                <?php
+if (! isset($_instance)) {
+    $html = \Livewire\Livewire::mount('projects.view-assigned-users', 
+                                        ['project' => $project])->html();
+} elseif ($_instance->childHasBeenRendered('dMczSHg')) {
+    $componentId = $_instance->getRenderedChildComponentId('dMczSHg');
+    $componentTag = $_instance->getRenderedChildComponentTagName('dMczSHg');
+    $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
+    $_instance->preserveRenderedChild('dMczSHg');
+} else {
+    $response = \Livewire\Livewire::mount('projects.view-assigned-users', 
+                                        ['project' => $project]);
+    $html = $response->html();
+    $_instance->logRenderedChild('dMczSHg', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+}
+echo $html;
+?>
                             </ul>
                         </div>
                     </div>

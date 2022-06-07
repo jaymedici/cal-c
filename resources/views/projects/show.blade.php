@@ -97,7 +97,7 @@
                                 <a href="{{ route('participantVisits.projectVisitsIndex', $project->id) }}">Participants Visit Schedule</a>
                                 </li>
                                 <li class="list-group-item">
-                                <a href="">Add User to Project</a>
+                                @livewire('projects.add-user-to-project')
                                 </li>
                                 <li class="list-group-item">
                                 <a href="">Add Site to Project</a>
@@ -105,6 +105,8 @@
                             </ul>
                         </div>
                     </div>
+
+                    
 
                     <div class="card card-outline">
                         <div class="card-header">
@@ -130,12 +132,8 @@
                         
                         <div class="card-body">
                             <ul class="list-inline">
-                                @foreach ($pageVariables['users'] as $user)
-                                <li class="list-inline-item text-center">
-                                    <img src="{{ asset('img/user-avatar.png') }}" alt="Avatar" height="50">
-                                    <br> {{ strtok($user->name, " ") }}
-                                </li>
-                                @endforeach
+                                @livewire('projects.view-assigned-users', 
+                                        ['project' => $project])
                             </ul>
                         </div>
                     </div>

@@ -58,6 +58,10 @@
 - Adding a Change Password feature. - **DONE**
 
 
+#### **07/06/2022:**
+- Adding pagination for Assigned Users on Project.  - **DONE**
+
+
 #### **TASKS QUEUE:**
 - ***Bug:*** A test for checking successful assignment of sites and managers is failing.
 - ***Bug:*** A test that checks if users are assigned to a site after site creation is also failing.
