@@ -98,26 +98,8 @@
                                 <li class="list-group-item">
                                 <a href="<?php echo e(route('participantVisits.projectVisitsIndex', $project->id)); ?>">Participants Visit Schedule</a>
                                 </li>
-                                <li class="list-group-item">
-                                <?php
-if (! isset($_instance)) {
-    $html = \Livewire\Livewire::mount('projects.add-user-to-project')->html();
-} elseif ($_instance->childHasBeenRendered('k9A1Z7T')) {
-    $componentId = $_instance->getRenderedChildComponentId('k9A1Z7T');
-    $componentTag = $_instance->getRenderedChildComponentTagName('k9A1Z7T');
-    $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('k9A1Z7T');
-} else {
-    $response = \Livewire\Livewire::mount('projects.add-user-to-project');
-    $html = $response->html();
-    $_instance->logRenderedChild('k9A1Z7T', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
-}
-echo $html;
-?>
-                                </li>
-                                <li class="list-group-item">
-                                <a href="">Add Site to Project</a>
-                                </li>
+
+                                
                             </ul>
                         </div>
                     </div>
@@ -153,16 +135,16 @@ echo $html;
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('projects.view-assigned-users', 
                                         ['project' => $project])->html();
-} elseif ($_instance->childHasBeenRendered('dMczSHg')) {
-    $componentId = $_instance->getRenderedChildComponentId('dMczSHg');
-    $componentTag = $_instance->getRenderedChildComponentTagName('dMczSHg');
+} elseif ($_instance->childHasBeenRendered('VTUQPlh')) {
+    $componentId = $_instance->getRenderedChildComponentId('VTUQPlh');
+    $componentTag = $_instance->getRenderedChildComponentTagName('VTUQPlh');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('dMczSHg');
+    $_instance->preserveRenderedChild('VTUQPlh');
 } else {
     $response = \Livewire\Livewire::mount('projects.view-assigned-users', 
                                         ['project' => $project]);
     $html = $response->html();
-    $_instance->logRenderedChild('dMczSHg', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('VTUQPlh', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>

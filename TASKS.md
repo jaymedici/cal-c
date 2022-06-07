@@ -60,6 +60,7 @@
 
 #### **07/06/2022:**
 - Adding pagination for Assigned Users on Project.  - **DONE**
+- Commenting out adding users and sites to projects temporarily. - **DONE**
 
 
 #### **TASKS QUEUE:**

@@ -96,12 +96,15 @@
                                 <li class="list-group-item">
                                 <a href="{{ route('participantVisits.projectVisitsIndex', $project->id) }}">Participants Visit Schedule</a>
                                 </li>
+
+                                {{-- Temporarily commented out
                                 <li class="list-group-item">
                                 @livewire('projects.add-user-to-project')
                                 </li>
                                 <li class="list-group-item">
                                 <a href="">Add Site to Project</a>
                                 </li>
+                                --}}
                             </ul>
                         </div>
                     </div>
