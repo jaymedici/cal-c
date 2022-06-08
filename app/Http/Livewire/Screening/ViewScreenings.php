@@ -25,6 +25,12 @@ class ViewScreenings extends Component
 
     public function render()
     {
-        return view('livewire.screening.view-screenings');
+        $screenings = $this->screeningService()
+                            ->screeningRecords(auth()->id())
+                            ->where('participant_id', 'like', '%'.$this->search.'%')
+                            ->paginate(10);
+
+        return view('livewire.screening.view-screenings',
+                            ['screenings' => $screenings]);
     }
 }

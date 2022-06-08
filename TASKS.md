@@ -63,6 +63,10 @@
 - Commenting out adding users and sites to projects temporarily. - **DONE**
 
 
+#### **08/06/2022:**
+- Adding a view for Screened Participants. - **DONE**
+
+
 #### **TASKS QUEUE:**
 - ***Bug:*** A test for checking successful assignment of sites and managers is failing.
 - ***Bug:*** A test that checks if users are assigned to a site after site creation is also failing.

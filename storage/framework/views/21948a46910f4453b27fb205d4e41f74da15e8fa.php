@@ -37,23 +37,23 @@
             </thead>
 
             <tbody>
-                @forelse ($screenings as $screening)
+                <?php $__empty_1 = true; $__currentLoopData = $screenings; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $screening): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                     <tr wire:loading.remove>
-                        <td>{{ $screening->participant_id }}</td>
-                        <td>{{ $screening->project->name }}</td>
-                        <td>{{ $screening->site->site_name }}</td>
-                        <td>{{ $screening->screening_date }}</td>
-                        <td>{{ $screening->screening_label }}</td>
-                        <td>{{ $screening->still_screening }}</td>
-                        <td>{{ $screening->next_screening_date }}</td>
-                        <td>{{ $screening->screening_outcome }}</td>
-                        <td>{{ $screening->updated_by }}</td>
+                        <td><?php echo e($screening->participant_id); ?></td>
+                        <td><?php echo e($screening->project->name); ?></td>
+                        <td><?php echo e($screening->site->site_name); ?></td>
+                        <td><?php echo e($screening->screening_date); ?></td>
+                        <td><?php echo e($screening->screening_label); ?></td>
+                        <td><?php echo e($screening->still_screening); ?></td>
+                        <td><?php echo e($screening->next_screening_date); ?></td>
+                        <td><?php echo e($screening->screening_outcome); ?></td>
+                        <td><?php echo e($screening->updated_by); ?></td>
                     </tr>
-                @empty
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                     <tr>
                         <td colspan="9">No result found...</td>
                     </tr>
-                @endforelse 
+                <?php endif; ?> 
             </tbody>
         </table>
 
@@ -62,8 +62,10 @@
         </div>
 
         <div class="float-right">
-            {!! $screenings->links() !!}
+            <?php echo $screenings->links(); ?>
+
         </div>
     </div>
 </div>
 
+<?php /**PATH C:\xampp\htdocs\Visitcallender\resources\views/livewire/screening/view-screenings.blade.php ENDPATH**/ ?>
