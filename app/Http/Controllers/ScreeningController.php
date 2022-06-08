@@ -78,7 +78,9 @@ class ScreeningController extends Controller
                                         ->whereAssignedTo(auth()->id())
                                         ->get();
 
-        return view('screening.create', compact('projectsWithScreening'));
+        $assignedSites = Auth::user()->sites()->get();
+
+        return view('screening.create', compact('projectsWithScreening', 'assignedSites'));
     }
 
     /**
@@ -90,7 +92,6 @@ class ScreeningController extends Controller
     public function store(StoreScreeningRequest $request)
     { 
         $data = $request->validated();
-        $data['site_id'] = 1;
 
         if($this->service->duplicatePatientExists($data))
         {

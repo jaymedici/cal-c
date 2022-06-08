@@ -67,6 +67,13 @@
 - Adding a view for Screened Participants. - **DONE**
 
 
+#### **08/06/2022:**
+- Screening site automatically setting itself as Mbeya. PS: Try to pick site based on the assigned site of the User. - **DONE**
+- Add the quick stats on project dashboard.
+- Add Users to Site function. - **DONE**
+- Remove visit link for screening visits on Appointments this week. - **DONE**
+
+
 #### **TASKS QUEUE:**
 - ***Bug:*** A test for checking successful assignment of sites and managers is failing.
 - ***Bug:*** A test that checks if users are assigned to a site after site creation is also failing.

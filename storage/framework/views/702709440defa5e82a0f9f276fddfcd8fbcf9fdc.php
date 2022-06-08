@@ -138,6 +138,25 @@ unset($__errorArgs, $__bag); ?>" id="project_id" onchange="project_selected(this
                 </div>
 
                 <div class="form-group row">
+                    <label for="site_id" class="col-md-3 col-form-label text-md-left">Site<span class="required"><font color="red">*</font></span></label>
+                    <div class="col-md-9">
+                        <select name="site_id" class="form-control <?php $__errorArgs = ['site_id'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" id="site_id">
+                            <option disabled selected value="">Please select Site</option>
+                            <?php $__currentLoopData = $assignedSites; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $site): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <option value="<?php echo e($site->id); ?>"><?php echo e($site->site_name); ?></option>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row">
                     <label for="screening_label" class="col-md-3 col-form-label text-md-left">Screening Label<span class="required"><font color="red">*</font></span></label>
                     <div class="col-md-9">
                         <select name="screening_label" class="form-control <?php $__errorArgs = ['screening_label'];

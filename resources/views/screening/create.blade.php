@@ -130,6 +130,18 @@
                 </div>
 
                 <div class="form-group row">
+                    <label for="site_id" class="col-md-3 col-form-label text-md-left">Site<span class="required"><font color="red">*</font></span></label>
+                    <div class="col-md-9">
+                        <select name="site_id" class="form-control @error('site_id') is-invalid @enderror" id="site_id">
+                            <option disabled selected value="">Please select Site</option>
+                            @foreach($assignedSites as $site)
+                                <option value="{{$site->id}}">{{$site->site_name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row">
                     <label for="screening_label" class="col-md-3 col-form-label text-md-left">Screening Label<span class="required"><font color="red">*</font></span></label>
                     <div class="col-md-9">
                         <select name="screening_label" class="form-control @error('screening_label') is-invalid @enderror" id="screening_label">

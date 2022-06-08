@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Sites\StoreSiteRequest;
+use App\Http\Requests\Sites\StoreUsersToSiteRequest;
 use App\Models\Site;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -22,10 +23,10 @@ class SitesController extends Controller
 
     public function index()
     {
-        //
         $allSites = Site::withCount('users')->paginate(10);
+        $users = User::all();
 
-        return view('sites.index', compact('allSites'));
+        return view('sites.index', compact('allSites', 'users'));
         
     }
 
@@ -54,5 +55,12 @@ class SitesController extends Controller
         $newSite->assignUsers($request->site_users);
 
         return redirect()->route('sites.index')->with('success','Site Information has been saved Successfully.');
+    }
+
+    public function addUsersToSite(StoreUsersToSiteRequest $request, Site $site)
+    {
+        $data = $request->validated();
+        $site->assignUsers($data['users']);
+        return redirect()->route('sites.index')->with('success','Users added to the Site Successfully.');
     }
 }

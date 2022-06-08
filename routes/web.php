@@ -52,6 +52,7 @@ Route::group(['middleware' => ['preventBackHistory','auth']],function()
 
                 //Site Routes
                 Route::resource('sites',SitesController::class);
+                Route::post('sites/addUsersToSite/{site}', [SitesController::class, 'addUsersToSite'])->name('site.addUsersToSite');
 
                 //Appointment Routes
                 Route::resource('appointments',AppointmentsController::class);

@@ -25,6 +25,7 @@ class StoreScreeningRequest extends FormRequest
     {
         return [
             'project_id' => 'required',
+            'site_id' => 'required',
             'screening_label' => 'required',
             'screening_date' => 'required',
             'screening_outcome' => 'required',
