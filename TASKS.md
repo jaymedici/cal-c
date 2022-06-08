@@ -71,7 +71,8 @@
 - Screening site automatically setting itself as Mbeya. PS: Try to pick site based on the assigned site of the User. - **DONE**
 - Add the quick stats on project dashboard.
 - Add Users to Site function. - **DONE**
-- Remove visit link for screening visits on Appointments this week. - **DONE**
+- Add View Users for each site. - **DONE**
+- Remove visit link for screening visits on Appointments this week. 
 
 
 #### **TASKS QUEUE:**

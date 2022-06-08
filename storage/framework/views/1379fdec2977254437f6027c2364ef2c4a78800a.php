@@ -14,17 +14,15 @@
                     <h4><?php echo e(substr(\Carbon\Carbon::parse($appointment->appointment_date_time)->format('l'), 0, 3)); ?></h4>
                     </div>
                     <div class="product-info">
-                    <?php if(isset($appointment->participant_visit_id)): ?>
                     <a href="<?php echo e(route('appointments.viewAppointment', $appointment->id)); ?>" class="product-title"><?php echo e($appointment->participant_id); ?>
 
+                    <?php if(isset($appointment->participant_visit_id)): ?>
                     <span class="badge badge-info float-right">Regular</span></a>
                     <span class="product-description">
                     Coming for <?php echo e($appointment->participantVisit->visit->visit_name); ?> Visit
                     </span>
                     <?php elseif(isset($appointment->screening_id)): ?>
-                    <?php echo e($appointment->participant_id); ?>
-
-                    <span class="badge badge-warning float-right">Screening</span>
+                    <span class="badge badge-warning float-right">Screening</span></a>
                     <span class="product-description">
                     coming for Screening
                     </span>
