@@ -39,6 +39,13 @@ class Appointment extends Model
         });
     }
 
+    public function scopeWhereSiteAssignedTo($query, $userId)
+    {
+        return $query->whereHas('site', function ($query) use ($userId) {
+            $query->whereAssignedTo($userId);
+        });
+    }
+
     //MODEL RELATIONSHIPS:
     public function project()
     {

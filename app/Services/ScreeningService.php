@@ -51,6 +51,7 @@ class ScreeningService {
 
     public function screeningRecords($userId)
     {
-        return Screening::whereProjectAssignedTo($userId);
+        return Screening::whereProjectAssignedTo($userId)
+                        ->whereSiteAssignedTo($userId);
     }
 }

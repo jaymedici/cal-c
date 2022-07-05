@@ -74,6 +74,11 @@
 - Add View Users for each site. - **DONE**
 - Remove visit link for screening visits on Appointments this week. 
 
+#### **05/07/2022:**
+- Add pagination on 'Appointments This Week' - **DONE**
+- Filter Appointments this week by assigned site - **DONE**
+- Filter Screening index records by assigned site - **DONE**
+
 
 #### **TASKS QUEUE:**
 - ***Bug:*** A test for checking successful assignment of sites and managers is failing.
@@ -87,4 +92,6 @@
 - Add check to ensure a user is assigned to a project only once
 - Add breadcrumbs on pages
 - Add Site Filter on view appointments page
+
+- FILTER PARTICIPANT VISITS BY SITE ASSIGNED
 

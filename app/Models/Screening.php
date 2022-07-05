@@ -33,6 +33,13 @@ class Screening extends Model
         });
     }
 
+    public function scopeWhereSiteAssignedTo($query, $userId)
+    {
+        return $query->whereHas('site', function ($query) use ($userId) {
+            $query->whereAssignedTo($userId);
+        });
+    }
+
     public function project()
     {
         return $this->belongsTo(Project::class);

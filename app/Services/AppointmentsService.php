@@ -26,9 +26,10 @@ class AppointmentsService
         $weekendDate = Carbon::createFromFormat('Y-m-d H:s:i', Carbon::now()->endOfWeek());
 
         $appointments = Appointment::whereProjectAssignedTo($userId)
+                ->whereSiteAssignedTo($userId)
                 ->whereBetween('appointment_date_time', [$datetoday, $weekendDate])
                 ->orderBy('appointment_date_time', 'asc')
-                ->get();
+                ->simplePaginate(5);
 
         return $appointments;
     }
@@ -57,6 +58,7 @@ class AppointmentsService
     public static function getAllAppointments($userId)
     {
         $appointments = Appointment::whereProjectAssignedTo($userId)
+                ->whereSiteAssignedTo($userId)
                 ->orderBy('appointment_date_time', 'asc')
                 ->get();
 

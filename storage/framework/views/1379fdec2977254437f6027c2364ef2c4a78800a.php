@@ -33,7 +33,11 @@
             </ul>
         </div>
         
-        <div class="card-footer text-center">
+        <div class="card-footer">
+            <div class="float-right">
+                <?php echo e($appointmentsThisWeek->links()); ?>
+
+            </div>
             <a href="/appointments" class="uppercase">View All Appointments</a>
         </div>
 

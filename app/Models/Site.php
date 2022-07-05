@@ -37,6 +37,15 @@ class Site extends Model
         }
     }
 
+    //SCOPES
+    public function scopeWhereAssignedTo($query, $userId)
+    {
+        return $query->whereHas('users', function ($query) use ($userId) {
+            $query->where('user_id', $userId);
+        }); 
+    }
+
+    //MODEL RELATIONSHIPS
     public function projects()
     {
         return $this->belongsToMany(Project::class, 'project_sites');

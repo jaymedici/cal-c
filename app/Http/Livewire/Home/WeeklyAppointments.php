@@ -6,9 +6,13 @@ use App\Http\Controllers\AppointmentsController;
 use App\Services\AppointmentsService;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class WeeklyAppointments extends Component
 {
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
+
     protected $listeners = [
         'appointmentCreated' => 'render'
     ];
