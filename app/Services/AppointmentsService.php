@@ -39,6 +39,7 @@ class AppointmentsService
         $datetoday = Carbon::createFromFormat('Y-m-d H:s:i', Carbon::now());
 
         $appointments = Appointment::whereProjectAssignedTo($userId)
+                ->whereSiteAssignedTo($userId)
                 ->whereDate('appointment_date_time', '=', $datetoday)
                 ->orderBy('appointment_date_time', 'asc');
 
@@ -70,6 +71,7 @@ class AppointmentsService
         $dateToday = Carbon::now()->toDateString();
 
         $appointments = Appointment::whereProjectAssignedTo($userId)
+                                    ->whereSiteAssignedTo($userId)
                                     ->whereDate('appointment_date_time', '>=', $dateToday)
                                     ->with('project')->with('site')
                                     ->with('participantVisit')

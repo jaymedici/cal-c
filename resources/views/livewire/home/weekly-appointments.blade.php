@@ -14,13 +14,14 @@
                     <h4>{{ substr(\Carbon\Carbon::parse($appointment->appointment_date_time)->format('l'), 0, 3) }}</h4>
                     </div>
                     <div class="product-info">
-                    <a href="{{ route('appointments.viewAppointment', $appointment->id) }}" class="product-title">{{$appointment->participant_id}}
                     @if(isset($appointment->participant_visit_id))
+                    <a href="{{ route('appointments.viewAppointment', $appointment->id) }}" class="product-title">{{$appointment->participant_id}}
                     <span class="badge badge-info float-right">Regular</span></a>
                     <span class="product-description">
                     Coming for {{$appointment->participantVisit->visit->visit_name}} Visit
                     </span>
                     @elseif(isset($appointment->screening_id))
+                    <a href="#" class="product-title">{{$appointment->participant_id}}
                     <span class="badge badge-warning float-right">Screening</span></a>
                     <span class="product-description">
                     coming for Screening
