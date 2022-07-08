@@ -125,23 +125,9 @@
     </script>
 
     
-    <script>
-        window.addEventListener('show-edit-form', event => {
-            $('#editForm').modal('show');
-        });
+    <script src="<?php echo e(asset('sweetalert2/sweetalert2.all.min.js')); ?>"></script>
 
-        window.addEventListener('show-create-form', event => {
-            $('#createForm').modal('show');
-        });
-
-        window.addEventListener('hide-form', event => {
-            $('#createForm').modal('hide');
-            $('#editForm').modal('hide');
-
-            toastr.success(event.detail.message, 'Success');
-        });
-
-    </script>
+    <?php echo $__env->make('partials.browserEventListeners', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
 </body>
 

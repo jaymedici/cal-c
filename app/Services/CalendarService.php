@@ -7,6 +7,40 @@ use Illuminate\Database\Eloquent\Collection;
 
 class CalendarService
 {
+    public function initializeCalendar(array $calendarEvents)
+    {
+        $calendar = new Calendar();
+        $calendar->addEvents($calendarEvents);
+
+        //other views: timeGridDay
+        $calendar->setOptions([   
+            'firstDay' => 0,
+            'displayEventTime' => true,
+            'selectable' => true,
+            'initialView' => 'dayGridMonth',
+            'headerToolbar' => [
+                'left' => 'prev,next today myCustomButton',
+                'center' => 'title',
+                'right' => 'dayGridMonth,timeGridWeek,listWeek', 
+            ],
+            'customButtons' => [
+                'myCustomButton' => [
+                    'text'=> 'custom!',
+                    'click' => 'function() {
+                        alert(\'clicked the custom button!\');
+                    }'
+                ]
+            ]
+        ]);
+
+        $calendar->setId('1');
+        $calendar->setCallbacks([
+            'select' => 'function(selectionInfo){}',
+            'eventClick' => 'function(event){}'
+        ]);
+
+        return $calendar;
+    }
 
     public function eventSetupTest()
     {
@@ -76,8 +110,10 @@ class CalendarService
         
         foreach($appointments as $appointment)
         {
+            $visitType = AppointmentsService::getAppointmentVisitType($appointment);
+
             $events[] = Calendar::event(
-                $appointment->participant_id, 
+                $appointment->participant_id . '(' . $visitType . ')', 
                 false, //full day event?
                 $appointment->appointment_date_time, 
                 $appointment->appointment_date_time, 
@@ -91,41 +127,6 @@ class CalendarService
         }
 
         return $events;
-    }
-
-    public function initializeCalendar(array $calendarEvents)
-    {
-        $calendar = new Calendar();
-        $calendar->addEvents($calendarEvents);
-
-        //other views: timeGridDay
-        $calendar->setOptions([   
-            'firstDay' => 0,
-            'displayEventTime' => true,
-            'selectable' => true,
-            'initialView' => 'dayGridMonth',
-            'headerToolbar' => [
-                'left' => 'prev,next today myCustomButton',
-                'center' => 'title',
-                'right' => 'dayGridMonth,timeGridWeek,listWeek', 
-            ],
-            'customButtons' => [
-                'myCustomButton' => [
-                    'text'=> 'custom!',
-                    'click' => 'function() {
-                        alert(\'clicked the custom button!\');
-                    }'
-                ]
-            ]
-        ]);
-
-        $calendar->setId('1');
-        $calendar->setCallbacks([
-            'select' => 'function(selectionInfo){}',
-            'eventClick' => 'function(event){}'
-        ]);
-
-        return $calendar;
     }
 
 }

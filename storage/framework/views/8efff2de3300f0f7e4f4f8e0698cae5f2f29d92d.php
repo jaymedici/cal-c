@@ -11,21 +11,39 @@
 <?php echo $__env->make('partials.success', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
 <div class="row">
-    <?php
-if (! isset($_instance)) {
-    $html = \Livewire\Livewire::mount('screening.view-screenings')->html();
-} elseif ($_instance->childHasBeenRendered('YWrPtbK')) {
-    $componentId = $_instance->getRenderedChildComponentId('YWrPtbK');
-    $componentTag = $_instance->getRenderedChildComponentTagName('YWrPtbK');
-    $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('YWrPtbK');
-} else {
-    $response = \Livewire\Livewire::mount('screening.view-screenings');
-    $html = $response->html();
-    $_instance->logRenderedChild('YWrPtbK', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
-}
-echo $html;
-?>
+    <div class="card card-outline card-secondary col-md-12">
+        <div class="card-header">
+            <h4 class="col-md-12" align="center">Projects with Screening Visits</h4>
+        </div>
+
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table" id="table">
+                    <thead>
+                        <tr>
+                            <th>Project Name</th>
+                            <th>Screening Visits</th>
+                            <th>Screened Participants</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <?php $__currentLoopData = $projectsWithScreening; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $project): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <tr>
+                            <td><?php echo e($project->name); ?></td>
+                            <td><?php echo e($project->screening_visit_labels); ?></td>
+                            <td><?php echo e($project->screenedParticipants()->count()); ?></td>
+                            <td><a href="<?php echo e(route('screening.viewScreenings',$project->id)); ?>">Show Screening</a></td>
+                        </tr>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    </tbody>
+                </table>
+                <?php echo e($projectsWithScreening->links()); ?>
+
+            </div>
+        </div>
+    </div>
 </div>  
 
 <?php $__env->stopSection(); ?>

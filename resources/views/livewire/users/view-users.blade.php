@@ -55,12 +55,12 @@
     </div>
 
     <!-- Add Form Modal -->
-    <div wire:ignore.self class="modal fade" id="createForm" tabindex="-1" role="dialog" aria-labelledby="createFormLabel" aria-hidden="true">
+    <div wire:ignore.self class="modal fade" id="createUserForm" tabindex="-1" role="dialog" aria-labelledby="createUserFormLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
         <form wire:submit.prevent="saveUser">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="createFormLabel">Add User</h5>
+                <h5 class="modal-title" id="createUserFormLabel">Add User</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -122,12 +122,12 @@
     </div>
 
     <!-- Edit Form Modal -->
-    <div wire:ignore.self class="modal fade" id="editForm" tabindex="-1" role="dialog" aria-labelledby="editFormLabel" aria-hidden="true">
+    <div wire:ignore.self class="modal fade" id="editUserForm" tabindex="-1" role="dialog" aria-labelledby="editUserFormLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <form wire:submit.prevent="updateUser">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editFormLabel">Edit User</h5>
+                <h5 class="modal-title" id="editUserFormLabel">Edit User</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>

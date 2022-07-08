@@ -27,7 +27,16 @@ class ScreeningController extends Controller
 
     public function index()
     {
-        return view('screening.index');
+        $projectsWithScreening = Project::whereAssignedTo(auth()->id())
+                                ->where('include_screening', 'LIKE', 'Yes')
+                                ->paginate(7);
+
+        return view('screening.index', compact('projectsWithScreening'));
+    }
+
+    public function viewScreenings($projectId)
+    {
+        return view('screening.viewScreenings', compact('projectId'));
     }
 
     /**

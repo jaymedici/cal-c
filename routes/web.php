@@ -83,6 +83,7 @@ Route::group(['middleware' => ['preventBackHistory','auth']],function()
                 Route::resource('screening',ScreeningController::class);
                 Route::get('screening/getScreeningTypes/{project}',[ScreeningController::class, 'getScreeningTypes'])->name('screening.getScreeningTypes');
                 Route::get('screening/getScreeningReturningParticipants/{project}',[ScreeningController::class, 'getScreeningReturningParticipants'])->name('screening.getScreeningReturningParticipants');
+                Route::get('screening/viewScreenings/{project}',[ScreeningController::class, 'viewScreenings'])->name('screening.viewScreenings');
 
                 //Participant Visits Routes
                 Route::get('participantVisits/enrolmentIndex',[ParticipantVisitsController::class, 'enrolmentIndex'])->name('participantVisits.enrolmentIndex');

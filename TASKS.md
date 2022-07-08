@@ -79,6 +79,13 @@
 - Filter Appointments this week by assigned site - **DONE**
 - Filter Screening index records by assigned site - **DONE**
 
+#### **08/07/2022:**
+- Add a visit name or screening label for Appointments loaded on the Calendar. - **DONE**
+- Add a screening label & Outcome filter on Screening Index. - **DONE**
+- Add Screening record Editing. - **DONE**
+- Add Screening record Deletion
+
+
 
 #### **TASKS QUEUE:**
 - ***Bug:*** A test for checking successful assignment of sites and managers is failing.
@@ -94,5 +101,6 @@
 - Add Site Filter on view appointments page
 
 - FILTER PARTICIPANT VISITS BY SITE ASSIGNED
-- FILTER SCREENING INDEX BY SCREENING LABEL
+- Limit Screening record editing and deletion to Study Secretaries
+- Add a way to add Appointments manually
 

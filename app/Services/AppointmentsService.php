@@ -20,6 +20,22 @@ class AppointmentsService
         Appointment::create($appointmentDetails);
     }
 
+    public static function getAppointmentVisitType(Appointment $appointment)
+    {
+        $visitType = '';
+        
+        if(!empty($appointment->participant_visit_id))
+        {
+            $visitType = $appointment->participantVisit->visit->visit_name;
+        } 
+        elseif(!empty($appointment->screening_id))
+        {
+            $visitType = $appointment->screening->screening_label;
+        }
+
+        return $visitType;
+    }
+
     public function getAppointmentsThisWeek($userId)
     {
         $datetoday = Carbon::createFromFormat('Y-m-d H:s:i', Carbon::now());

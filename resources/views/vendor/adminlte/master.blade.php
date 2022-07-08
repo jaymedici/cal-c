@@ -120,24 +120,10 @@
         });
     </script>
 
-    {{-- Browser Event Listeners (thrown by Livewire) --}}
-    <script>
-        window.addEventListener('show-edit-form', event => {
-            $('#editForm').modal('show');
-        });
+    {{-- SweetAlert2 --}}
+    <script src="{{ asset('sweetalert2/sweetalert2.all.min.js') }}"></script>
 
-        window.addEventListener('show-create-form', event => {
-            $('#createForm').modal('show');
-        });
-
-        window.addEventListener('hide-form', event => {
-            $('#createForm').modal('hide');
-            $('#editForm').modal('hide');
-
-            toastr.success(event.detail.message, 'Success');
-        });
-
-    </script>
+    @include('partials.browserEventListeners')
 
 </body>
 

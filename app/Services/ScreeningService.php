@@ -3,7 +3,9 @@
 namespace App\Services;
 
 use App\Models\Screening;
+use App\Project;
 use Auth;
+use Illuminate\Support\Facades\Validator;
 
 class ScreeningService {
 
@@ -53,5 +55,25 @@ class ScreeningService {
     {
         return Screening::whereProjectAssignedTo($userId)
                         ->whereSiteAssignedTo($userId);
+    }
+
+    public function getScreeningLabels($projectId)
+    {
+        $project = Project::findOrFail($projectId);
+        $screeningVisitLabels = array_filter(explode(';', $project->screening_visit_labels));
+        
+        return $screeningVisitLabels;
+    }
+
+    public function validateScreeningRecordUpdates(array $screningDetails)
+    {
+        return Validator::make($screningDetails, [
+            'participant_id' => 'required',
+            'screening_label' => 'required',
+            'screening_date' => 'required',
+            'still_screening' => 'required',
+            'screening_outcome' => 'required'
+            ])
+            ->validate();
     }
 }

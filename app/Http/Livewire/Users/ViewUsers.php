@@ -24,17 +24,16 @@ class ViewUsers extends Component
 
     public function create()
     {
-        $this->dispatchBrowserEvent('show-create-form');
+        $this->dispatchBrowserEvent('show-create-user-form');
     }
 
     public function edit(User $user)
     {
         $this->edit_form_state = $user->toArray();
-        //dd($user->toArray());
         $this->user = $user;
 
-        //Add the browser even listener on the main page blade
-        $this->dispatchBrowserEvent('show-edit-form');
+        //Add the browser event listener on the main page blade
+        $this->dispatchBrowserEvent('show-edit-user-form');
     }
 
     public function saveUser()
