@@ -45,6 +45,13 @@ class Site extends Model
         }); 
     }
 
+    public function scopeWhereHasProject($query, $projectId)
+    {
+        return $query->whereHas('projects', function ($query) use ($projectId) {
+            $query->where('project_id', $projectId);
+        }); 
+    }
+
     //MODEL RELATIONSHIPS
     public function projects()
     {

@@ -1,6 +1,6 @@
 
 <?php $__env->startSection('css'); ?>
-
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('js'); ?>
 <script>
@@ -230,7 +230,7 @@ unset($__errorArgs, $__bag); ?>
                     <div id="participant_id_select_div" style="display: none" class="form-group col-md-9 row">
                         <label for="participant_id_select" class="col-md-3 col-form-label text-md-left">Select Participant<span class="required"><font color="red">*</font></span></label>
                         <div class="col-md-6">
-                            <select name="participant_id_select" class="form-control <?php $__errorArgs = ['participant_id_select'];
+                            <select name="participant_id_select" class="participant_id_select form-control <?php $__errorArgs = ['participant_id_select'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }

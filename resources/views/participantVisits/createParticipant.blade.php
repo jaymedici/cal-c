@@ -1,9 +1,14 @@
 @extends('adminlte::page')
 @section('css')
-
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @stop
 @section('js')
-
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.participant-select').select2();
+    });
+</script>
 @stop
 
 @section('content')
@@ -24,7 +29,7 @@
                 <div class="form-group row">
                     <label for="participant_id" class="col-md-3 col-form-label text-md-left">Select Participant<span class="required"><font color="red">*</font></span></label>
                     <div class="col-md-9">
-                        <select name="participant_id" class="form-control @error('participant_id') is-invalid @enderror" id="participant_id">
+                        <select name="participant_id" class="form-control participant-select @error('participant_id') is-invalid @enderror" id="participant_id">
                             <option disabled selected value="">Please select a participant from previously screened Participants</option>
                             @foreach($screenedParticipants as $participant)
                             <option value="{{$participant}}">{{$participant}}</option>
@@ -53,7 +58,7 @@
                     <div class="col-md-9">
                         <select name="site_id" required class="form-control @error('site_id') is-invalid @enderror" id="site_id">
                             <option disabled selected value="">Please select the Site for which the Participant is to be enrolled</option>
-                            @foreach($project->sites as $site)
+                            @foreach($assignedSites as $site)
                             <option value="{{$site->id}}">{{$site->site_name}}</option>
                             @endforeach
                         </select>
@@ -99,3 +104,7 @@
 </div>  
 
 @endsection
+
+@section('js')
+
+@stop

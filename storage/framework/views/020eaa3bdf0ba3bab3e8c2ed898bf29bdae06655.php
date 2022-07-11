@@ -8,7 +8,7 @@
             </button>
         </div>
         <div class="modal-body">
-            <div style="column-count: 3;">
+            <div style="column-count: 2;">
                 <ul>
                     <?php $__currentLoopData = $site->users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <li><?php echo e($user->name); ?></li>

@@ -74,10 +74,12 @@
 - Add View Users for each site. - **DONE**
 - Remove visit link for screening visits on Appointments this week. 
 
+
 #### **05/07/2022:**
 - Add pagination on 'Appointments This Week' - **DONE**
 - Filter Appointments this week by assigned site - **DONE**
 - Filter Screening index records by assigned site - **DONE**
+
 
 #### **08/07/2022:**
 - Add a visit name or screening label for Appointments loaded on the Calendar. - **DONE**
@@ -85,6 +87,11 @@
 - Add Screening record Editing. - **DONE**
 - Add Screening record Deletion
 
+
+#### **11/07/2022:**
+- Filter the number of site names displaye on Participant enrollment page
+- Filter the number of participants displated on enrolment page
+- Add a participant search on enrolment page
 
 
 #### **TASKS QUEUE:**

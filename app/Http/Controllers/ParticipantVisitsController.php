@@ -53,9 +53,16 @@ class ParticipantVisitsController extends Controller
                                         ->first()
                                         ->visit_name;
 
-        $screenedParticipants = Screening::where('project_id', $projectId)->where('screening_outcome', 'LIKE', 'Enrol')->get()->unique('participant_id')->pluck('participant_id');
+        $assignedSites = Auth::user()->sites()->whereHasProject($projectId)->get();
 
-        return view('participantVisits.createParticipant', compact('project', 'firstProjectVisitName', 'screenedParticipants'));
+        $screenedParticipants = Screening::where('project_id', $projectId)
+                                ->whereSiteAssignedTo(auth()->id())
+                                ->where('screening_outcome', 'LIKE', 'Enrol')
+                                ->get()
+                                ->unique('participant_id')
+                                ->pluck('participant_id');
+
+        return view('participantVisits.createParticipant', compact('project', 'firstProjectVisitName', 'screenedParticipants', 'assignedSites'));
     }
 
     public function storeParticipant($projectId, StoreParticipantRequest $request)

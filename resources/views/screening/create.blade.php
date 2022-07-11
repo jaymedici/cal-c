@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 @section('css')
-
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @stop
 @section('js')
 <script>
@@ -187,7 +187,7 @@
                     <div id="participant_id_select_div" style="display: none" class="form-group col-md-9 row">
                         <label for="participant_id_select" class="col-md-3 col-form-label text-md-left">Select Participant<span class="required"><font color="red">*</font></span></label>
                         <div class="col-md-6">
-                            <select name="participant_id_select" class="form-control @error('participant_id_select') is-invalid @enderror" id="participant_id_select">
+                            <select name="participant_id_select" class="participant_id_select form-control @error('participant_id_select') is-invalid @enderror" id="participant_id_select">
                                 <option disabled selected value="">Please select the returning Participant</option>
                             </select>
                         </div>
