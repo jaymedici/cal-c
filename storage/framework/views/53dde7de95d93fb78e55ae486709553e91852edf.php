@@ -1,5 +1,14 @@
 
     <script>
+        //  Appointment Forms
+        window.addEventListener('show-set-appointment-form', event => {
+            $('#setAppointmentForm').modal('show');
+        });
+
+        window.addEventListener('show-change-appointment-form', event => {
+            $('#changeAppointmentForm').modal('show');
+        });
+
         // User Registration Forms
         window.addEventListener('show-edit-user-form', event => {
             $('#editUserForm').modal('show');
@@ -19,6 +28,8 @@
             $('#createUserForm').modal('hide');
             $('#editUserForm').modal('hide');
             $('#editScreeningForm').modal('hide');
+            $('#setAppointmentForm').modal('hide');
+            $('#changeAppointmentForm').modal('hide');
 
             toastr.success(event.detail.message, 'Success');
         });

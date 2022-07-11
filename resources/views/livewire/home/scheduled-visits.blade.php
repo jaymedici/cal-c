@@ -45,12 +45,12 @@
     </div>
 
     <!-- Set Appointment Modal -->
-    <div wire:ignore.self class="modal fade" id="createForm" tabindex="-1" role="dialog">
+    <div wire:ignore.self class="modal fade" id="setAppointmentForm" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
         <form wire:submit.prevent="saveAppointment">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="createFormLabel">Create Appointment</h5>
+                <h5 class="modal-title" id="setAppointmentFormLabel">Create Appointment</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -104,12 +104,12 @@
     </div>
 
     <!-- Change Appointment Modal -->
-    <div wire:ignore.self class="modal fade" id="editForm" tabindex="-1" role="dialog">
+    <div wire:ignore.self class="modal fade" id="changeAppointmentForm" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
         <form wire:submit.prevent="updateAppointment">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="createFormLabel">Change Appointment Date</h5>
+                <h5 class="modal-title" id="changeAppointmentFormLabel">Change Appointment Date</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>

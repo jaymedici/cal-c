@@ -29,7 +29,7 @@ class ScheduledVisits extends Component
         $this->create_form_state['site_name'] = $participantVisit->site->site_name;
         //($this->create_form_state);
 
-        $this->dispatchBrowserEvent('show-create-form');
+        $this->dispatchBrowserEvent('show-set-appointment-form');
     }
 
     public function changeAppointment(ParticipantVisit $participantVisit)
@@ -45,7 +45,7 @@ class ScheduledVisits extends Component
 
         //dd($this->edit_form_state);
 
-        $this->dispatchBrowserEvent('show-edit-form');
+        $this->dispatchBrowserEvent('show-change-appointment-form');
     }
 
     public function saveAppointment()
