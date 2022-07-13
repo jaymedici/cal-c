@@ -32,7 +32,8 @@ class ParticipantVisitsService
         $participantVisits = ParticipantVisit::with('project')->with('appointment')
                                 ->with('visit')->with('site')
                                 ->whereProjectAssignedTo($userId)
-                                ->whereSiteAssignedTo($userId);
+                                ->whereSiteAssignedTo($userId)
+                                ->orderBy('visit_date', 'ASC');
 
         return $participantVisits;
     }
