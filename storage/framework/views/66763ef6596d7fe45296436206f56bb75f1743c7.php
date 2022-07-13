@@ -13,7 +13,8 @@
                         <tr>
                             <th>Project</th>
                             <th>Participant ID</th>
-                            <th>Window Period</th>
+                            <th>Visit</th>
+                            <th>Window</th>
                             <th>Set Appt</th>
                             <th>Action</th>
                         </tr>
@@ -23,6 +24,7 @@
                         <tr>
                             <td><?php echo e($participantVisit->project->name); ?> </td>
                             <td><?php echo e($participantVisit->participant_id); ?> </td>
+                            <td><?php echo e($participantVisit->visit->visit_name); ?></td>
                             <td><?php echo e($participantVisit->window_start_date_formatted); ?> - <br> <?php echo e($participantVisit->window_end_date_formatted); ?> </td>
                             <?php if($participantVisit->appointment()->exists()): ?>
                             <td><?php echo e($participantVisit->appointment->appointment_date_time_formatted); ?></td>

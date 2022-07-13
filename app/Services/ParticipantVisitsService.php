@@ -17,6 +17,7 @@ class ParticipantVisitsService
         $dateAfterTwoWeeks = $now->add($timeInterval)->toDateTimeString();
 
         $participantVisits = ParticipantVisit::with('project')->with('appointment')
+                                ->with('visit')
                                 ->whereProjectAssignedTo($userId)
                                 ->whereBetween('window_end_date', [$datetoday, $dateAfterTwoWeeks])
                                 ->orderBy('window_start_date', 'asc')

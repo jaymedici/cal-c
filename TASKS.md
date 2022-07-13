@@ -89,19 +89,17 @@
 
 
 #### **11/07/2022:**
-- Filter the number of site names displaye on Participant enrollment page
-- Filter the number of participants displated on enrolment page
-- Add a participant search on enrolment page
+- Filter the number of site names displaye on Participant enrollment page. - **DONE**
+- Filter the number of participants displated on enrolment page. - **DONE**
+- Add a participant search on enrolment page. - **DONE**
 
 
 #### **TASKS QUEUE:**
 - ***Bug:*** A test for checking successful assignment of sites and managers is failing.
 - ***Bug:*** A test that checks if users are assigned to a site after site creation is also failing.
-- Start working on Screening Appointments
 - Add Reminder Emails
 - Add Notification alerts
 - Add reminder email preferences page
-- Rewrite adding users and sites to a projects
 - Add project-specific roles
 - Add check to ensure a user is assigned to a project only once
 - Add breadcrumbs on pages
@@ -111,3 +109,5 @@
 - Limit Screening record editing and deletion to Study Secretaries
 - Add a way to add Appointments manually
 
+- Add visit name on Scheduled visits (Home)
+- Add All visits link below Scheduled Visits (Home)
