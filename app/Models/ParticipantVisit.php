@@ -42,6 +42,13 @@ class ParticipantVisit extends Model
             });
     }
 
+    public function scopeWhereSiteAssignedTo($query, $userId)
+    {
+        return $query->whereHas('site', function ($query) use ($userId) {
+            $query->whereAssignedTo($userId);
+            });
+    }
+
     //ACCESSORS
     public function getWindowStartDateFormattedAttribute()
     {

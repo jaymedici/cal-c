@@ -19,6 +19,7 @@ class ParticipantVisitsService
         $participantVisits = ParticipantVisit::with('project')->with('appointment')
                                 ->with('visit')
                                 ->whereProjectAssignedTo($userId)
+                                ->whereSiteAssignedTo($userId)
                                 ->whereBetween('window_end_date', [$datetoday, $dateAfterTwoWeeks])
                                 ->orderBy('window_start_date', 'asc')
                                 ->paginate(5);
@@ -26,9 +27,22 @@ class ParticipantVisitsService
         return $participantVisits;
     }
 
+    public function scheduledVisitRecords($userId)
+    {
+        $participantVisits = ParticipantVisit::with('project')->with('appointment')
+                                ->with('visit')->with('site')
+                                ->whereProjectAssignedTo($userId)
+                                ->whereSiteAssignedTo($userId);
+
+        return $participantVisits;
+    }
+
     public static function getAllScheduledVisits($userId)
     {
-        $participantVisits = ParticipantVisit::with('project')->whereProjectAssignedTo($userId)->get();
+        $participantVisits = ParticipantVisit::with('project')
+                                ->whereProjectAssignedTo($userId)
+                                ->whereSiteAssignedTo($userId)
+                                ->get();
 
         return $participantVisits;
     }

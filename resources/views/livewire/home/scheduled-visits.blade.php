@@ -40,7 +40,10 @@
             </div>
         </div>
 
-        <div class="card-footer text-center">
+        <div class="card-footer">
+            <div class="float-right">
+                <a href="{{ route('participantVisits.viewVisits') }}">View All Visits</a>
+            </div>
             {{ $scheduledParticipantVisits->links() }}
         </div>
 

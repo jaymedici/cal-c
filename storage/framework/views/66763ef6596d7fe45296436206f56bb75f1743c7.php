@@ -40,7 +40,10 @@
             </div>
         </div>
 
-        <div class="card-footer text-center">
+        <div class="card-footer">
+            <div class="float-right">
+                <a href="<?php echo e(route('participantVisits.viewVisits')); ?>">View All Visits</a>
+            </div>
             <?php echo e($scheduledParticipantVisits->links()); ?>
 
         </div>

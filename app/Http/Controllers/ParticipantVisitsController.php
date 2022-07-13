@@ -21,6 +21,11 @@ class ParticipantVisitsController extends Controller
         $this->service = $service;
     }
 
+    public function viewVisits()
+    {
+        return view('participantVisits.viewVisits');
+    }
+
     public function enrolmentIndex()
     {
         $projectsWithVisits = Project::whereHas('visits')->whereAssignedTo(auth()->id())

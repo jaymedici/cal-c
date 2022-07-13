@@ -94,6 +94,11 @@
 - Add a participant search on enrolment page. - **DONE**
 
 
+#### **13/07/2022:**
+- Add visit name on Scheduled visits (Home). - **DONE**
+- Add All visits link below Scheduled Visits (Home). - **PARTIALLY DONE**
+
+
 #### **TASKS QUEUE:**
 - ***Bug:*** A test for checking successful assignment of sites and managers is failing.
 - ***Bug:*** A test that checks if users are assigned to a site after site creation is also failing.
@@ -109,5 +114,4 @@
 - Limit Screening record editing and deletion to Study Secretaries
 - Add a way to add Appointments manually
 
-- Add visit name on Scheduled visits (Home)
-- Add All visits link below Scheduled Visits (Home)
+
