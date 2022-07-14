@@ -99,6 +99,11 @@
 - Add All visits link below Scheduled Visits (Home). - **PARTIALLY DONE**
 
 
+#### **14/07/2022:**
+- Add participant id search on All Participant visits page. - **DONE**
+- Add visit status filter on All Participant visits page. - **DONE**
+
+
 #### **TASKS QUEUE:**
 - ***Bug:*** A test for checking successful assignment of sites and managers is failing.
 - ***Bug:*** A test that checks if users are assigned to a site after site creation is also failing.

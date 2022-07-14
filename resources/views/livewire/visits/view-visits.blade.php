@@ -4,6 +4,27 @@
             <div class="card-title mr-4">
                 <h5>All Participant Visits</h5>
             </div>
+            <div class="card-title mr-2">
+                <div class="input-group input-group-sm">
+                    <input wire:model="search" type="text" name="table_search" class="form-control float-right" placeholder="Search Participant...">
+                    <div class="input-group-append">
+                    <button type="submit" class="btn btn-default">
+                    <i class="fas fa-search"></i>
+                    </button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-title form-group mr-2">
+                <select wire:model="visitStatus" class="form-control-sm" name="">
+                    <option selected value="">Status Filter</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Completed">Completed</option>
+                    <option value="Missed">Missed</option>
+                </select>
+            </div>
+            <div class="card-title mr-2">
+                <a wire:click="clearFilters" href="#" class="btn btn-sm btn-secondary"> <i class="fa fa-eraser"></i> Clear Filters</a>
+            </div>
         </div>
    
 
