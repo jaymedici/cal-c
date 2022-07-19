@@ -1,9 +1,8 @@
 @extends('adminlte::page')
 @section('css')
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
 @stop
 @section('js')
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
     $(document).ready(function() {
         $('.participant-select').select2();
@@ -29,7 +28,7 @@
                 <div class="form-group row">
                     <label for="participant_id" class="col-md-3 col-form-label text-md-left">Select Participant<span class="required"><font color="red">*</font></span></label>
                     <div class="col-md-9">
-                        <select name="participant_id" class="form-control participant-select @error('participant_id') is-invalid @enderror" id="participant_id">
+                        <select name="participant_id" class="form-control form-select participant-select @error('participant_id') is-invalid @enderror" id="participant_id">
                             <option disabled selected value="">Please select a participant from previously screened Participants</option>
                             @foreach($screenedParticipants as $participant)
                             <option value="{{$participant}}">{{$participant}}</option>

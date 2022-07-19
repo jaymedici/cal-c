@@ -103,6 +103,27 @@
 - Add participant id search on All Participant visits page. - **DONE**
 - Add visit status filter on All Participant visits page. - **DONE**
 
+#### **16/07/2022:**
+- Add ability to edit visit status.
+    - Create form
+    - Write backend logic
+- Add Appointments on Main Menu - **DONE**
+- Add appointments manually: - **DONE**
+    - Test result pickup 
+    - Screening
+    - Visits:
+        - Scheduled
+        - Unscheduled
+- Add Edit Appointment on Appointments page
+- Screen New participant should not ask for project as it pull it automatically
+- Rework the Screen New Patient form
+- Add visit_type column on appointments table
+- populate visit_type on previous entries 
+- Add Awaiting results as an outcome on Screening Form
+- getProjects on viewAppointments is unnecessarily complicated
+- Add Clear Filter on Appointments page
+- Add a validation that checks if the selected site is assigned to the selected project when storing a manually created Appointment
+
 
 #### **TASKS QUEUE:**
 - ***Bug:*** A test for checking successful assignment of sites and managers is failing.

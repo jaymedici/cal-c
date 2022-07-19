@@ -9,6 +9,10 @@
             $('#changeAppointmentForm').modal('show');
         });
 
+        window.addEventListener('show-create-appointment-form', event => {
+            $('#createAppointmentForm').modal('show');
+        });
+
         // User Registration Forms
         window.addEventListener('show-edit-user-form', event => {
             $('#editUserForm').modal('show');
@@ -30,6 +34,7 @@
             $('#editScreeningForm').modal('hide');
             $('#setAppointmentForm').modal('hide');
             $('#changeAppointmentForm').modal('hide');
+            $('#createAppointmentForm').modal('hide');
 
             toastr.success(event.detail.message, 'Success');
         });

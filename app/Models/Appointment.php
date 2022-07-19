@@ -21,6 +21,8 @@ class Appointment extends Model
         'site_id',
         'participant_visit_id',
         'screening_id',
+        'visit_type',
+        'screening_visit_label',
         'appointment_date_time',
         'updated_by',
     ];

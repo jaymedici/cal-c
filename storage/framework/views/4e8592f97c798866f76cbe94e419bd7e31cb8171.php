@@ -57,6 +57,10 @@
                             <td><i>No set Appt...</i></td>
                             <?php endif; ?>
                             <td><?php echo e($participantVisit->visit_status); ?> </td>
+                            
+                            <?php if($participantVisit->VisitStatusCanBeEdited()): ?>
+                            <td><a href="#" class="btn btn-sm btn-warning">Edit Visit</a></td> 
+                            <?php endif; ?>         
                         </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                         <tr>

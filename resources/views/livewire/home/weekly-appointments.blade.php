@@ -20,11 +20,14 @@
                     <span class="product-description">
                     Coming for {{$appointment->participantVisit->visit->visit_name}} Visit
                     </span>
-                    @elseif(isset($appointment->screening_id))
+                    @elseif(isset($appointment->screening_id) || $appointment->visit_type == 'Screening')
                     <a href="#" class="product-title">{{$appointment->participant_id}}
                     <span class="badge badge-warning float-right">Screening</span></a>
                     <span class="product-description">
-                    coming for Screening
+                    coming for 
+                    @if(isset($appointment->screening_visit_label))
+                        {{$appointment->screening_visit_label}}
+                    @endif
                     </span>
                     @endif
                     </div>

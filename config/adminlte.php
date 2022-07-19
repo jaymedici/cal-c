@@ -238,6 +238,12 @@ return [
             'icon'  => 'fa fa-home',
         ],
         [
+            'text' => 'Appointments',
+            'icon_color' => 'green',
+            'url'  => '/appointments',
+            'icon'  => 'fa fa-calendar-week',
+        ],
+        [
             'text' => 'Screening',
             'url'  => '/screening',
             'icon'  => 'fa fa-thermometer',

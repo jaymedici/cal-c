@@ -3,8 +3,10 @@
 namespace App\Services;
 
 use App\Models\Appointment;
+use App\Models\ParticipantVisit;
 use App\Models\Screening;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Validator;
 
 class AppointmentsService
 {
@@ -95,6 +97,33 @@ class AppointmentsService
                                     ->orderBy('appointment_date_time', 'asc');
 
         return $appointments;
+    }
+
+    public function loadCreateAppointmentValidationRules(array $formDetails)
+    {
+        return Validator::make($formDetails, [
+                'site_id' => 'required',
+                'participant_id' => 'required',
+                'visit_type' => 'required',
+                'appointment_date_time' => 'required',
+                'screening_visit_label' => 'required_if:visit_type,Screening',
+                'visit_id' => 'required_if:visit_type,Scheduled Visit'
+                ]);
+    }
+
+    public function getCorrespondingParticipantVisitId(array $formDetails)
+    {
+        if($formDetails['visit_type'] == 'Scheduled Visit')
+        {
+            $participantVisit = ParticipantVisit::where('participant_id', 'LIKE', $formDetails['participant_id'])
+                                ->where('visit_id', $formDetails['visit_id'])
+                                ->first();
+            return $participantVisit->id;
+        }
+
+        else {
+            return null;
+        }
     }
  
 }

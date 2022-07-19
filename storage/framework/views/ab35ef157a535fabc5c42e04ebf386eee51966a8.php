@@ -76,6 +76,12 @@
     
     <link href="<?php echo e(asset('toastr/toastr.css')); ?>" rel="stylesheet"/>
 
+    
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+    
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
 </head>
 
 <body class="<?php echo $__env->yieldContent('classes_body'); ?>" <?php echo $__env->yieldContent('body_data'); ?>>
@@ -126,6 +132,9 @@
 
     
     <script src="<?php echo e(asset('sweetalert2/sweetalert2.all.min.js')); ?>"></script>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     <?php echo $__env->make('partials.browserEventListeners', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 

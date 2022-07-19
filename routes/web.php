@@ -59,6 +59,7 @@ Route::group(['middleware' => ['preventBackHistory','auth']],function()
                 Route::get('appointments/createFromVisit/{visitId}',[AppointmentsController::class, 'createFromVisit'])->name('appointments.createFromVisit');
                 Route::get('appointments/viewAppointment/{appointmentId}',[AppointmentsController::class, 'viewAppointment'])->name('appointments.viewAppointment');
                 Route::post('appointments/storeByVisit/{visitId}',[AppointmentsController::class, 'storeByVisit'])->name('appointments.storeByVisit');
+                Route::get('appointments/viewAppointments/{project}',[AppointmentsController::class, 'viewAppointments'])->name('appointments.viewAppointments');
 
                 //Calendar Routes
                 Route::get('calendar/show',[CalendarController::class, 'show'])->name('calendar.show');

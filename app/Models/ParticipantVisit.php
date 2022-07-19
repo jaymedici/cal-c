@@ -34,6 +34,18 @@ class ParticipantVisit extends Model
         'window_end_date' => 'date'
     ];
 
+    public function VisitStatusCanBeEdited()
+    {
+        if(Carbon::now() >= $this->window_start_date)
+        {
+            return true;
+        }
+
+        else {
+            return false;
+        }
+    }
+
     //SCOPES
     public function scopeWhereProjectAssignedTo($query, $userId)
     {
@@ -59,7 +71,6 @@ class ParticipantVisit extends Model
     {
         return $this->window_end_date->format('d M, Y');
     }
-
 
     //MODEL RELATIONSHIPS
     public function project()

@@ -21,12 +21,16 @@
                     <span class="product-description">
                     Coming for <?php echo e($appointment->participantVisit->visit->visit_name); ?> Visit
                     </span>
-                    <?php elseif(isset($appointment->screening_id)): ?>
+                    <?php elseif(isset($appointment->screening_id) || $appointment->visit_type == 'Screening'): ?>
                     <a href="#" class="product-title"><?php echo e($appointment->participant_id); ?>
 
                     <span class="badge badge-warning float-right">Screening</span></a>
                     <span class="product-description">
-                    coming for Screening
+                    coming for 
+                    <?php if(isset($appointment->screening_visit_label)): ?>
+                        <?php echo e($appointment->screening_visit_label); ?>
+
+                    <?php endif; ?>
                     </span>
                     <?php endif; ?>
                     </div>

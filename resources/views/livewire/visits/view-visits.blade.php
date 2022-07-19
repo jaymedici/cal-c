@@ -57,6 +57,10 @@
                             <td><i>No set Appt...</i></td>
                             @endif
                             <td>{{ $participantVisit->visit_status}} </td>
+                            {{-- Show Edit visit if date today is greater than closing window date --}}
+                            @if($participantVisit->VisitStatusCanBeEdited())
+                            <td><a href="#" class="btn btn-sm btn-warning">Edit Visit</a></td> 
+                            @endif         
                         </tr>
                     @empty
                         <tr>

@@ -5,13 +5,21 @@ namespace App\Http\Controllers;
 use App\Models\Appointment;
 use Illuminate\Http\Request;
 use App\Models\ParticipantVisit;
+use App\Project;
 use Auth;
 
 class AppointmentsController extends Controller
 {
     public function index()
     {
-        return view('appointments.index');
+        $assignedProjects = Project::whereAssignedTo(auth()->id())->paginate(7);
+
+        return view('appointments.index', compact('assignedProjects'));
+    }
+
+    public function viewAppointments($projectId)
+    {
+        return view('appointments.viewAppointments', compact('projectId'));
     }
     
     public function createFromVisit($visitId)

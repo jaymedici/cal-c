@@ -1,9 +1,8 @@
 
 <?php $__env->startSection('css'); ?>
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('js'); ?>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
     $(document).ready(function() {
         $('.participant-select').select2();
@@ -30,7 +29,7 @@
                 <div class="form-group row">
                     <label for="participant_id" class="col-md-3 col-form-label text-md-left">Select Participant<span class="required"><font color="red">*</font></span></label>
                     <div class="col-md-9">
-                        <select name="participant_id" class="form-control participant-select <?php $__errorArgs = ['participant_id'];
+                        <select name="participant_id" class="form-control form-select participant-select <?php $__errorArgs = ['participant_id'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
