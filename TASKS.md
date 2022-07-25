@@ -124,6 +124,8 @@
 #### **25/07/2022:**
 - Rework the Screen New Patient form - **DONE** 
 - Screen New participant should not ask for project as it pull it automatically - **DONE**
+- A foreign key migration is failing on the Live Server - **DONE** 
+- Missed Visits not being flagged - **DONE** 
 
 
 #### **BACKLOG:**
@@ -140,8 +142,6 @@
 - FILTER PARTICIPANT VISITS BY SITE ASSIGNED
 - Limit Screening record editing and deletion to Study Secretaries
 
-- A foreign key migration is failing on the Live Server
-
 - Add ability to edit visit status.
     - Create form
     - Write backend logic
@@ -153,7 +153,7 @@
     - Add subsequent qn below: Which Arm?
 - On Enrolment add Arm to which the participant should be enrolled
 
-- Missed Visits not being flagged ***
+
 
 
 

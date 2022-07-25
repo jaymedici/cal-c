@@ -34,8 +34,8 @@
                         @foreach($missedVisits as $missedVisit)
                         <tr>
                             <td>{{$missedVisit->participant_id}}</td>
-                            <td>{{$missedVisit->site_id}}</td>
-                            <td>{{$missedVisit->visit_id}}</td>
+                            <td>{{$missedVisit->site->site_name}}</td>
+                            <td>{{$missedVisit->visit->visit_name}}</td>
                             <td>{{$missedVisit->marked_date}}</td>
                             <td>{{$missedVisit->marked_by}}</td>
                         </tr>
