@@ -6,7 +6,7 @@
                 <h5>Participants Screened</h5>
             </div>
             <div class="card-title mr-2">
-                <a href="/screening/create" class="btn btn-sm btn-success"> <i class="fa fa-plus-circle"></i> Screen New Participant</a>
+                <a href="/screening/screenPatientForm/{{$projectId}}" class="btn btn-sm btn-success"> <i class="fa fa-plus-circle"></i> Screen New Participant</a>
             </div>
             <div class="card-title mr-2">
                 <div class="input-group input-group-sm">

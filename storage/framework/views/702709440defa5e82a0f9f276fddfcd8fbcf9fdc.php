@@ -48,57 +48,12 @@
         }
     }
 
-    function project_selected(obj)
-    {
-        var projectId = $(obj).val();
+</script>
 
-        if(projectId)
-        {
-            $.ajax(
-                {
-                    type:"GET",
-                    url:"<?php echo e(url('screening/getScreeningTypes')); ?>/"+projectId,
-                    success:function(res){
-                        console.log(res);
-                        if(res)
-                        {
-                            $('#screening_label').empty();
-                            $('#screening_label').append('<option value="Screening" selected>Screening</option>');
-                            $.each(res,function(key,value)
-                            {
-                                $('#screening_label').append('<option value="'+value+'">'+value+'</option>');
-                            });
-                        }
-                else {
-                    $('#screening_label').empty();
-                    $("#screening_label").append('<option value="Screening" selected>Screening</option>'); 
-                }
-                    }
-                });
-
-                $.ajax(
-                {
-                    type:"GET",
-                    url:"<?php echo e(url('screening/getScreeningReturningParticipants')); ?>/"+projectId,
-                    success:function(res){
-                        console.log(res);
-                        if(res)
-                        {
-                            $('#participant_id_select').empty();
-                            $('#participant_id_select').append('<option disabled selected value="">Please select the returning Participant</option>');
-                            $.each(res,function(key,value)
-                            {
-                                $('#participant_id_select').append('<option value="'+value+'">'+value+'</option>');
-                            });
-                        }
-                else {
-                    $('#participant_id_select').empty();
-                    $("#participant_id_select").append('<option disabled selected value="">Please select the returning Participant</option>'); 
-                }
-                    }
-                });
-        }
-    }
+<script>
+    $(document).ready(function() {
+        $('.participant_id_select').select2();
+    });
 </script>
 <?php $__env->stopSection(); ?>
 
@@ -121,19 +76,8 @@
                 <div class="form-group row">
                     <label for="project_id" class="col-md-3 col-form-label text-md-left">Project<span class="required"><font color="red">*</font></span></label>
                     <div class="col-md-9">
-                        <select name="project_id" class="form-control <?php $__errorArgs = ['project_id'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>" id="project_id" onchange="project_selected(this)">
-                            <option disabled selected value="">Please select a Project</option>
-                            <?php $__currentLoopData = $projectsWithScreening; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $project): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <option value="<?php echo e($project->id); ?>"><?php echo e($project->name); ?></option>
-                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                        </select>
+                        <input type="text" class="form-control" value="<?php echo e($project->name); ?>" disabled>
+                        <input style="display: none;" type="text" name="project_id" value="<?php echo e($project->id); ?>">
                     </div>
                 </div>
 
@@ -167,7 +111,10 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" id="screening_label">
-                            <option selected value="Screening">Screening</option>
+                            <option selected value="">Please select a screening label for this visit</option>
+                            <?php $__currentLoopData = $screeningLabels; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $screeningLabel): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <option value="<?php echo e($screeningLabel); ?>"><?php echo e($screeningLabel); ?></option>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </select>
                     </div>
                 </div>
@@ -239,6 +186,9 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" id="participant_id_select">
                                 <option disabled selected value="">Please select the returning Participant</option>
+                                <?php $__currentLoopData = $returningParticipants; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $returningParticipant): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option value="<?php echo e($returningParticipant); ?>"><?php echo e($returningParticipant); ?></option>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                         </div>
                     </div>

@@ -65,6 +65,37 @@ class ScreeningService {
         return $screeningVisitLabels;
     }
 
+    public function getReturningParticipantIds($projectId)
+    {
+        $participantIdsWithContinueScreening =  Screening::where('project_id', $projectId)
+                                            ->whereSiteAssignedTo(auth()->id())
+                                            ->where('screening_outcome', 'LIKE', 'Continue Screening')
+                                            ->get()->unique('participant_id')
+                                            ->pluck('participant_id')
+                                            ->toArray();
+
+        $returningParticipantIds = $this->filterOutEnroledOrFailedParticipants(
+                                    $projectId, $participantIdsWithContinueScreening);
+
+        return $returningParticipantIds;
+    }
+
+    public function filterOutEnroledOrFailedParticipants(int $projectId, array $participantIds)
+    {
+        $projectScreeningRecords = Screening::where('project_id', $projectId)->get();
+
+        foreach($projectScreeningRecords as $screeningRecord)
+        {
+            if($screeningRecord->screening_outcome == "Enrol" | $screeningRecord->screening_outcome == "Screen Failure")
+            {
+                $keyToUnset = array_search($screeningRecord->participant_id, $participantIds);
+                unset($participantIds[$keyToUnset]);
+            }
+        }
+
+        return $participantIds;
+    }
+
     public function validateScreeningRecordUpdates(array $screningDetails)
     {
         return Validator::make($screningDetails, [

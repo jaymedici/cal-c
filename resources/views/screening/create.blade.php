@@ -48,57 +48,12 @@
         }
     }
 
-    function project_selected(obj)
-    {
-        var projectId = $(obj).val();
+</script>
 
-        if(projectId)
-        {
-            $.ajax(
-                {
-                    type:"GET",
-                    url:"{{url('screening/getScreeningTypes')}}/"+projectId,
-                    success:function(res){
-                        console.log(res);
-                        if(res)
-                        {
-                            $('#screening_label').empty();
-                            $('#screening_label').append('<option value="Screening" selected>Screening</option>');
-                            $.each(res,function(key,value)
-                            {
-                                $('#screening_label').append('<option value="'+value+'">'+value+'</option>');
-                            });
-                        }
-                else {
-                    $('#screening_label').empty();
-                    $("#screening_label").append('<option value="Screening" selected>Screening</option>'); 
-                }
-                    }
-                });
-
-                $.ajax(
-                {
-                    type:"GET",
-                    url:"{{url('screening/getScreeningReturningParticipants')}}/"+projectId,
-                    success:function(res){
-                        console.log(res);
-                        if(res)
-                        {
-                            $('#participant_id_select').empty();
-                            $('#participant_id_select').append('<option disabled selected value="">Please select the returning Participant</option>');
-                            $.each(res,function(key,value)
-                            {
-                                $('#participant_id_select').append('<option value="'+value+'">'+value+'</option>');
-                            });
-                        }
-                else {
-                    $('#participant_id_select').empty();
-                    $("#participant_id_select").append('<option disabled selected value="">Please select the returning Participant</option>'); 
-                }
-                    }
-                });
-        }
-    }
+<script>
+    $(document).ready(function() {
+        $('.participant_id_select').select2();
+    });
 </script>
 @stop
 
@@ -120,12 +75,8 @@
                 <div class="form-group row">
                     <label for="project_id" class="col-md-3 col-form-label text-md-left">Project<span class="required"><font color="red">*</font></span></label>
                     <div class="col-md-9">
-                        <select name="project_id" class="form-control @error('project_id') is-invalid @enderror" id="project_id" onchange="project_selected(this)">
-                            <option disabled selected value="">Please select a Project</option>
-                            @foreach($projectsWithScreening as $project)
-                                <option value="{{$project->id}}">{{$project->name}}</option>
-                            @endforeach
-                        </select>
+                        <input type="text" class="form-control" value="{{$project->name}}" disabled>
+                        <input style="display: none;" type="text" name="project_id" value="{{$project->id}}">
                     </div>
                 </div>
 
@@ -145,7 +96,10 @@
                     <label for="screening_label" class="col-md-3 col-form-label text-md-left">Screening Label<span class="required"><font color="red">*</font></span></label>
                     <div class="col-md-9">
                         <select name="screening_label" class="form-control @error('screening_label') is-invalid @enderror" id="screening_label">
-                            <option selected value="Screening">Screening</option>
+                            <option selected value="">Please select a screening label for this visit</option>
+                            @foreach ($screeningLabels as $screeningLabel)
+                                <option value="{{$screeningLabel}}">{{$screeningLabel}}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -189,6 +143,9 @@
                         <div class="col-md-6">
                             <select name="participant_id_select" class="participant_id_select form-control @error('participant_id_select') is-invalid @enderror" id="participant_id_select">
                                 <option disabled selected value="">Please select the returning Participant</option>
+                                @foreach ($returningParticipants as $returningParticipant)
+                                    <option value="{{$returningParticipant}}">{{$returningParticipant}}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>

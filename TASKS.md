@@ -103,21 +103,17 @@
 - Add participant id search on All Participant visits page. - **DONE**
 - Add visit status filter on All Participant visits page. - **DONE**
 
+
 #### **16/07/2022:**
-- Add ability to edit visit status.
-    - Create form
-    - Write backend logic
 - Add Appointments on Main Menu - **DONE**
 - Add appointments manually: - **DONE**
-    - Test result pickup 
-    - Screening
-    - Visits:
-        - Scheduled
-        - Unscheduled
+    - Test result pickup  - **DONE**
+    - Screening - **DONE**
+    - Visits: 
+        - Scheduled - **DONE**
+        - Unscheduled - **DONE**
 - Add Edit Appointment on Appointments page
-- Screen New participant should not ask for project as it pull it automatically
-- Rework the Screen New Patient form
-- Add visit_type column on appointments table
+- Add visit_type column on appointments table - **DONE**
 - populate visit_type on previous entries 
 - Add Awaiting results as an outcome on Screening Form
 - getProjects on viewAppointments is unnecessarily complicated
@@ -125,7 +121,12 @@
 - Add a validation that checks if the selected site is assigned to the selected project when storing a manually created Appointment
 
 
-#### **TASKS QUEUE:**
+#### **25/07/2022:**
+- Rework the Screen New Patient form - **DONE** 
+- Screen New participant should not ask for project as it pull it automatically - **DONE**
+
+
+#### **BACKLOG:**
 - ***Bug:*** A test for checking successful assignment of sites and managers is failing.
 - ***Bug:*** A test that checks if users are assigned to a site after site creation is also failing.
 - Add Reminder Emails
@@ -138,6 +139,21 @@
 
 - FILTER PARTICIPANT VISITS BY SITE ASSIGNED
 - Limit Screening record editing and deletion to Study Secretaries
-- Add a way to add Appointments manually
+
+- A foreign key migration is failing on the Live Server
+
+- Add ability to edit visit status.
+    - Create form
+    - Write backend logic
+
+- STUDY ARM Functionality:
+- When creating a project, a user should select if the project will have 'study arms'
+- PROTID ARMS: Cohort & Trial
+- Change 'Enrol' on Screening Outcome to 'Eligible for Enrolment'
+    - Add subsequent qn below: Which Arm?
+- On Enrolment add Arm to which the participant should be enrolled
+
+- Missed Visits not being flagged ***
+
 
 

@@ -39,57 +39,13 @@ class ScreeningController extends Controller
         return view('screening.viewScreenings', compact('projectId'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function getScreeningTypes($projectId)
+    public function screenPatientForm(Project $project)
     {
-        $project = Project::findOrFail($projectId);
-        $screeningVisitLabels = array_filter(explode(';', $project->screening_visit_labels));
-
-        if(!empty($screeningVisitLabels))
-        {
-            return response()->json($screeningVisitLabels);
-        }
-         
-    }
-
-    public function getScreeningReturningParticipants($projectId)
-    {
-        $allScreenedParticipantIDs = Screening::where('project_id', $projectId)
-                                    ->get()->unique('participant_id')
-                                    ->pluck('participant_id')
-                                    ->toArray();
-
-        $allScreeningInfo = Screening::where('project_id', $projectId)->get();
-
-        foreach($allScreeningInfo as $screening)
-        {
-            if($screening->screening_outcome == "Enrol" | $screening->screening_outcome == "Screen Failure")
-            {
-                //remove participant from participant list (to remain only with those whose screening continues)
-                $arrayKey = array_search($screening->participant_id, $allScreenedParticipantIDs);
-                unset($allScreenedParticipantIDs[$arrayKey]);
-            }
-        }
-
-        $returningParticipants = $allScreenedParticipantIDs;
-        
-        return response()->json($returningParticipants);
-    }
-
-    public function create()
-    {
-        //
-        $projectsWithScreening = Project::where('include_screening', 'LIKE', 'Yes')
-                                        ->whereAssignedTo(auth()->id())
-                                        ->get();
-
         $assignedSites = Auth::user()->sites()->get();
+        $screeningLabels = $this->service->getScreeningLabels($project->id);
+        $returningParticipants = $this->service->getReturningParticipantIds($project->id);
 
-        return view('screening.create', compact('projectsWithScreening', 'assignedSites'));
+        return view('screening.create', compact('project', 'assignedSites', 'screeningLabels', 'returningParticipants'));
     }
 
     /**
@@ -117,7 +73,7 @@ class ScreeningController extends Controller
             $appointment->createScreeningAppointment($screening, $data);
         }
 
-        return redirect()->route('screening.create')->with('success','Screening Information added Successfully!');
+        return redirect()->route('screening.screenPatientForm', $data['project_id'])->with('success','Screening Information added Successfully!');
     }
 
     /**
