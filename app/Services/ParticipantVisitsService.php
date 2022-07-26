@@ -17,7 +17,7 @@ class ParticipantVisitsService
         $dateAfterTwoWeeks = $now->add($timeInterval)->toDateTimeString();
 
         $participantVisits = ParticipantVisit::with('project')->with('appointment')
-                                ->with('visit')
+                                ->with('visit')->with('participant')
                                 ->whereProjectAssignedTo($userId)
                                 ->whereSiteAssignedTo($userId)
                                 ->whereBetween('window_end_date', [$datetoday, $dateAfterTwoWeeks])
@@ -30,7 +30,7 @@ class ParticipantVisitsService
     public function scheduledVisitRecords($userId)
     {
         $participantVisits = ParticipantVisit::with('project')->with('appointment')
-                                ->with('visit')->with('site')
+                                ->with('visit')->with('site')->with('participant')
                                 ->whereProjectAssignedTo($userId)
                                 ->whereSiteAssignedTo($userId)
                                 ->orderBy('visit_date', 'ASC');
@@ -99,6 +99,7 @@ class ParticipantVisitsService
         {
             unset($participantVisitSchedule[$key]['first_visit_date']);
             unset($participantVisitSchedule[$key]['mark_first_visit_complete']);
+            unset($participantVisitSchedule[$key]['study_arm_id']);
         }
         
         return $participantVisitSchedule;

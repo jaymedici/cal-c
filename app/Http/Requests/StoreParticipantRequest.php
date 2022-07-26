@@ -28,6 +28,7 @@ class StoreParticipantRequest extends FormRequest
             'site_id' => 'required',
             'first_visit_date' => 'required',
             'mark_first_visit_complete' => 'required',
+            'study_arm_id' => 'nullable'
         ];
     }
 }

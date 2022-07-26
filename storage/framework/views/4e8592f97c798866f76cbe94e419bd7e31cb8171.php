@@ -48,7 +48,13 @@
                         <tr wire:loading.remove>
                             <td><?php echo e($participantVisit->project->name); ?> </td>
                             <td><?php echo e($participantVisit->site->site_name); ?> </td>
-                            <td><?php echo e($participantVisit->participant_id); ?> </td>
+                            <td>
+                                <?php echo e($participantVisit->participant_id); ?>
+
+                                <?php if(!$participantVisit->project->studyArms->isEmpty()): ?>
+                                    (<?php echo e($participantVisit->participant->studyArm->name); ?>)
+                                <?php endif; ?>
+                            </td>
                             <td><?php echo e($participantVisit->visit->visit_name); ?></td>
                             <td><?php echo e($participantVisit->window_start_date_formatted); ?> - <br> <?php echo e($participantVisit->window_end_date_formatted); ?> </td>
                             <?php if($participantVisit->appointment()->exists()): ?>

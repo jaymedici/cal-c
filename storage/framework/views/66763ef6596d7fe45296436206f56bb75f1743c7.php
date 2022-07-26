@@ -23,7 +23,12 @@
                         <?php $__currentLoopData = $scheduledParticipantVisits; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $participantVisit): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <tr>
                             <td><?php echo e($participantVisit->project->name); ?> </td>
-                            <td><?php echo e($participantVisit->participant_id); ?> </td>
+                            <td>
+                                <?php echo e($participantVisit->participant_id); ?> 
+                                <?php if(!$participantVisit->project->studyArms->isEmpty()): ?>
+                                    (<?php echo e($participantVisit->participant->studyArm->name); ?>)
+                                <?php endif; ?>
+                            </td>
                             <td><?php echo e($participantVisit->visit->visit_name); ?></td>
                             <td><?php echo e($participantVisit->window_start_date_formatted); ?> - <br> <?php echo e($participantVisit->window_end_date_formatted); ?> </td>
                             <?php if($participantVisit->appointment()->exists()): ?>

@@ -64,6 +64,20 @@
                     </div>
                 </div>
 
+                @if (!$project->studyArms->isEmpty())
+                <div class="form-group row">
+                    <label for="study_arm_id" class="col-md-3 col-form-label text-md-left">Select Study Arm<span class="required"><font color="red">*</font></span></label>
+                    <div class="col-md-9">
+                        <select name="study_arm_id" required class="form-control @error('study_arm_id') is-invalid @enderror" id="study_arm_id">
+                            <option disabled selected value="">Please select the Study arm to enrol the participant</option>
+                            @foreach($project->studyArms as $studyArm)
+                            <option value="{{$studyArm->id}}">{{$studyArm->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                @endif
+
                 <div class="form-group row">
                     <label for="first_visit_date" class="col-md-3 col-form-label text-md-left">Enter visit date for {{$firstProjectVisitName}}  <span class="required"><font color="red">*</font></span></label>
                     <div class="col-md-9">

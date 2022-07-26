@@ -23,7 +23,12 @@
                         @foreach($scheduledParticipantVisits as $participantVisit)
                         <tr>
                             <td>{{ $participantVisit->project->name}} </td>
-                            <td>{{ $participantVisit->participant_id}} </td>
+                            <td>
+                                {{ $participantVisit->participant_id}} 
+                                @if (!$participantVisit->project->studyArms->isEmpty())
+                                    ({{$participantVisit->participant->studyArm->name}})
+                                @endif
+                            </td>
                             <td>{{ $participantVisit->visit->visit_name}}</td>
                             <td>{{ $participantVisit->window_start_date_formatted }} - <br> {{ $participantVisit->window_end_date_formatted }} </td>
                             @if($participantVisit->appointment()->exists())

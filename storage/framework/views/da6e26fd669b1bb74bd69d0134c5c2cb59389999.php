@@ -93,6 +93,27 @@ unset($__errorArgs, $__bag); ?>" id="site_id">
                     </div>
                 </div>
 
+                <?php if(!$project->studyArms->isEmpty()): ?>
+                <div class="form-group row">
+                    <label for="study_arm_id" class="col-md-3 col-form-label text-md-left">Select Study Arm<span class="required"><font color="red">*</font></span></label>
+                    <div class="col-md-9">
+                        <select name="study_arm_id" required class="form-control <?php $__errorArgs = ['study_arm_id'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" id="study_arm_id">
+                            <option disabled selected value="">Please select the Study arm to enrol the participant</option>
+                            <?php $__currentLoopData = $project->studyArms; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $studyArm): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <option value="<?php echo e($studyArm->id); ?>"><?php echo e($studyArm->name); ?></option>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        </select>
+                    </div>
+                </div>
+                <?php endif; ?>
+
                 <div class="form-group row">
                     <label for="first_visit_date" class="col-md-3 col-form-label text-md-left">Enter visit date for <?php echo e($firstProjectVisitName); ?>  <span class="required"><font color="red">*</font></span></label>
                     <div class="col-md-9">

@@ -128,6 +128,17 @@
 - Missed Visits not being flagged - **DONE** 
 
 
+#### **26/07/2022:**
+- Add Study Arm Functionality
+    - Migration, Model  - **DONE** 
+- Add Enrolled Participant Model - **DONE** 
+- Add study arms to scheduled visits (Home) using parenthesis around participant id. - **DONE**
+- Add Study Arm on All Visits. - **DONE**
+- Create an enrolled participant entry when enrolling a participant  - **DONE**
+- Choose study arm when enrolling a participant  - **DONE**
+
+
+
 #### **BACKLOG:**
 - ***Bug:*** A test for checking successful assignment of sites and managers is failing.
 - ***Bug:*** A test that checks if users are assigned to a site after site creation is also failing.
@@ -148,12 +159,16 @@
 
 - STUDY ARM Functionality:
 - When creating a project, a user should select if the project will have 'study arms'
-- PROTID ARMS: Cohort & Trial
+
 - Change 'Enrol' on Screening Outcome to 'Eligible for Enrolment'
     - Add subsequent qn below: Which Arm?
 - On Enrolment add Arm to which the participant should be enrolled
 
+- On Project View -> Add Quick links link to "Enrolled Participants"
 
+- On Enrolled Participants page. Show participants, first visit date, Study Arm
+	- Add link to view participant
+	- Change Arm link
 
 
 

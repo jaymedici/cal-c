@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreParticipantRequest;
+use App\Models\EnrolledParticipant;
 use App\Models\ParticipantVisit;
 use Illuminate\Http\Request;
 use App\Project;
@@ -51,7 +52,7 @@ class ParticipantVisitsController extends Controller
 
     public function createParticipant($projectId)
     {
-        $project = Project::with('sites')->findOrFail($projectId);
+        $project = Project::with('sites')->with('studyArms')->findOrFail($projectId);
 
         $firstProjectVisitName = VisitSetting::where('project_id', $projectId)
                                         ->where('days_from_first_visit', 0)
@@ -80,11 +81,25 @@ class ParticipantVisitsController extends Controller
             return back()->withInput()->with('error_message', 'Sorry this participant has already been enrolled in this study');
         }
 
-        $participantVisitSchedule = $this->service->generateParticipantVisitSchedule($data, $projectId);
+        $data['enrolled_participant_id'] = $this->addParticipantRecordOnEnrolledParticipants($projectId, $data);
 
+        $participantVisitSchedule = $this->service->generateParticipantVisitSchedule($data, $projectId);
         ParticipantVisit::insert($participantVisitSchedule);
         
         return redirect()->route('participantVisits.enrolmentIndex')->with('success','Participant Visit schedule information saved successfully!');
+    }
+
+    public function addParticipantRecordOnEnrolledParticipants(int $projectId, array $data)
+    {
+        $enrolledParticipant = EnrolledParticipant::create([
+            'participant_id' => $data['participant_id'],
+            'project_id' => $projectId,
+            'study_arm_id' => $data['study_arm_id'],
+            'site_id' => $data['site_id'],
+            'updated_by' => Auth::user()->username
+        ]);
+        
+        return $enrolledParticipant->id;
     }
 
 }

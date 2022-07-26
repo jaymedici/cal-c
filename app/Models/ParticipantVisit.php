@@ -28,6 +28,7 @@ class ParticipantVisit extends Model
         'window_start_date',
         'window_end_date',
         'updated_by',
+        'enrolled_participant_id'
     ];
 
     protected $casts = [
@@ -86,6 +87,11 @@ class ParticipantVisit extends Model
     public function site()
     {
         return $this->belongsTo(Site::class, 'site_id');
+    }
+
+    public function participant()
+    {
+        return $this->belongsTo(EnrolledParticipant::class, 'enrolled_participant_id');
     }
 
     public function appointment()

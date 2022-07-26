@@ -10,6 +10,7 @@ use App\UserProject;
 use App\Models\Site;
 use App\Models\Screening;
 use App\Models\ProjectSite;
+use App\Models\StudyArm;
 use App\Observers\ProjectObserver;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -123,6 +124,11 @@ class Project extends Model
     public function assignees()
     {
         return $this->hasMany(UserProject::class);
+    }
+
+    public function studyArms()
+    {
+        return $this->hasMany(StudyArm::class);
     }
 
     public function sites()
