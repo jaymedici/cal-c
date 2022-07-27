@@ -15,8 +15,13 @@
                     </div>
                     <div class="product-info">
                     @if(isset($appointment->participant_visit_id))
-                    <a href="{{ route('appointments.viewAppointment', $appointment->id) }}" class="product-title">{{$appointment->participant_id}}
-                    <span class="badge badge-info float-right">Regular</span></a>
+                    <a href="{{ route('appointments.viewAppointment', $appointment->id) }}" class="product-title">
+                        {{$appointment->participant_id}}
+                        @if (!$appointment->participantVisit->project->studyArms->isEmpty())
+                            ({{$appointment->participantVisit->participant->studyArm->name}})
+                        @endif
+                        <span class="badge badge-info float-right">Regular</span>
+                    </a>
                     <span class="product-description">
                     Coming for {{$appointment->participantVisit->visit->visit_name}} Visit
                     </span>

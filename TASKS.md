@@ -138,6 +138,14 @@
 - Choose study arm when enrolling a participant  - **DONE**
 
 
+#### **26/07/2022:**
+- Add Study Arm on weekly Appointments - **DONE**
+- Add Study Arm on All Appointments - **DONE**
+- On Project View -> Add Quick links link to "Enrolled Participants"
+- On Enrolled Participants page. Show participants, first visit date, Study Arm
+	- Add link to view participant
+	- Change Arm link
+
 
 #### **BACKLOG:**
 - ***Bug:*** A test for checking successful assignment of sites and managers is failing.
@@ -164,11 +172,6 @@
     - Add subsequent qn below: Which Arm?
 - On Enrolment add Arm to which the participant should be enrolled
 
-- On Project View -> Add Quick links link to "Enrolled Participants"
-
-- On Enrolled Participants page. Show participants, first visit date, Study Arm
-	- Add link to view participant
-	- Change Arm link
 
 
 

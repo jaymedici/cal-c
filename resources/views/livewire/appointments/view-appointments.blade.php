@@ -47,7 +47,12 @@
             <tbody>
                 @forelse ($appointments as $appointment)
                     <tr wire:loading.remove>
-                        <td>{{ $appointment->participant_id }}</td>
+                        <td>
+                            {{ $appointment->participant_id }}
+                            @if (!$appointment->participantVisit->project->studyArms->isEmpty())
+                            ({{$appointment->participantVisit->participant->studyArm->name}})
+                            @endif
+                        </td>
                         <td>{{ $appointment->appointment_date_time }}</td>
                         @if (!empty($appointment->participant_visit_id))
                         <td>{{ $appointment->participantVisit->visit->visit_name}}</td>

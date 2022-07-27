@@ -15,9 +15,14 @@
                     </div>
                     <div class="product-info">
                     <?php if(isset($appointment->participant_visit_id)): ?>
-                    <a href="<?php echo e(route('appointments.viewAppointment', $appointment->id)); ?>" class="product-title"><?php echo e($appointment->participant_id); ?>
+                    <a href="<?php echo e(route('appointments.viewAppointment', $appointment->id)); ?>" class="product-title">
+                        <?php echo e($appointment->participant_id); ?>
 
-                    <span class="badge badge-info float-right">Regular</span></a>
+                        <?php if(!$appointment->participantVisit->project->studyArms->isEmpty()): ?>
+                            (<?php echo e($appointment->participantVisit->participant->studyArm->name); ?>)
+                        <?php endif; ?>
+                        <span class="badge badge-info float-right">Regular</span>
+                    </a>
                     <span class="product-description">
                     Coming for <?php echo e($appointment->participantVisit->visit->visit_name); ?> Visit
                     </span>

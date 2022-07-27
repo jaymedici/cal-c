@@ -47,7 +47,13 @@
             <tbody>
                 <?php $__empty_1 = true; $__currentLoopData = $appointments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $appointment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                     <tr wire:loading.remove>
-                        <td><?php echo e($appointment->participant_id); ?></td>
+                        <td>
+                            <?php echo e($appointment->participant_id); ?>
+
+                            <?php if(!$appointment->participantVisit->project->studyArms->isEmpty()): ?>
+                            (<?php echo e($appointment->participantVisit->participant->studyArm->name); ?>)
+                            <?php endif; ?>
+                        </td>
                         <td><?php echo e($appointment->appointment_date_time); ?></td>
                         <?php if(!empty($appointment->participant_visit_id)): ?>
                         <td><?php echo e($appointment->participantVisit->visit->visit_name); ?></td>

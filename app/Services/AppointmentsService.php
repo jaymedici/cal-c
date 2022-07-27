@@ -43,7 +43,8 @@ class AppointmentsService
         $datetoday = Carbon::createFromFormat('Y-m-d H:s:i', Carbon::now());
         $weekendDate = Carbon::createFromFormat('Y-m-d H:s:i', Carbon::now()->endOfWeek());
 
-        $appointments = Appointment::whereProjectAssignedTo($userId)
+        $appointments = Appointment::with('participantVisit')
+                ->whereProjectAssignedTo($userId)
                 ->whereSiteAssignedTo($userId)
                 ->whereBetween('appointment_date_time', [$datetoday, $weekendDate])
                 ->orderBy('appointment_date_time', 'asc')
