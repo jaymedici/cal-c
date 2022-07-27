@@ -17,6 +17,14 @@ class EnrolledParticipant extends Model
         'updated_by'
     ];
 
+    //SCOPES
+    public function scopeWhereSiteAssignedTo($query, $userId)
+    {
+        return $query->whereHas('site', function ($query) use ($userId) {
+            $query->whereAssignedTo($userId);
+            });
+    }
+
     //MODEL RELATIONSHIPS
     public function project()
     {

@@ -96,7 +96,11 @@
                         <div class="card-body">
                             <ul class="list-group list-group-unbordered mb-3">
                                 <li class="list-group-item">
-                                <a href="<?php echo e(route('participantVisits.projectVisitsIndex', $project->id)); ?>">Participants Visit Schedule</a>
+                                <a href="<?php echo e(route('participantVisits.projectVisitsIndex', $project->id)); ?>">View Participants Visit Schedule</a>
+                                </li>
+
+                                <li class="list-group-item">
+                                <a href="<?php echo e(route('enrolledParticipants.index', $project->id)); ?>">View Enrolled Participants</a>
                                 </li>
 
                                 
@@ -135,16 +139,16 @@
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('projects.view-assigned-users', 
                                         ['project' => $project])->html();
-} elseif ($_instance->childHasBeenRendered('VTUQPlh')) {
-    $componentId = $_instance->getRenderedChildComponentId('VTUQPlh');
-    $componentTag = $_instance->getRenderedChildComponentTagName('VTUQPlh');
+} elseif ($_instance->childHasBeenRendered('3F4oRx2')) {
+    $componentId = $_instance->getRenderedChildComponentId('3F4oRx2');
+    $componentTag = $_instance->getRenderedChildComponentTagName('3F4oRx2');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('VTUQPlh');
+    $_instance->preserveRenderedChild('3F4oRx2');
 } else {
     $response = \Livewire\Livewire::mount('projects.view-assigned-users', 
                                         ['project' => $project]);
     $html = $response->html();
-    $_instance->logRenderedChild('VTUQPlh', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('3F4oRx2', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>

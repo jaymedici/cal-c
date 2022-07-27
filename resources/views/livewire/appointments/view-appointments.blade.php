@@ -49,8 +49,10 @@
                     <tr wire:loading.remove>
                         <td>
                             {{ $appointment->participant_id }}
-                            @if (!$appointment->participantVisit->project->studyArms->isEmpty())
-                            ({{$appointment->participantVisit->participant->studyArm->name}})
+                            @if ($appointment->participantVisit)
+                                @if (!$appointment->participantVisit->project->studyArms->isEmpty())
+                                ({{$appointment->participantVisit->participant->studyArm->name}})
+                                @endif
                             @endif
                         </td>
                         <td>{{ $appointment->appointment_date_time }}</td>

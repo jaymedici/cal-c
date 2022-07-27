@@ -50,8 +50,10 @@
                         <td>
                             <?php echo e($appointment->participant_id); ?>
 
-                            <?php if(!$appointment->participantVisit->project->studyArms->isEmpty()): ?>
-                            (<?php echo e($appointment->participantVisit->participant->studyArm->name); ?>)
+                            <?php if($appointment->participantVisit): ?>
+                                <?php if(!$appointment->participantVisit->project->studyArms->isEmpty()): ?>
+                                (<?php echo e($appointment->participantVisit->participant->studyArm->name); ?>)
+                                <?php endif; ?>
                             <?php endif; ?>
                         </td>
                         <td><?php echo e($appointment->appointment_date_time); ?></td>

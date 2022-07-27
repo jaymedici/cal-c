@@ -3,7 +3,7 @@
 use App\Http\Controllers\AppointmentsController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\DataChartController;
-use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\EnrolledParticipantsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ParticipantVisitsController;
 use App\Http\Controllers\ProjectsController;
@@ -79,6 +79,9 @@ Route::group(['middleware' => ['preventBackHistory','auth']],function()
 
                 //Visit Checklist Routes
                 Route::resource('visitChecklists',VisitChecklistsController::class);
+
+                //Participants Routes
+                Route::get('enrolledParticipants/{project}',[EnrolledParticipantsController::class, 'enrolledParticipantsIndex'])->name('enrolledParticipants.index');
 
                 //Screening Routes
                 Route::resource('screening',ScreeningController::class);

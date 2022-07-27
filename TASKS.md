@@ -145,6 +145,7 @@
 - On Enrolled Participants page. Show participants, first visit date, Study Arm
 	- Add link to view participant
 	- Change Arm link
+- Fix a Bug on the view Appointments page. - **DONE**
 
 
 #### **BACKLOG:**
@@ -172,6 +173,9 @@
     - Add subsequent qn below: Which Arm?
 - On Enrolment add Arm to which the participant should be enrolled
 
+- Add Search for Participant ID on Scheduled visits
+- Remove entries on scheduled visits and weekly appointments for tasks that have either been marked as Complete or Missed.
 
-
+- Add link to show visits on Enrolled Participants for each participant
+- Add first visit date column on Enrolled Participants
 

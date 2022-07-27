@@ -94,7 +94,11 @@
                         <div class="card-body">
                             <ul class="list-group list-group-unbordered mb-3">
                                 <li class="list-group-item">
-                                <a href="{{ route('participantVisits.projectVisitsIndex', $project->id) }}">Participants Visit Schedule</a>
+                                <a href="{{ route('participantVisits.projectVisitsIndex', $project->id) }}">View Participants Visit Schedule</a>
+                                </li>
+
+                                <li class="list-group-item">
+                                <a href="{{ route('enrolledParticipants.index', $project->id) }}">View Enrolled Participants</a>
                                 </li>
 
                                 {{-- Temporarily commented out
