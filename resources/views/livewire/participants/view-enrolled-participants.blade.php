@@ -33,7 +33,7 @@
                         <td>{{$enrolledParticipant->participant_id}}</td>
                         <td>{{$enrolledParticipant->site->site_name}}</td>
                         <td>{{$enrolledParticipant->studyArm->name}}</td>
-                        <td><a class="btn btn-sm btn-info" href="">Change Study Arm</a></td>
+                        <td><a class="btn btn-sm btn-info" wire:click='changeStudyArm({{ $enrolledParticipant }})'>Change Study Arm</a></td>
                     </tr>
                 @empty
                     <td colspan="6">No Result Found... </td>
@@ -50,5 +50,8 @@
         {!! $enrolledParticipants->links() !!}
         </div>
     </div>
+
+    <!-- Change study arm Modal  -->
+    @include('modals.changeStudyArm')
 </div>
 

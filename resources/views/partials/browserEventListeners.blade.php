@@ -27,6 +27,11 @@
             $('#editScreeningForm').modal('show');
         });
 
+        //Enrolled Participant Forms
+        window.addEventListener('show-change-study-arm-form', event => {
+            $('#changeStudyArmForm').modal('show');
+        });
+
         //Hide All Forms Here
         window.addEventListener('hide-form', event => {
             $('#createUserForm').modal('hide');
@@ -35,6 +40,7 @@
             $('#setAppointmentForm').modal('hide');
             $('#changeAppointmentForm').modal('hide');
             $('#createAppointmentForm').modal('hide');
+            $('#changeStudyArmForm').modal('hide');
 
             toastr.success(event.detail.message, 'Success');
         });

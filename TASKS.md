@@ -141,17 +141,19 @@
 #### **27/07/2022:**
 - Add Study Arm on weekly Appointments - **DONE**
 - Add Study Arm on All Appointments - **DONE**
-- On Project View -> Add Quick links link to "Enrolled Participants"
-- On Enrolled Participants page. Show participants, first visit date, Study Arm
-	- Add link to view participant
-	- Change Arm link
+- On Project View -> Add Quick links link to "Enrolled Participants" - **DONE**
 - Fix a Bug on the view Appointments page. - **DONE**
-- Add Edit visit Already
-- Add set Appointment on all Visits
 
 
 #### **28/07/2022:**
 - Add Search for Participant ID on Scheduled visits - **DONE**
+- On Enrolled Participants page. Show participants, first visit date, Study Arm
+	- Add link to view participant
+	- Change Arm link - **DONE**
+- Add first visit date column on Enrolled Participants
+- Add Edit visit Already
+- Add set Appointment on all Visits
+- Investigate select2 Mac issue
 
 
 
@@ -183,5 +185,5 @@
 - Remove entries on scheduled visits and weekly appointments for tasks that have either been marked as Complete or Missed.
 
 - Add link to show visits on Enrolled Participants for each participant
-- Add first visit date column on Enrolled Participants
+
 

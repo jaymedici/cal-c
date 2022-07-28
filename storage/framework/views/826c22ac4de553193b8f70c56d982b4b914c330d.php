@@ -33,7 +33,7 @@
                         <td><?php echo e($enrolledParticipant->participant_id); ?></td>
                         <td><?php echo e($enrolledParticipant->site->site_name); ?></td>
                         <td><?php echo e($enrolledParticipant->studyArm->name); ?></td>
-                        <td><a class="btn btn-sm btn-info" href="">Change Study Arm</a></td>
+                        <td><a class="btn btn-sm btn-info" wire:click='changeStudyArm(<?php echo e($enrolledParticipant); ?>)'>Change Study Arm</a></td>
                     </tr>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                     <td colspan="6">No Result Found... </td>
@@ -51,6 +51,9 @@
 
         </div>
     </div>
+
+    <!-- Change study arm Modal  -->
+    <?php echo $__env->make('modals.changeStudyArm', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 </div>
 
 <?php /**PATH C:\xampp\htdocs\Visitcallender\resources\views/livewire/participants/view-enrolled-participants.blade.php ENDPATH**/ ?>
