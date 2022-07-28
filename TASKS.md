@@ -138,7 +138,7 @@
 - Choose study arm when enrolling a participant  - **DONE**
 
 
-#### **26/07/2022:**
+#### **27/07/2022:**
 - Add Study Arm on weekly Appointments - **DONE**
 - Add Study Arm on All Appointments - **DONE**
 - On Project View -> Add Quick links link to "Enrolled Participants"
@@ -146,6 +146,13 @@
 	- Add link to view participant
 	- Change Arm link
 - Fix a Bug on the view Appointments page. - **DONE**
+- Add Edit visit Already
+- Add set Appointment on all Visits
+
+
+#### **28/07/2022:**
+- Add Search for Participant ID on Scheduled visits - **DONE**
+
 
 
 #### **BACKLOG:**
@@ -173,7 +180,6 @@
     - Add subsequent qn below: Which Arm?
 - On Enrolment add Arm to which the participant should be enrolled
 
-- Add Search for Participant ID on Scheduled visits
 - Remove entries on scheduled visits and weekly appointments for tasks that have either been marked as Complete or Missed.
 
 - Add link to show visits on Enrolled Participants for each participant

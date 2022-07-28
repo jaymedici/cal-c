@@ -15,6 +15,7 @@ class ScheduledVisits extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
+    public $search = '';
     public $create_form_state = [];
     public $edit_form_state = [];
 
@@ -90,7 +91,9 @@ class ScheduledVisits extends Component
 
     public function render()
     {
-        $scheduledParticipantVisits = ParticipantVisitsService::get2WeeksScheduledVisits(Auth::id());
+        $scheduledParticipantVisits = ParticipantVisitsService::get2WeeksScheduledVisits(Auth::id())
+                                                ->where('participant_id', 'like', '%'.$this->search.'%')
+                                                ->paginate(5);
 
         return view('livewire.home.scheduled-visits', [
             'scheduledParticipantVisits' => $scheduledParticipantVisits,

@@ -4,6 +4,17 @@
             <h3 class="card-title">Scheduled Visits for the coming two Weeks</h3>
             <div class="card-tools">
             </div>
+
+            <div class="card-tools">
+            <div class="input-group input-group-sm">
+                <input wire:model="search" type="text" name="table_search" class="form-control float-right" placeholder="Search Participant...">
+                <div class="input-group-append">
+                <button type="submit" class="btn btn-default">
+                <i class="fas fa-search"></i>
+                </button>
+                </div>
+            </div>
+        </div>
         </div>
 
         <div class="card-body p-0">

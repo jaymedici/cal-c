@@ -21,8 +21,7 @@ class ParticipantVisitsService
                                 ->whereProjectAssignedTo($userId)
                                 ->whereSiteAssignedTo($userId)
                                 ->whereBetween('window_end_date', [$datetoday, $dateAfterTwoWeeks])
-                                ->orderBy('window_start_date', 'asc')
-                                ->paginate(5);
+                                ->orderBy('window_start_date', 'asc');
 
         return $participantVisits;
     }
