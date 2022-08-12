@@ -27,6 +27,11 @@
             $('#editScreeningForm').modal('show');
         });
 
+        //Participant Visit Forms
+        window.addEventListener('show-edit-participant-visit-form', event => {
+            $('#editParticipantVisitForm').modal('show');
+        });
+
         //Enrolled Participant Forms
         window.addEventListener('show-change-study-arm-form', event => {
             $('#changeStudyArmForm').modal('show');
@@ -41,6 +46,7 @@
             $('#changeAppointmentForm').modal('hide');
             $('#createAppointmentForm').modal('hide');
             $('#changeStudyArmForm').modal('hide');
+            $('#editParticipantVisitForm').modal('hide');
 
             toastr.success(event.detail.message, 'Success');
         });

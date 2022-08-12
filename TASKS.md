@@ -156,6 +156,9 @@
 - Investigate select2 Mac issue
 
 
+#### **12/08/2022:**
+- Add Edit visit - **DONE**
+
 
 #### **BACKLOG:**
 - ***Bug:*** A test for checking successful assignment of sites and managers is failing.

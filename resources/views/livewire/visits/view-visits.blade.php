@@ -59,12 +59,20 @@
                             @if($participantVisit->appointment()->exists())
                             <td>{{ $participantVisit->appointment->appointment_date_time_formatted }}</td>
                             @else
-                            <td><i>No set Appt...</i></td>
+                            <td></td>
                             @endif
-                            <td>{{ $participantVisit->visit_status}} </td>
+                            <td>
+                                @if ($participantVisit->visit_status == "Pending")
+                                   <span class="text-bold text-info">{{ $participantVisit->visit_status}}</span> 
+                                @elseif ($participantVisit->visit_status == "Missed")
+                                    <span class="text-bold text-danger">{{ $participantVisit->visit_status}}</span> 
+                                @elseif ($participantVisit->visit_status == "Completed")
+                                    <span class="text-bold text-success">{{ $participantVisit->visit_status}}</span> 
+                                @endif 
+                            </td>
                             {{-- Show Edit visit if date today is greater than closing window date --}}
                             @if($participantVisit->VisitStatusCanBeEdited())
-                            <td><a href="#" class="btn btn-sm btn-warning">Edit Visit</a></td> 
+                            <td><a wire:click='editParticipantVisit({{ $participantVisit }})' class="btn btn-sm btn-warning">Edit Visit</a></td> 
                             @endif         
                         </tr>
                     @empty
@@ -83,4 +91,7 @@
             </div>
         </div>
     </div>
+
+    <!-- Edit Visit Modal -->
+    @include('modals.editParticipantVisit')
 </div>

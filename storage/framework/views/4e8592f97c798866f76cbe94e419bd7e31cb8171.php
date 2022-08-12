@@ -60,12 +60,20 @@
                             <?php if($participantVisit->appointment()->exists()): ?>
                             <td><?php echo e($participantVisit->appointment->appointment_date_time_formatted); ?></td>
                             <?php else: ?>
-                            <td><i>No set Appt...</i></td>
+                            <td></td>
                             <?php endif; ?>
-                            <td><?php echo e($participantVisit->visit_status); ?> </td>
+                            <td>
+                                <?php if($participantVisit->visit_status == "Pending"): ?>
+                                   <span class="text-bold text-info"><?php echo e($participantVisit->visit_status); ?></span> 
+                                <?php elseif($participantVisit->visit_status == "Missed"): ?>
+                                    <span class="text-bold text-danger"><?php echo e($participantVisit->visit_status); ?></span> 
+                                <?php elseif($participantVisit->visit_status == "Completed"): ?>
+                                    <span class="text-bold text-success"><?php echo e($participantVisit->visit_status); ?></span> 
+                                <?php endif; ?> 
+                            </td>
                             
                             <?php if($participantVisit->VisitStatusCanBeEdited()): ?>
-                            <td><a href="#" class="btn btn-sm btn-warning">Edit Visit</a></td> 
+                            <td><a wire:click='editParticipantVisit(<?php echo e($participantVisit); ?>)' class="btn btn-sm btn-warning">Edit Visit</a></td> 
                             <?php endif; ?>         
                         </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
@@ -85,5 +93,8 @@
             </div>
         </div>
     </div>
+
+    <!-- Edit Visit Modal -->
+    <?php echo $__env->make('modals.editParticipantVisit', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 </div>
 <?php /**PATH C:\xampp\htdocs\Visitcallender\resources\views/livewire/visits/view-visits.blade.php ENDPATH**/ ?>
