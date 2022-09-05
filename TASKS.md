@@ -160,6 +160,12 @@
 - Add Edit visit - **DONE**
 
 
+
+#### **15/09/2022:**
+- Fix Bug on EnrolParticipantTest - **DONE**
+- Add Study Arm factory - **DONE**
+
+
 #### **BACKLOG:**
 - ***Bug:*** A test for checking successful assignment of sites and managers is failing.
 - ***Bug:*** A test that checks if users are assigned to a site after site creation is also failing.
@@ -188,5 +194,8 @@
 - Remove entries on scheduled visits and weekly appointments for tasks that have either been marked as Complete or Missed.
 
 - Add link to show visits on Enrolled Participants for each participant
+
+- enrolled_participant_id has been hardcoded on Participant Visit factory. Create a factory for enrolled_participants
+
 
 

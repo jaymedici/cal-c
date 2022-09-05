@@ -55,6 +55,7 @@ class ParticipantVisitFactory extends Factory
         return [
             //
             'participant_id' => $this->faker->randomElement($participantIDs),
+            'enrolled_participant_id' => 1,
             'project_id' => 1,
             'site_id' => 1,
             'visit_id' => $visit->id,

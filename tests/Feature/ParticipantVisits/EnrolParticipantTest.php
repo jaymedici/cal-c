@@ -4,6 +4,7 @@ namespace Tests\Feature\ParticipantVisits;
 
 use App\Models\ParticipantVisit;
 use App\Models\Site;
+use App\Models\StudyArm;
 use App\Models\User;
 use App\Models\VisitSetting;
 use App\Project;
@@ -131,12 +132,14 @@ class EnrolParticipantTest extends TestCase
         $project = Project::factory()->create();
         $projectVisits = VisitSetting::factory()->count(5)->create(['project_id' => $project->id]);
         $site = Site::factory()->create();
+        $studyArm = StudyArm::factory()->create(['project_id' => $project->id]);
 
         $attributes = [
             'participant_id' => 'VsTEST',
             'site_id' => $site->id,
             'first_visit_date' => '2022-03-01',
-            'mark_first_visit_complete' => 'No'
+            'mark_first_visit_complete' => 'No',
+            'study_arm_id' => $studyArm->id
         ];
 
         $this->post('participantVisits/storeParticipant/' . $project->id, $attributes);
