@@ -8,7 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class SiteManagementTests extends TestCase
+class SiteManagementTest extends TestCase
 {
     use WithFaker, RefreshDatabase;
     //php artisan test tests/Feature/Sites/SiteManagementTests.php//
@@ -102,11 +102,12 @@ class SiteManagementTests extends TestCase
         $this->actingAs(User::factory()->create());
 
         $attributes = Site::factory()->raw();
-        $attributes['site_users'] = [1,2];
+        $siteUser = User::factory()->create();
+        $attributes['site_users'] = [$siteUser->id];
 
         $this->post('/sites', $attributes);
 
-        $this->assertDatabaseHas('user_sites', ['user_id' => 2]);
+        $this->assertDatabaseHas('user_sites', ['user_id' => $siteUser->id]);
     }
 
     //Check that Selected Users actuallty exist

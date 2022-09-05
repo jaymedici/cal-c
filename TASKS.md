@@ -164,11 +164,11 @@
 #### **15/09/2022:**
 - Fix Bug on EnrolParticipantTest - **DONE**
 - Add Study Arm factory - **DONE**
+- Assignment of sites and managers after project creation test failure - **DONE**
+- Assignment of site users after site creation test failure - **DONE**
 
 
 #### **BACKLOG:**
-- ***Bug:*** A test for checking successful assignment of sites and managers is failing.
-- ***Bug:*** A test that checks if users are assigned to a site after site creation is also failing.
 - Add Reminder Emails
 - Add Notification alerts
 - Add reminder email preferences page

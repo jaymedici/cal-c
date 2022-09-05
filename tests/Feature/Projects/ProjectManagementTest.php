@@ -9,7 +9,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class ProjectManagementTests extends TestCase
+class ProjectManagementTest extends TestCase
 {
     use WithFaker, RefreshDatabase;
     //php artisan test tests/Feature/Projects/ProjectManagementTests.php//
@@ -141,17 +141,19 @@ class ProjectManagementTests extends TestCase
     
     public function test_database_stores_managers_and_sites_when_project_is_created()
     {
-        $this->withoutExceptionHandling();
+        //$this->withoutExceptionHandling();
         $this->actingAs(User::factory()->create());
 
         $attributes = Project::factory()->raw();
-        $attributes['sites'] = [1,2];
-        $attributes['managers'] = [1,2];
+        $site = Site::factory()->create();
+        $userManager = User::factory()->create();
+        $attributes['sites'] = [$site->id];
+        $attributes['managers'] = [$userManager->id];
 
         $this->post('/projects', $attributes);
 
-        $this->assertDatabaseHas('project_sites', ['site_id' => 2]);
-        $this->assertDatabaseHas('user_projects', ['user_id' => 1]);
+        $this->assertDatabaseHas('project_sites', ['site_id' => $site->id]);
+        $this->assertDatabaseHas('user_projects', ['user_id' => $userManager->id]);
     }
 
     //Check that selected sites actually exist
