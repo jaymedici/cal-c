@@ -35,7 +35,7 @@ jobs:
     - name: Prepare Laravel Application
       run: |
         cp .env.tests .env
-        php artisan key:generate
+        php artisan -- env:set APP_KEY `php artisan key:generate --show`
 
     - name: Run Testsuite
       run: vendor/bin/phpunit tests/
