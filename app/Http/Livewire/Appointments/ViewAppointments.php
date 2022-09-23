@@ -108,7 +108,7 @@ class ViewAppointments extends Component
                                                 ->first();
 
             if($formDetails['appointment_date_time'] < $participantVisit->window_start_date ||
-                $formDetails['appointment_date_time'] > $participantVisit->window_end_date)
+                $formDetails['appointment_date_time'] > $participantVisit->validatable_end_date)
             {
                 session()->flash('message', 'Sorry! The appointment date you chose is not within the participant visit window!');
                 $this->proceed = false;

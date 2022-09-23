@@ -31,6 +31,7 @@ class ParticipantVisit extends Model
         'enrolled_participant_id'
     ];
 
+    // Default type is string
     protected $casts = [
         'window_end_date' => 'date'
     ];
@@ -71,6 +72,12 @@ class ParticipantVisit extends Model
     public function getWindowEndDateFormattedAttribute()
     {
         return $this->window_end_date->format('d M, Y');
+    }
+
+    //To be used during appointment setting validation
+    public function getValidatableEndDateAttribute()
+    {
+        return date('Y-m-d H:i:s', strtotime($this->window_end_date . ' +23 hours'));
     }
 
     //MODEL RELATIONSHIPS

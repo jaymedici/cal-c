@@ -8,18 +8,6 @@
                 <a wire:click='createAppointment()' class="btn btn-sm btn-success"> <i class="fa fa-plus-circle"></i> Create Appointment</a>
             </div>
     
-            <!-- <div class="card-title form-group mr-2">
-                <select class="form-control-sm" name="">
-                    <option selected disabled value="">Site Filter</option>
-                </select>
-            </div>
-    
-            <div class="card-title mr-2">
-                <button class="btn btn-sm btn-info">
-                   <i class="fa fa-calendar-alt" aria-hidden="true"></i> Date Filter
-                </button>
-            </div> -->
-    
             <div class="card-tools">
                 <div class="input-group input-group-sm">
                     <input wire:model="search" type="text" name="table_search" class="form-control float-right" placeholder="Search Participant...">

@@ -55,7 +55,7 @@ class ScheduledVisits extends Component
         $data = Validator::make($this->create_form_state, [
             'appointment_date_time' => 'required|after_or_equal:' .
             $this->participantVisit->window_start_date . '|before_or_equal:' .
-            $this->participantVisit->window_end_date
+            $this->participantVisit->validatable_end_date
         ])->validate();
 
         //dd($this->create_form_state);
@@ -77,7 +77,7 @@ class ScheduledVisits extends Component
         $data = Validator::make($this->edit_form_state, [
             'appointment_date_time' => 'required|after_or_equal:' .
             $this->participantVisit->window_start_date . '|before_or_equal:' .
-            $this->participantVisit->window_end_date
+            $this->participantVisit->validatable_end_date
         ])->validate();
 
         //dd($this->edit_form_state);
