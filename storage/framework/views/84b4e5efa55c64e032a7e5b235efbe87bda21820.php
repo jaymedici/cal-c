@@ -12,4 +12,4 @@
     <div class="float-right"> <?php echo e($assignedUsers->links()); ?> </div>
     
 </div>
-<?php /**PATH C:\xampp\htdocs\Visitcallender\resources\views/livewire/projects/view-assigned-users.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\xampp\htdocs\cal-c\resources\views/livewire/projects/view-assigned-users.blade.php ENDPATH**/ ?>

@@ -6,7 +6,10 @@
             height: <?php echo $chart->height(); ?>,
             width: '<?php echo $chart->width(); ?>',
             toolbar: <?php echo $chart->toolbar(); ?>,
-            zoom: <?php echo $chart->zoom(); ?>
+            zoom: <?php echo $chart->zoom(); ?>,
+            fontFamily: '<?php echo $chart->fontFamily(); ?>',
+            foreColor: '<?php echo $chart->foreColor(); ?>',
+            sparkline: <?php echo $chart->sparkline(); ?>
 
         },
         plotOptions: {
@@ -41,4 +44,4 @@
     chart.render();
 
 </script>
-<?php /**PATH C:\xampp\htdocs\Visitcallender\vendor\arielmejiadev\larapex-charts\src/../resources/views/chart/script.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\xampp\htdocs\cal-c\vendor\arielmejiadev\larapex-charts\src/../stubs/resources/views/chart/script.blade.php ENDPATH**/ ?>

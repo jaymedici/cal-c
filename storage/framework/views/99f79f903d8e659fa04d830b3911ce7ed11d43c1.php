@@ -97,4 +97,4 @@
     <!-- Edit Visit Modal -->
     <?php echo $__env->make('modals.editParticipantVisit', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 </div>
-<?php /**PATH C:\xampp\htdocs\Visitcallender\resources\views/livewire/visits/view-visits.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\xampp\htdocs\cal-c\resources\views/livewire/visits/view-visits.blade.php ENDPATH**/ ?>

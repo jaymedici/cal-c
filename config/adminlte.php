@@ -259,6 +259,7 @@ return [
             'icon_color' => 'blue',
             'url'  => '/calendar/show',
             'icon'        => 'fa fa-calendar',
+            'can' => 'not see'
         ],
 
         [

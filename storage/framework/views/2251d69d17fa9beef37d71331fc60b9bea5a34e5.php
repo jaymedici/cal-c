@@ -139,16 +139,16 @@
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('projects.view-assigned-users', 
                                         ['project' => $project])->html();
-} elseif ($_instance->childHasBeenRendered('3F4oRx2')) {
-    $componentId = $_instance->getRenderedChildComponentId('3F4oRx2');
-    $componentTag = $_instance->getRenderedChildComponentTagName('3F4oRx2');
+} elseif ($_instance->childHasBeenRendered('ZLOnwL9')) {
+    $componentId = $_instance->getRenderedChildComponentId('ZLOnwL9');
+    $componentTag = $_instance->getRenderedChildComponentTagName('ZLOnwL9');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('3F4oRx2');
+    $_instance->preserveRenderedChild('ZLOnwL9');
 } else {
     $response = \Livewire\Livewire::mount('projects.view-assigned-users', 
                                         ['project' => $project]);
     $html = $response->html();
-    $_instance->logRenderedChild('3F4oRx2', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('ZLOnwL9', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -164,4 +164,4 @@ echo $html;
 </div>  
 
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('adminlte::page', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Visitcallender\resources\views/projects/show.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('adminlte::page', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\cal-c\resources\views/projects/show.blade.php ENDPATH**/ ?>
