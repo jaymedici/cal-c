@@ -50,10 +50,9 @@ class RecalculateParticipantVisits extends Command
     public function handle()
     {
         $participantVisits = $this->getParticipantVisits();
-        $projectVisits = $this->getProjectVisits();
 
         $service = new ParticipantVisitsService();
-        $service->recalculateParticipantVisitSchedule($projectVisits);
+        $service->recalculateParticipantVisitSchedule($participantVisits);
 
         $this->info('Participant Visits recalculated successfully');
     }
