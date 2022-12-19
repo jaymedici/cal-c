@@ -105,13 +105,13 @@ class ParticipantVisitsService
         return $participantVisitSchedule;
     }
 
-    public static function recalculateParticipantVisitSchedule(Collection $participantVisits, Collection $visits)
+    public function recalculateParticipantVisitSchedule(Collection $participantVisits, Collection $visits)
     {
         foreach($visits as $visit)
         {
             foreach($participantVisits as $participantVisit)
             {
-                $firstVisitDate = self::getFirstVisitDate($participantVisit);
+                $firstVisitDate = $this->getFirstVisitDate($participantVisit);
 
                 $data['visit_date'] = date('Y-m-d', strtotime($firstVisitDate . ' + ' . $visit->days_from_first_visit . ' days'));
                 $data['window_start_date'] = date('Y-m-d', strtotime($data['visit_date'] . ' - ' . $visit->minus_window_period . ' days'));
@@ -122,7 +122,7 @@ class ParticipantVisitsService
         }
     }
 
-    protected static function getFirstVisitDate(ParticipantVisit $participantVisit): string
+    protected function getFirstVisitDate(ParticipantVisit $participantVisit): string
     {
         $firstVisit = ParticipantVisit::where('participant_id', $participantVisit->participant_id)
                                         ->orderBy('visit_date', 'ASC')
