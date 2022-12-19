@@ -65,6 +65,7 @@ class RecalculateParticipantVisits extends Command
         $participantVisits = $this->getParticipantVisits();
         $projectVisits = $this->getProjectVisits();
 
+        dd($participantVisits);
         ParticipantVisitsService::recalculateParticipantVisitSchedule(
             $participantVisits, $projectVisits);
 
