@@ -50,7 +50,8 @@ class RecalculateParticipantVisits extends Command
      */
     protected function getProjectVisits(): Collection
     {
-        return VisitSetting::where('visit_name', 'LIKE', 'Telephonic call%')
+        return VisitSetting::where('project_id', 1)
+                            ->where('visit_name', 'LIKE', 'Telephonic call%')
                             ->get();
     }
 
@@ -64,7 +65,6 @@ class RecalculateParticipantVisits extends Command
         $participantVisits = $this->getParticipantVisits();
         $projectVisits = $this->getProjectVisits();
 
-        dd($projectVisits);
         ParticipantVisitsService::recalculateParticipantVisitSchedule(
             $participantVisits, $projectVisits);
 
