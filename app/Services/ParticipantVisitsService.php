@@ -105,20 +105,17 @@ class ParticipantVisitsService
         return $participantVisitSchedule;
     }
 
-    public function recalculateParticipantVisitSchedule(Collection $participantVisits, Collection $visits)
+    public function recalculateParticipantVisitSchedule(Collection $participantVisits)
     {
-        foreach($visits as $visit)
+        foreach($participantVisits as $participantVisit)
         {
-            foreach($participantVisits as $participantVisit)
-            {
-                $firstVisitDate = $this->getFirstVisitDate($participantVisit);
+            $firstVisitDate = $this->getFirstVisitDate($participantVisit);
 
-                $data['visit_date'] = date('Y-m-d', strtotime($firstVisitDate . ' + ' . $visit->days_from_first_visit . ' days'));
-                $data['window_start_date'] = date('Y-m-d', strtotime($data['visit_date'] . ' - ' . $visit->minus_window_period . ' days'));
-                $data['window_end_date'] = date('Y-m-d', strtotime($data['visit_date'] . ' + ' . $visit->plus_window_period . ' days'));
+            $data['visit_date'] = date('Y-m-d', strtotime($firstVisitDate . ' + ' . $participantVisit->visit->days_from_first_visit . ' days'));
+            $data['window_start_date'] = date('Y-m-d', strtotime($data['visit_date'] . ' - ' . $participantVisit->visit->minus_window_period . ' days'));
+            $data['window_end_date'] = date('Y-m-d', strtotime($data['visit_date'] . ' + ' . $participantVisit->visit->plus_window_period . ' days'));
 
-                $participantVisit->update($data);
-            }
+            $participantVisit->update($data);
         }
     }
 

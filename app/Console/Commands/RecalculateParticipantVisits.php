@@ -41,17 +41,6 @@ class RecalculateParticipantVisits extends Command
                                 ->get();
     }
     
-    /**
-     * Project visits to be used for the participant visit recalculation
-     *
-     * @return VisitSetting
-     */
-    protected function getProjectVisits(): Collection
-    {
-        return VisitSetting::where('project_id', 1)
-                            ->where('visit_name', 'LIKE', 'Telephonic call%')
-                            ->get();
-    }
 
     /**
      * Execute the console command.
@@ -64,8 +53,7 @@ class RecalculateParticipantVisits extends Command
         $projectVisits = $this->getProjectVisits();
 
         $service = new ParticipantVisitsService();
-        $service->recalculateParticipantVisitSchedule(
-            $participantVisits, $projectVisits);
+        $service->recalculateParticipantVisitSchedule($projectVisits);
 
         $this->info('Participant Visits recalculated successfully');
     }
