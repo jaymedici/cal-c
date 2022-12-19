@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\ParticipantVisit;
 use App\Models\VisitSetting;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 
 class ParticipantVisitsService
@@ -102,5 +103,31 @@ class ParticipantVisitsService
         }
         
         return $participantVisitSchedule;
+    }
+
+    public static function recalculateParticipantVisitSchedule(Collection $participantVisits, Collection $visits)
+    {
+        foreach($visits as $visit)
+        {
+            foreach($participantVisits as $participantVisit)
+            {
+                $firstVisitDate = self::getFirstVisitDate($participantVisit);
+
+                $data['visit_date'] = date('Y-m-d', strtotime($firstVisitDate . ' + ' . $visit->days_from_first_visit . ' days'));
+                $data['window_start_date'] = date('Y-m-d', strtotime($data['visit_date'] . ' - ' . $visit->minus_window_period . ' days'));
+                $data['window_end_date'] = date('Y-m-d', strtotime($data['visit_date'] . ' + ' . $visit->plus_window_period . ' days'));
+
+                $participantVisit->update($data);
+            }
+        }
+    }
+
+    protected static function getFirstVisitDate(ParticipantVisit $participantVisit): string
+    {
+        $firstVisit = ParticipantVisit::where('participant_id', $participantVisit->participant_id)
+                                        ->orderBy('visit_date', 'ASC')
+                                        ->first();
+
+        return $firstVisit->visit_date;
     }
 }
