@@ -32,14 +32,12 @@ class RecalculateParticipantVisits extends Command
     protected function getParticipantVisits(): Collection
     {
         return ParticipantVisit::where('project_id', 1)
-                                ->where([
-                                        ['visit_id', 15],
-                                        ['visit_id', 16],
-                                        ['visit_id', 18],
-                                        ['visit_id', 20],
-                                        ['visit_id', 22],
-                                        ['visit_id', 24]
-                                    ])
+                                ->where('visit_id', 15)
+                                ->orWhere('visit_id', 16)
+                                ->orWhere('visit_id', 18)
+                                ->orWhere('visit_id', 20)
+                                ->orWhere('visit_id', 22)
+                                ->orWhere('visit_id', 24)
                                 ->get();
     }
     
