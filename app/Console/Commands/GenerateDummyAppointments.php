@@ -14,7 +14,7 @@ class GenerateDummyAppointments extends Command
      *
      * @var string
      */
-    protected $signature = 'generate:appointments {participantVisits=1} {--project=1}';
+    protected $signature = 'appointments:generate {participantVisits=1} {--project=1}';
 
     /**
      * The console command description.

@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\EnrolledParticipant;
 use App\Models\ParticipantVisit;
 use App\Services\ParticipantVisitsService;
 use Illuminate\Console\Command;
@@ -14,7 +15,7 @@ class generateTestParticipantSchedules extends Command
      *
      * @var string
      */
-    protected $signature = 'generate:schedules {participantsNo=1} {--project=1}';
+    protected $signature = 'schedules:generate {participantsNo=1} {--project=1}';
 
     /**
      * The console command description.
@@ -46,8 +47,19 @@ class generateTestParticipantSchedules extends Command
 
         for($i = 1; $i <= $participantsNo; $i++)
         {
+            $participantId = $faker->numerify('PNo/Test/####');
+
+            $enrolledParticipant = EnrolledParticipant::create([
+                'participant_id' => $participantId,
+                'project_id' => $projectId,
+                'study_arm_id' => $faker->numberBetween(1,2),
+                'site_id' => 1,
+                'updated_by' => 'AutoGenerator'
+            ]);
+
             $attributes = [
-                'participant_id' => $faker->numerify('PNo/Test/####'),
+                'participant_id' => $participantId,
+                'enrolled_participant_id' => $enrolledParticipant->id,
                 'site_id' => 1,
                 'first_visit_date' => ($faker->dateTimeBetween('-2 weeks', '+10 weeks'))->format('Y-m-d'),
                 'mark_first_visit_complete' => 'No',
