@@ -27,6 +27,7 @@ class ViewAppointments extends Component
     public $participantVisits = [];
 
     public $create_form_state = [];
+    public $edit_form_state = [];
 
     public $proceed;
 
@@ -72,6 +73,29 @@ class ViewAppointments extends Component
 
             $this->dispatchBrowserEvent('hide-form', ['message' => 'Appointment Created Successfully!']);
         }  
+    }
+
+    public function editParticipantVisit(ParticipantVisit $participantVisit)
+    {
+        $this->participantVisit = $participantVisit;
+        $this->edit_form_state['participant_id'] = $participantVisit->participant_id;
+        $this->edit_form_state['visit_name'] = $participantVisit->visit->visit_name;
+        $this->edit_form_state['visit_status'] = $participantVisit->visit_status;
+
+        $this->dispatchBrowserEvent('show-edit-participant-visit-form');
+    }
+
+    public function updateParticipantVisitStatus()
+    {
+        $data = Validator::make($this->edit_form_state, [
+            'visit_status' => 'required'
+        ])->validate();
+
+        $data['updated_by'] = Auth::user()->username;
+        $data['marked_by'] = Auth::user()->username;
+
+        $this->participantVisit->update($data);
+        $this->dispatchBrowserEvent('hide-form', ['message' => 'Participant visit status updated Successfully!']);
     }
 
     public function checkIfParticipantWithNoIdIsAssignedToNonScreeningVisit(array $formDetails)

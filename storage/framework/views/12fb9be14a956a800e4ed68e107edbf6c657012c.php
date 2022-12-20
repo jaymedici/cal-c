@@ -27,9 +27,9 @@
                         <th>Participant ID</th>
                         <th>Date & Time</th>
                         <th>Visit Type</th>
-                        <th>Project</th>
-                        <th>Site</th>
                         <th>Created By</th>
+                        <th>Visit Status</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
     
@@ -55,9 +55,17 @@
                                 <td><?php echo e($appointment->screening_visit_label); ?></td>
                                 <?php endif; ?>
                             <?php endif; ?>
-                            <td><?php echo e($appointment->project->name); ?></td>
-                            <td><?php echo e($appointment->site->site_name); ?></td>
                             <td><?php echo e($appointment->updated_by); ?></td>
+                            <td>
+                                <?php if($appointment->participantVisit->visit_status == "Pending"): ?>
+                                   <span class="text-bold text-info"><?php echo e($appointment->participantVisit->visit_status); ?></span> 
+                                <?php elseif($appointment->participantVisit->visit_status == "Missed"): ?>
+                                    <span class="text-bold text-danger"><?php echo e($appointment->participantVisit->visit_status); ?></span> 
+                                <?php elseif($appointment->participantVisit->visit_status == "Completed"): ?>
+                                    <span class="text-bold text-success"><?php echo e($appointment->participantVisit->visit_status); ?></span> 
+                                <?php endif; ?>
+                            </td>
+                            <td><a wire:click='editParticipantVisit(<?php echo e($appointment->participantVisit); ?>)' class="btn btn-sm btn-warning">Edit Visit</a></td> 
                         </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                     <tr>
@@ -79,5 +87,8 @@
     
         <!-- Appointment Creation Form Modal -->
         <?php echo $__env->make('modals.createAppointment', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+
+        <!-- Edit Visit Modal -->
+        <?php echo $__env->make('modals.editParticipantVisit', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     </div>
 </div><?php /**PATH C:\xampp\htdocs\cal-c\resources\views/livewire/appointments/view-appointments.blade.php ENDPATH**/ ?>

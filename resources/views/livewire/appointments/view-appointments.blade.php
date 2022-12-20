@@ -27,9 +27,9 @@
                         <th>Participant ID</th>
                         <th>Date & Time</th>
                         <th>Visit Type</th>
-                        <th>Project</th>
-                        <th>Site</th>
                         <th>Created By</th>
+                        <th>Visit Status</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
     
@@ -54,9 +54,17 @@
                                 <td>{{ $appointment->screening_visit_label }}</td>
                                 @endif
                             @endif
-                            <td>{{ $appointment->project->name }}</td>
-                            <td>{{ $appointment->site->site_name }}</td>
                             <td>{{ $appointment->updated_by }}</td>
+                            <td>
+                                @if ($appointment->participantVisit->visit_status == "Pending")
+                                   <span class="text-bold text-info">{{ $appointment->participantVisit->visit_status}}</span> 
+                                @elseif ($appointment->participantVisit->visit_status == "Missed")
+                                    <span class="text-bold text-danger">{{ $appointment->participantVisit->visit_status}}</span> 
+                                @elseif ($appointment->participantVisit->visit_status == "Completed")
+                                    <span class="text-bold text-success">{{ $appointment->participantVisit->visit_status}}</span> 
+                                @endif
+                            </td>
+                            <td><a wire:click='editParticipantVisit({{ $appointment->participantVisit }})' class="btn btn-sm btn-warning">Edit Visit</a></td> 
                         </tr>
                     @empty
                     <tr>
@@ -77,5 +85,8 @@
     
         <!-- Appointment Creation Form Modal -->
         @include('modals.createAppointment')
+
+        <!-- Edit Visit Modal -->
+        @include('modals.editParticipantVisit')
     </div>
 </div>
